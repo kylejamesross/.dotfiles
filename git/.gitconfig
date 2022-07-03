@@ -1,6 +1,7 @@
 [user]
 	name = Kyle Ross
 	email = kylejamesross@gmail.com
+	username = kylejamesross
 
 [core]
 	editor = vim
