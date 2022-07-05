@@ -11,16 +11,15 @@ chmod +x ~/.nix-profile/etc/profile.d/nix.sh
 # install packages
 nix-env -iA \
 	nixpkgs.zsh \
-	nixpkgs.antibody
+	nixpkgs.antibody \
 	nixpkgs.tmux \
 	nixpkgs.stow \
 	nixpkgs.bat \
 
-
-
 # stow dotfiles
 stow git
 stow zsh
+stow vim
 
 
 # zsh config
