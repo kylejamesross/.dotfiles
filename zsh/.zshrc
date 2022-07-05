@@ -18,7 +18,7 @@ alias update-antibody='antibody bundle < $HOME/.zsh_plugins.txt > $HOME/.zsh_plu
 alias list-npm-globals='npm list -g --depth=0'
 # colored ls output
 alias ls='ls -alh --color'
-alias pb='git branch -vv | awk '\''/: gone]/{print $1}'\'''' | xargs git branch -d'''
+alias pb='git branch --merged | grep -v -E "main|master|staging|dev|$(git rev-parse --abbrev-ref HEAD)" > /tmp/merged-branches && vi /tmp/merged-branches && xargs git branch -d </tmp/merged-branches'
 # PATH
 # export PATH=${PATH}:/usr/local/go/bin
 # export PATH=${PATH}:${HOME}/go/bin
