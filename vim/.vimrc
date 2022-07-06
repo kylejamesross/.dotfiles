@@ -1,1 +1,2 @@
 :set is
+:set nu
