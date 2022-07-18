@@ -16,6 +16,12 @@ nix-env -iA \
 	nixpkgs.stow \
 	nixpkgs.bat \
 
+# download vim plugins
+git clone https://github.com/dracula/vim.git ./vim/.vim/pack/themes/opt/dracula
+git clone https://github.com/tpope/vim-fugitive.git ./vim/.vim/pack/git/start/fugitive 
+git clone https://github.com/ctrlpvim/ctrlp.vim.git ./vim/.vim/pack/general/start/ctrlp
+git clone https://github.com/easymotion/vim-easymotion.git ./vim/.vim/pack/general/start/vim-easymotion
+
 # stow dotfiles
 stow git
 stow zsh
