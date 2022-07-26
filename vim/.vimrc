@@ -1,6 +1,8 @@
 let mapleader=" "
 set number
 
+set relativenumber
+
 set history=1000
 
 set ruler
