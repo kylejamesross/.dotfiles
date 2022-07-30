@@ -8,9 +8,6 @@ set signcolumn=number
 set noswapfile
 set nobackup
 
-set undodir=~/undodir
-set undofile
-
 set nohlsearch
 
 set ignorecase
