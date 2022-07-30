@@ -19,6 +19,7 @@ alias list-npm-globals='npm list -g --depth=0'
 # colored ls output
 alias ls='ls -alh --color'
 alias pb='git branch --merged | grep -v -E "main|master|staging|dev|$(git rev-parse --abbrev-ref HEAD)" > /tmp/merged-branches && vi /tmp/merged-branches && xargs git branch -d </tmp/merged-branches'
+alias vim='nvim'
 # PATH
 # export PATH=${PATH}:/usr/local/go/bin
 # export PATH=${PATH}:${HOME}/go/bin
