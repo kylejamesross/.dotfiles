@@ -35,3 +35,5 @@ if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile
 if [ -e /home/kyler/.nix-profile/etc/profile.d/nix.sh ]; then . /home/kyler/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 if [ -e /home/kyle/.nix-profile/etc/profile.d/nix.sh ]; then . /home/kyle/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+PATH="$PATH:${HOME}/.local/bin"
