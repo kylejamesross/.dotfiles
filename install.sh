@@ -13,7 +13,7 @@ nix-env -iA \
 	nixpkgs.zsh \
 	nixpkgs.antibody \
 	nixpkgs.tmux \
-    nixpkgs.neovim
+        nixpkgs.neovim \
 	nixpkgs.stow \
 	nixpkgs.bat \
 
