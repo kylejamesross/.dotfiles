@@ -37,3 +37,8 @@ if [ -e /home/kyler/.nix-profile/etc/profile.d/nix.sh ]; then . /home/kyler/.nix
 if [ -e /home/kyle/.nix-profile/etc/profile.d/nix.sh ]; then . /home/kyle/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 PATH="$PATH:${HOME}/.local/bin"
+
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
