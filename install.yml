@@ -48,7 +48,7 @@
   - name: Stow nvim
     shell: stow nvim
   - name: Configure zsh to shells
-    shell: command -v zsh | sudo tee -a /etc/shells
+    shell: command -v zsh | tee -a /etc/shells
   - name: Change shell to zsh
     shell: chsh -s $(which zsh) $USER
   - name: Install zsh_plugins
