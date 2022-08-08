@@ -6,7 +6,9 @@
   - name: Install zsh
     apt: name=zsh 
   - name: Install antibody
-    shell: curl -sfL git.io/antibody | sh -s - -b /usr/local/bin 
+    shell: curl -sfL git.io/antibody|sh -s - -b /usr/local/bin 
+  - name: Install git 
+    apt: name=git
   - name: Install tmux
     apt: name=tmux
   - name: Install neovim
@@ -51,3 +53,5 @@
     shell: chsh -s $(which zsh) $USER
   - name: Install zsh_plugins
     shell: antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh
+  - name: Install neovim plugins
+    shell: nvim +PlugInstall +PlugUpdate +qall
