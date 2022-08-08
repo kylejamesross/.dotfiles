@@ -40,6 +40,8 @@ set updatetime=250
 set encoding=UTF-8
 set mouse=a
 
+set clipboard+=unnamedplus
+
 packadd! dracula
 syntax enable
 colorscheme dracula
