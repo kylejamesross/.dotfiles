@@ -1,57 +1,116 @@
 - hosts: localhost
   become: true
+  vars:
+    source_key: "./ssh/.ssh/junk"
+    dest_key: "{{ lookup('env', 'HOME') }}/.ssh/junk"
+    source_pub_key: "./ssh/.ssh/junk.pub"
+    dest_pub_key: "{{ lookup('env', 'HOME') }}/.ssh/junk.pub"
   tasks:
+  - name: Ensure .ssh directory exists.
+    become_user: root
+    file:
+      dest: "{{ dest_key | dirname }}"
+      mode: 0700
+      state: directory
+    tags:
+      - dotfiles
+      - ssh
+  - name: Install ssh key
+    become_user: root
+    copy:
+      src: "{{ source_key }}"
+      dest: "{{ dest_key }}"
+      mode: 0600
+    tags:
+      - dotfiles
+      - ssh
+  - name: Install ssh pub key
+    become_user: root
+    copy:
+      src: "{{ source_pub_key }}"
+      dest: "{{ dest_pub_key }}"
+      mode: 0600
+    tags:
+      - dotfiles
+      - ssh
   - name: Install curl
     apt: name=curl
+    tags:
+      - dotfiles
+      - zsh
+      - neovim
   - name: Install zsh
     apt: name=zsh 
+    tags:
+      - zsh
   - name: Install antibody
     shell: curl -sfL git.io/antibody|sh -s - -b /usr/local/bin 
+    tags:
+      - zsh
   - name: Install git 
     apt: name=git
+    tags:
+      - nvim
   - name: Install tmux
     apt: name=tmux
+    tags:
+      - tmux
   - name: Install neovim
     apt: name=neovim
+    tags:
+      - neovim
   - name: Install stow
     apt: name=stow
+    tags:
+      - dotfiles
+      - stow
   - name: Install bat
     apt: name=bat
-  - name: Install dracula vim theme
-    ansible.builtin.git:
-      repo: https://github.com/dracula/vim.git 
-      dest: ./vim/.vim/pack/themes/opt/dracula
-      update: true
-  - name: Install vim fugitive plugin
-    ansible.builtin.git:
-      repo: https://github.com/tpope/vim-fugitive.git 
-      dest: ./vim/.vim/pack/git/start/fugitive 
-      update: true
-  - name: Install ctrlp plugin
-    ansible.builtin.git:
-      repo: https://github.com/ctrlpvim/ctrlp.vim.git
-      dest: ./vim/.vim/pack/general/start/ctrlp
-      update: true
-  - name: Install vim-easymotion plugin
-    ansible.builtin.git:
-      repo: https://github.com/easymotion/vim-easymotion.git 
-      dest: ./vim/.vim/pack/general/start/vim-easymotion
-      update: true
+    tags:
+      - bat
   - name: Install plug for neovim
     shell: sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    tags:
+      - neovim
   - name: Stow git
     shell: stow git
+    tags:
+      - dotfiles
   - name: Stow zsh
     shell: stow zsh
+    tags:
+      - dotfiles
   - name: Stow vim
     shell: stow vim
+    tags:
+      - dotfiles
   - name: Stow nvim
     shell: stow nvim
+    tags:
+      - dotfiles
+  - name: Set authorized key took from file
+    authorized_key:
+      user: "{{ lookup('env', 'USER') }}"
+      state: present
+      key: "{{ lookup('file', item) }}"
+    with_fileglob:
+      - ./ssh/.ssh/junk.pub"
+    tags:
+      - dotfiles
+      - ssh
   - name: Configure zsh to shells
     shell: command -v zsh | tee -a /etc/shells
+    tags: 
+      - zsh
   - name: Change shell to zsh
     shell: chsh -s $(which zsh) $USER
+    tags: 
+      - zsh
   - name: Install zsh_plugins
-    shell: antibody bundle < ./.zsh/.zsh_plugins.txt > ./.zsh/.zsh_plugins.sh
+    shell: antibody bundle < ./zsh/.zsh_plugins.txt > ~/.zsh_plugins.sh
+    tags: 
+      - zsh
   - name: Install neovim plugins
     shell: nvim +PlugInstall +PlugUpdate +qall
+    tags: 
+      - neovim
