@@ -52,6 +52,6 @@
   - name: Change shell to zsh
     shell: chsh -s $(which zsh) $USER
   - name: Install zsh_plugins
-    shell: antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh
+    shell: antibody bundle < ./.zsh/.zsh_plugins.txt > ./.zsh/.zsh_plugins.sh
   - name: Install neovim plugins
     shell: nvim +PlugInstall +PlugUpdate +qall
