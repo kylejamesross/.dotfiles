@@ -39,6 +39,11 @@
       - dotfiles
       - zsh
       - neovim
+  - name: Install fzf
+    apt: name=fzf
+    tags:
+      - dotfiles
+      - tmux
   - name: Install zsh
     apt: name=zsh 
     tags:
