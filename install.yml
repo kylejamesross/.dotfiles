@@ -93,6 +93,10 @@
     shell: stow nvim
     tags:
       - dotfiles
+  - name: Stow tmux
+    shell: stow tmux
+    tags:
+      - dotfiles
   - name: Set authorized key took from file
     authorized_key:
       user: "{{ lookup('env', 'USER') }}"

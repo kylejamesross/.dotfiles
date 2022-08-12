@@ -25,6 +25,7 @@ alias vim='nvim'
 # export PATH=${PATH}:${HOME}/go/bin
 
 export BAT_THEME="gruvbox-dark"
+# export TERM=xterm-256color
 
 # nix
 if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi

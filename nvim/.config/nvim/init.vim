@@ -49,7 +49,7 @@ if exists('g:vscode')
     Plug 'asvetliakov/vim-easymotion', { 'as': 'vsc-easymotion' }
     call plug#end()
 
-    :nnoremap <Leader>s :%s/<C-r><C-w>//g<Left><Left>
+    :nnoremap :%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>
 else
     " ordinary neovim
     call plug#begin()
@@ -65,11 +65,4 @@ colorscheme dracula
 
 " map s to global search
 nmap s <Plug>(easymotion-s)
-
-" move selections up or down
-nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>== 
-inoremap <A-j> <Esc>:m .+1<CR>==gi
-inoremap <A-k> <Esc>:m .-2<CR>==gi
-vnoremap <A-j> :m '>+1<CR>gv=gv
-noremap <A-k> :m '<-2<CR>gv=gv
+nnoremap <leader>x :!chmod +x %<CR>
