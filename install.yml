@@ -1,5 +1,9 @@
 - hosts: localhost
   become: true
+  pre_tasks:
+    - name: Update cache
+      apt:
+        update_cache: true
   vars:
     source_key: "./ssh/.ssh/id_ed25519"
     dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519"
@@ -64,6 +68,17 @@
     apt: name=neovim
     tags:
       - neovim
+  - name: Install node
+    apt:
+      ['nodejs', 'npm']
+    tags:
+      - node
+  - name: Install n
+    apt: name=n
+    tags:
+      - n
+  - name: Node 16
+    shell: n 16
   - name: Install stow
     apt: name=stow
     tags:
