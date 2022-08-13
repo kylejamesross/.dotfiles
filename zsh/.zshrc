@@ -15,15 +15,8 @@ alias vim='nvim'
 
 export BAT_THEME="gruvbox-dark"
 
-# nix
-if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-if [ -e /home/kyler/.nix-profile/etc/profile.d/nix.sh ]; then . /home/kyler/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-
-if [ -e /home/kyle/.nix-profile/etc/profile.d/nix.sh ]; then . /home/kyle/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 # PATH
 PATH="$PATH:${HOME}/.local/bin"
