@@ -59,9 +59,18 @@ else
     :nnoremap <Leader>s :%s/<C-r><C-w>//g<Left><Left>
 endif
 
-let g:EasyMotion_smartcase = 1
 colorscheme dracula   
+let g:EasyMotion_smartcase = 1
 
 " map s to global search
 nmap s <Plug>(easymotion-s)
 nnoremap <leader>x :!chmod +x %<CR>
+vnoremap <leader>p "_dP
+vnoremap <leader>y "+y
+nnoremap <leader>y "+y
+vnoremap <leader>w "+p
+nnoremap <leader>w "+p
+nnoremap <leader>Y gg"+yG
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
