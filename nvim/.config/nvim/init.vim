@@ -64,6 +64,8 @@ let g:EasyMotion_smartcase = 1
 
 " map s to global search
 nmap s <Plug>(easymotion-s)
+
+" key remaps
 nnoremap <leader>x :!chmod +x %<CR>
 vnoremap <leader>p "_dP
 vnoremap <leader>y "+y
@@ -71,6 +73,23 @@ nnoremap <leader>y "+y
 vnoremap <leader>w "+p
 nnoremap <leader>w "+p
 nnoremap <leader>Y gg"+yG
+nnoremap <leader>vp viw"_dP
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
-
+imap <Up>    <Nop>
+imap <Down>  <Nop>
+imap <Left>  <Nop>
+imap <Right> <Nop>
+inoremap <C-k> <Up>
+inoremap <C-j> <Down>
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
+nmap >> <Nop>
+nmap << <Nop>
+vmap >> <Nop>
+vmap << <Nop>
+nnoremap <Tab>   >>
+nnoremap <S-Tab> <<
+vnoremap <Tab>   >><Esc>gv
+vnoremap <S-Tab> <<<Esc>gv
+nnoremap Y y$
