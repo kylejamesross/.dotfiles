@@ -24,7 +24,7 @@ local options = {
     updatetime = 250,
     fileencoding = "UTF-8",
     updatetime= 250,
-    clipboard = "unnamedplus",
+--    clipboard = "unnamedplus",
     cmdheight = 2,
     conceallevel = 0,
     showtabline = 2,
@@ -43,5 +43,3 @@ for k, v in pairs(options) do
 end
 
 vim.cmd "let g:EasyMotion_smartcase = 1"
--- shortmess:append "c"
--- vim.cmd "set whichwrap+=<,>,[,],h,l"

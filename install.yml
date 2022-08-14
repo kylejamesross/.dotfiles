@@ -74,6 +74,10 @@
     apt: name=neovim
     tags:
       - neovim
+  - name: Install unzip
+    apt: name=unzip
+    tags:
+      - neovim
   - name: Install node
     apt: name=nodejs
     tags:
@@ -153,6 +157,8 @@
     shell: "antibody bundle < /home/{{ lookup('env', 'USER') }}/.zsh_plugins.txt > /home/{{ lookup('env', 'USER') }}/.zsh_plugins.sh"
     tags: 
       - zsh
+  - name: Give ownership of .dotfiles to user
+    shell: chown -R {{ lookup('env', 'USER') }}:{{ lookup('env', 'USER') }} /home/{{ lookup('env', 'USER') }}/.dotfiles
   - name: Install neovim clipboard support for wsl
     shell: |
       curl -sLo/tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip

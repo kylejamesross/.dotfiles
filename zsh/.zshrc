@@ -12,6 +12,8 @@ alias pb='git branch --merged | grep -v -E "main|master|staging|dev|$(git rev-pa
 alias vim='nvim'
 
 export BAT_THEME="gruvbox-dark"
+export DIR_NVIM_OPTIONS="${HOME}/.dotfiles/nvim/.config/nvim/lua/user"
+export DIR_DOTFILES="${HOME}/.dotfiles"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
