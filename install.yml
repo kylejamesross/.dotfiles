@@ -40,6 +40,9 @@
     tags:
       - dotfiles
       - ssh
+  - name: Give ownership of .ssh to user
+    become_user: "{{ lookup('env', 'USER') }}"
+    shell: chown -R {{ lookup('env', 'USER') }}:{{ lookup('env', 'USER') }} /home/{{ lookup('env', 'USER') }}/.ssh
   - name: Install curl
     apt: name=curl
     tags:
