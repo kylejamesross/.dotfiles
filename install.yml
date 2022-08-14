@@ -1,6 +1,9 @@
 - hosts: localhost
   become: true
   pre_tasks:
+    - name: Add latest stable neovim repo
+      apt_repository:
+        repo: ppa:neovim-ppa/stable
     - name: Update cache
       apt:
         update_cache: true
@@ -72,6 +75,10 @@
     apt: name=nodejs
     tags:
       - node
+  - name: Install npm
+    apt: name=npm
+    tags:
+      - node
   - name: Install n
     npm:
       name: n
@@ -95,8 +102,12 @@
     apt: name=bat
     tags:
       - bat
-  - name: Install plug for neovim
-    shell: sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  - name: Install packer neovim plugin
+    git:
+      repo: https://github.com/wbthomason/packer.nvim
+      dest: ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+      update: true
+      depth: 1
     tags:
       - neovim
   - name: Stow git
@@ -105,10 +116,6 @@
       - dotfiles
   - name: Stow zsh
     shell: stow zsh
-    tags:
-      - dotfiles
-  - name: Stow vim
-    shell: stow vim
     tags:
       - dotfiles
   - name: Stow nvim
@@ -125,7 +132,7 @@
       state: present
       key: "{{ lookup('file', item) }}"
     with_fileglob:
-      - ./ssh/.ssh/id_ed25519.pub"
+      - ./ssh/.ssh/id_ed25519.pub
     tags:
       - dotfiles
       - ssh
@@ -134,11 +141,13 @@
     tags: 
       - zsh
   - name: Change shell to zsh
-    shell: chsh -s $(which zsh) $USER
+    shell: "chsh -s $(which zsh) {{ lookup('env', 'USER') }}" 
     tags: 
       - zsh
   - name: Install zsh_plugins
-    shell: antibody bundle < ./zsh/.zsh_plugins.txt > ~/.zsh_plugins.sh
+    become: false
+    become_user: "{{ lookup('env', 'USER') }}"
+    shell: "antibody bundle < /home/{{ lookup('env', 'USER') }}/.zsh_plugins.txt > /home/{{ lookup('env', 'USER') }}/.zsh_plugins.sh"
     tags: 
       - zsh
   - name: Install neovim clipboard support for wsl
@@ -147,7 +156,3 @@
       unzip -p /tmp/win32yank.zip win32yank.exe > /tmp/win32yank.exe
       chmod +x /tmp/win32yank.exe
       mv /tmp/win32yank.exe /usr/local/bin/
-  - name: Install neovim plugins
-    shell: nvim +PlugInstall +PlugUpdate +qall
-    tags: 
-      - neovim
