@@ -46,7 +46,11 @@ return packer.startup(function(use)
   if vim.g.vscode then
     use { 'svetliakov/vim-easymotion', as = 'vsc-easymotion' }
   else
+    -- Regular nvim plugins
     use { 'easymotion/vim-easymotion' }
+    use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
+    use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
+
     -- Color schemes
     use { 'dracula/vim', as = 'dracula'}
 
