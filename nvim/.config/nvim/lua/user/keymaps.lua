@@ -31,6 +31,8 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 -- Navigate buffers
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
+keymap("n", "<leader>", ":cclose<CR>", opts)
+
 
 -- easy executeable file
 keymap("n", "<leader>x", ":!chmod +x %<CR>", opts);
@@ -89,3 +91,8 @@ keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
 -- easy motion
 keymap("n", "s", "<Plug>(easymotion-s)", opts);
+
+-- telescope
+keymap("n", "<c-t>", "<cmd>Telescope live_grep<cr>", opts)
+keymap("n", "<c-p>", "<cmd>Telescope git_files<cr>", opts)
+keymap("n", "<c-p>", "<CMD>lua require'telescope-config'.project_files()<CR>", opts)
