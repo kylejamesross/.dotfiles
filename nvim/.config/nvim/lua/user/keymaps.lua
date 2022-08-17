@@ -98,4 +98,4 @@ keymap("n", "s", "<Plug>(easymotion-s)", opts);
 -- telescope
 keymap("n", "<c-t>", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "<c-p>", "<cmd>Telescope git_files<cr>", opts)
-keymap("n", "<c-p>", "<CMD>lua require'telescope-config'.project_files()<CR>", opts)
+keymap("n", "<c-p>", "<CMD>lua require'user.telescope-config'.project_files()<CR>", opts)
