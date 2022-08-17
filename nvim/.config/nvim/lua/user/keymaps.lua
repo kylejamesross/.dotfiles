@@ -37,6 +37,9 @@ keymap("n", "<leader>", ":cclose<CR>", opts)
 -- easy executeable file
 keymap("n", "<leader>x", ":!chmod +x %<CR>", opts);
 
+-- git actions
+keymap("n", "<leader>ga", ":!git add --all<CR>", opts);
+
 -- paste enhancements
 keymap("v", "<leader>p", '"_dP', opts);
 keymap("v", "<leader>y", '"+y', opts);

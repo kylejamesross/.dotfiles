@@ -87,5 +87,3 @@ telescope.setup {
       }
   },
 }
-
-require "telescope-config"
