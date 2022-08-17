@@ -1,4 +1,3 @@
-
 local options = {
     number = true,
     relativenumber = true,
@@ -23,7 +22,6 @@ local options = {
     smartindent = true,
     updatetime = 250,
     fileencoding = "UTF-8",
-    updatetime= 250,
 --    clipboard = "unnamedplus",
     cmdheight = 2,
     conceallevel = 0,
@@ -35,6 +33,7 @@ local options = {
     undofile = true,
     numberwidth = 2,
     guifont = "monospace:h17",
+    termguicolors = true,
 }
 
 -- set all options

@@ -14,7 +14,7 @@ else
 end
 
 -- editor
-keymap("n", "<leader>e", ":Lex 30<cr>", opts)
+keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 
 -- easy window movement
 keymap("n", "<C-h>", "<C-w>h", opts)

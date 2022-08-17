@@ -50,6 +50,16 @@ return packer.startup(function(use)
     use { 'easymotion/vim-easymotion' }
     use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
     use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
+    use "windwp/nvim-autopairs"
+    use "numToStr/Comment.nvim" -- Easily comment stuff
+
+    -- tree
+    use {
+      'kyazdani42/nvim-tree.lua',
+      requires = {
+        'kyazdani42/nvim-web-devicons', -- optional, for file icons
+      },
+    }
 
     -- cmp plugins
     use "hrsh7th/nvim-cmp" -- the completion plugin
@@ -63,6 +73,7 @@ return packer.startup(function(use)
      -- LSP
     use "neovim/nvim-lspconfig" -- enable LSP
     use "williamboman/nvim-lsp-installer" -- simple to use language server installer
+    use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
 
     -- snippets
     use "L3MON4D3/LuaSnip" --snippet engine
@@ -73,6 +84,7 @@ return packer.startup(function(use)
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
     }
+    use 'JoosepAlviste/nvim-ts-context-commentstring'
 
     --colors
     use 'NvChad/nvim-colorizer.lua'
@@ -80,8 +92,12 @@ return packer.startup(function(use)
     -- Telescope
     use "nvim-telescope/telescope.nvim"
     use 'nvim-telescope/telescope-media-files.nvim'
+
     -- Color schemes
     use { 'dracula/vim', as = 'dracula'}
+
+    -- Git
+    use "lewis6991/gitsigns.nvim"
 
   end
 
