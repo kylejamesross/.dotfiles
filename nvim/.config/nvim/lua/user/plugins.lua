@@ -99,6 +99,9 @@ return packer.startup(function(use)
     -- Git
     use "lewis6991/gitsigns.nvim"
 
+    -- Bufferline
+    use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
+
   end
 
   -- Automatically set up your configuration after cloning packer.nvim
