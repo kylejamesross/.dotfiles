@@ -4,6 +4,9 @@
     - name: Add latest stable neovim repo
       apt_repository:
         repo: ppa:neovim-ppa/stable
+    - name: Add repo for lazy git
+      apt_repository:
+        repo: ppa:lazygit-team/release
     - name: Update cache
       apt:
         update_cache: true
@@ -65,7 +68,11 @@
   - name: Install git 
     apt: name=git
     tags:
-      - nvim
+      - git
+  - name: Install lazygit
+    apt: name=lazygit
+    tags:
+      - lazygit
   - name: Install tmux
     apt: name=tmux
     tags:

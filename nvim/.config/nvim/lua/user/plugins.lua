@@ -52,6 +52,7 @@ return packer.startup(function(use)
     use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
     use "windwp/nvim-autopairs"
     use "numToStr/Comment.nvim" -- Easily comment stuff
+    use "akinsho/toggleterm.nvim"
 
     -- tree
     use {
@@ -100,8 +101,12 @@ return packer.startup(function(use)
     -- Git
     use "lewis6991/gitsigns.nvim"
 
-    -- Bufferline
+    -- Lines
     use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
+    use {
+      'nvim-lualine/lualine.nvim',
+      requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    }
 
   end
 
