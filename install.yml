@@ -1,12 +1,6 @@
 - hosts: localhost
   become: true
   pre_tasks:
-    - name: Add latest stable neovim repo
-      apt_repository:
-        repo: ppa:neovim-ppa/stable
-    - name: Add repo for lazy git
-      apt_repository:
-        repo: ppa:lazygit-team/release
     - name: Update cache
       apt:
         update_cache: true
@@ -69,8 +63,22 @@
     apt: name=git
     tags:
       - git
+  - name: Install neovim
+    include_tasks:
+      file: tasks/neovim-install.yml
+      apply:
+        tags:
+          - neovim
+  - name: Install tar
+    apt: name=tar
+    tags:
+      - lazygit
   - name: Install lazygit
-    apt: name=lazygit
+    shell: |
+      LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[0-35.]+')
+      curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+      tar xf lazygit.tar.gz -C /usr/local/bin lazygit
+      rm lazygit.tar.gz
     tags:
       - lazygit
   - name: Install tmux

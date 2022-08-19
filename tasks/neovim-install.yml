@@ -1,0 +1,49 @@
+- name: ninja-build
+  apt: name=ninja-build
+  tags: install-neovim
+- name: gettext
+  apt: name=gettext
+  tags: install-neovim
+- name: libtool
+  apt: name=libtool 
+  tags: install-neovim
+- name: autoconf 
+  apt: name=autoconf
+  tags: install-neovim
+- name: libtool-bin
+  apt: name=libtool-bin
+  tags: install-neovim
+- name: automake
+  apt: name=automake
+  tags: install-neovim
+- name: cmake
+  apt: name=cmake
+  tags: install-neovim
+- name: g++
+  apt: name=g++
+  tags: install-neovim
+- name: pkg-config
+  apt: name=pkg-config
+  tags: install-neovim
+- name: unzip
+  apt: name=unzip
+  tags: install-neovim
+- name: curl
+  apt: name=curl
+  tags: install-neovim
+- name: doxygen
+  apt: name=doxygen
+  tags: install-neovim
+- name: Clone neovim
+  git:
+    repo: https://github.com/neovim/neovim
+    dest: "{{ lookup('env', 'HOME') }}/tmp/neovim"
+    update: yes
+  tags: install-neovim
+- name: Install neovim
+  shell: |
+    cd "{{ lookup('env', 'HOME') }}/tmp/neovim"
+    make CMAKE_BUILD_TYPE=RelWithDebInfo
+    make install 
+  tags: install-neovim
+
