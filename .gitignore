@@ -3,3 +3,4 @@ plugin/packer_compiled.lua
 nvim/.config/nvim/plugin/packer_compiled.lua
 nvim/.config/nvim/plugin/packer_compiled.lua
 tmp/neovim/
+vim/.vim/pack/general/start/ctrlp
