@@ -25,6 +25,7 @@ local options = {
 --    clipboard = "unnamedplus",
     cmdheight = 2,
     conceallevel = 0,
+    cursorline = true,
     showtabline = 2,
     splitbelow = true,
     splitright = true,
