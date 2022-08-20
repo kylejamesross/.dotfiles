@@ -1,4 +1,4 @@
-local options = {
+  local options = {
     number = true,
     relativenumber = true,
     signcolumn = "number",
