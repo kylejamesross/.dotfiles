@@ -99,3 +99,6 @@ keymap("n", "s", "<Plug>(easymotion-s)", opts);
 keymap("n", "<c-t>", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "<c-p>", "<cmd>Telescope git_files<cr>", opts)
 keymap("n", "<c-p>", "<CMD>lua require'user.telescope-config'.project_files()<CR>", opts)
+
+-- terminal
+keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", opts)
