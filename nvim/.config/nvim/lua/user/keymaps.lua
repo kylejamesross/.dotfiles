@@ -14,7 +14,7 @@ else
 end
 
 -- editor
-keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
+keymap("n", "<leader>e", ":NvimTreeFindFile<CR>", opts)
 
 -- easy window movement
 keymap("n", "<C-h>", "<C-w>h", opts)

@@ -53,7 +53,15 @@ return packer.startup(function(use)
     use "windwp/nvim-autopairs"
     use "numToStr/Comment.nvim" -- Easily comment stuff
     use "akinsho/toggleterm.nvim"
-
+    use 'lewis6991/impatient.nvim'
+    use "lukas-reineke/indent-blankline.nvim"
+    use {
+        'goolord/alpha-nvim',
+        requires = { 'kyazdani42/nvim-web-devicons' },
+        config = function ()
+            require'alpha'.setup(require'alpha.themes.startify'.config)
+        end
+    }
     -- tree
     use {
       'kyazdani42/nvim-tree.lua',
@@ -87,6 +95,7 @@ return packer.startup(function(use)
       run = ":TSUpdate",
     }
     use 'JoosepAlviste/nvim-ts-context-commentstring'
+    use 'p00f/nvim-ts-rainbow'
 
     --colors
     use 'NvChad/nvim-colorizer.lua'
