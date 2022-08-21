@@ -53,7 +53,15 @@ return packer.startup(function(use)
     use "windwp/nvim-autopairs"
     use "numToStr/Comment.nvim" -- Easily comment stuff
     use "akinsho/toggleterm.nvim"
-
+    use 'lewis6991/impatient.nvim'
+    use "lukas-reineke/indent-blankline.nvim"
+    use {
+        'goolord/alpha-nvim',
+        requires = { 'kyazdani42/nvim-web-devicons' },
+        config = function ()
+            require'alpha'.setup(require'alpha.themes.startify'.config)
+        end
+    }
     -- tree
     use {
       'kyazdani42/nvim-tree.lua',
@@ -61,6 +69,7 @@ return packer.startup(function(use)
         'kyazdani42/nvim-web-devicons', -- optional, for file icons
       },
     }
+
 
     -- cmp plugins
     use "hrsh7th/nvim-cmp" -- the completion plugin
@@ -76,6 +85,8 @@ return packer.startup(function(use)
     use "williamboman/nvim-lsp-installer" -- simple to use language server installer
     use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
     use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
+    use { 'kkharji/lspsaga.nvim' }  -- nightly
+    use { "RRethy/vim-illuminate" }
 
     -- snippets
     use "L3MON4D3/LuaSnip" --snippet engine
@@ -87,6 +98,7 @@ return packer.startup(function(use)
       run = ":TSUpdate",
     }
     use 'JoosepAlviste/nvim-ts-context-commentstring'
+    use 'p00f/nvim-ts-rainbow'
 
     --colors
     use 'NvChad/nvim-colorizer.lua'
