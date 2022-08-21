@@ -13,5 +13,6 @@ null_ls.setup {
       extra_filetypes = { "toml" },
     },
     diagnostics.eslint,
+    formatting.stylua,
   },
 }

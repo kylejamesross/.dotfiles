@@ -35,7 +35,8 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 keymap("n", "<Leader>bd", ":%bd|e#|bd#<CR>", opts)
-keymap("n", "<Leader>", ":cclose<CR>", opts)
+keymap("n", "<Leader>cc", ":cclose<CR>", opts)
+keymap("n", "<Leader>co", ":copenCR>", opts)
 
 
 -- easy executeable file
@@ -103,4 +104,4 @@ keymap("n", "<c-p>", "<cmd>Telescope git_files<cr>", opts)
 keymap("n", "<c-p>", "<CMD>lua require'user.telescope-config'.project_files()<CR>", opts)
 
 -- terminal
-keymap("n", "<Leader>g", "<cmd>lua _lazygit_toggle()<CR>", opts)
+keymap("n", "<Leader>v", "<cmd>lua _lazygit_toggle()<CR>", opts)
