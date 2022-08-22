@@ -39,6 +39,7 @@
     repo: https://github.com/neovim/neovim
     dest: "{{ lookup('env', 'HOME') }}/tmp/neovim"
     update: yes
+    force: yes
   tags: install-neovim
 - name: Install neovim
   shell: |
