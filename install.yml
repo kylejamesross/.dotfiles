@@ -124,14 +124,6 @@
     npm:
       name: tldr
       global: true
-  - name: Install prettier
-    npm:
-      name: prettier
-      global: true
-  - name: Install eslint
-    npm:
-      name: eslint
-      global: true
   - name: Install stow
     apt: name=stow
     tags:
