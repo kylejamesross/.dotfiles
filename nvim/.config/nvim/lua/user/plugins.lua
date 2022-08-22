@@ -58,9 +58,6 @@ return packer.startup(function(use)
     use {
         'goolord/alpha-nvim',
         requires = { 'kyazdani42/nvim-web-devicons' },
-        config = function ()
-            require'alpha'.setup(require'alpha.themes.startify'.config)
-        end
     }
     -- tree
     use {
@@ -85,7 +82,7 @@ return packer.startup(function(use)
     use "williamboman/nvim-lsp-installer" -- simple to use language server installer
     use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
     use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
-    use { 'kkharji/lspsaga.nvim' }  -- nightly
+    --[[ use "jose-elias-alvarez/nvim-lsp-ts-utils" ]]
     use { "RRethy/vim-illuminate" }
 
     -- snippets
