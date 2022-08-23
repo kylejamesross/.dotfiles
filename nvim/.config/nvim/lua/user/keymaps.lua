@@ -36,7 +36,9 @@ keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 keymap("n", "<Leader>bd", ":%bd|e#|bd#<CR>", opts)
 keymap("n", "<Leader>cc", ":cclose<CR>", opts)
-keymap("n", "<Leader>co", ":copenCR>", opts)
+keymap("n", "<Leader>co", ":copen<CR>", opts)
+keymap("n", "<S-j>", ":cnext<CR>", opts);
+keymap("n", "<S-k>", ":cprev<CR>", opts);
 
 
 -- easy executeable file
@@ -99,7 +101,7 @@ keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 keymap("n", "s", "<Plug>(easymotion-s)", opts);
 
 -- telescope
-keymap("n", "<c-t>", "<cmd>Telescope live_grep<cr>", opts)
+keymap("n", "<c-r>", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "<c-p>", "<cmd>Telescope git_files<cr>", opts)
 keymap("n", "<c-p>", "<CMD>lua require'user.telescope-config'.project_files()<CR>", opts)
 
