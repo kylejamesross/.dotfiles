@@ -124,6 +124,10 @@
     npm:
       name: tldr
       global: true
+  - name: Install stylua
+    npm:
+      name: "@johnnymorganz/stylua-bin"
+      global: true
   - name: Install stow
     apt: name=stow
     tags:
