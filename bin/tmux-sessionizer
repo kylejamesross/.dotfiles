@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-session=$(find ~ ~/personal -mindepth 1 -maxdepth 1 -type d | fzf)
+session=$({ find ~/personal ~/source -mindepth 1 -maxdepth 1 -type d & echo "~/.dotfiles/"; } | fzf)
 
 session_name=$(basename "$session" | tr . _);
 
