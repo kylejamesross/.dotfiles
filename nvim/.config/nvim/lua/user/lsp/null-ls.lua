@@ -17,24 +17,9 @@ null_ls.setup({
 	sources = {
 		formatting.eslint_d,
 		diagnostics.eslint_d,
+		diagnostics.tsc,
 		code_actions.eslint_d,
-		formatting.prettier.with({
-			prefer_local = "node_modules/.bin",
-			filetypes = {
-				"typescriptreact",
-				"typescript",
-				"javascriptreact",
-				"javascript",
-				"svelte",
-				"json",
-				"jsonc",
-				"css",
-				"less",
-				"scss",
-				"html",
-				"yaml",
-			},
-		}),
+		formatting.prettierd,
 		formatting.stylua,
 	},
 	on_attach = function(client, bufnr)

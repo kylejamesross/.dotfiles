@@ -20,3 +20,4 @@ require("user.indent-blankline")
 require("user.illuminate")
 require("user.alpha")
 require("user.lspsaga")
+--[[ require("user.typescript") ]]

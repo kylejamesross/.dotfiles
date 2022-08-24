@@ -128,6 +128,14 @@
     npm:
       name: "@johnnymorganz/stylua-bin"
       global: true
+  - name: Install prettierd
+    npm:
+      name: "@fsouza/prettierd"
+      global: true
+  - name: Install typescript
+    npm:
+      name: "typescript"
+      global: true
   - name: Install stow
     apt: name=stow
     tags:
