@@ -98,6 +98,13 @@
     apt: name=tmux
     tags:
       - tmux
+  - name: Install tmux plugin manager
+    git:
+      repo: https://github.com/tmux-plugins/tpm
+      dest: /home/{{ lookup('env', 'USER') }}/.tmux/plugins/tpm
+      update: true
+    tags:
+      - tmux
   - name: Install unzip
     apt: name=unzip
     tags:
