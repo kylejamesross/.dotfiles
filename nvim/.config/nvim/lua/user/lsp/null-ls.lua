@@ -10,15 +10,25 @@ local code_actions = null_ls.builtins.code_actions
 vim.env.PRETTIERD_DEFAULT_CONFIG = vim.fn.stdpath("config") .. "/.prettierrc"
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
+local lsp_formatting = function(bufnr)
+	vim.lsp.buf.format({
+		filter = function(client)
+			return client.name == "null-ls"
+		end,
+		bufnr = bufnr,
+	})
+end
+
 null_ls.setup({
 	debounce = 150,
 	autostart = true,
 	debug = false,
 	sources = {
-		formatting.eslint_d,
 		diagnostics.eslint_d,
 		diagnostics.tsc,
 		code_actions.eslint_d,
+		code_actions.gitsigns,
+		formatting.eslint_d,
 		formatting.prettierd,
 		formatting.stylua,
 	},
@@ -29,7 +39,7 @@ null_ls.setup({
 				group = augroup,
 				buffer = bufnr,
 				callback = function()
-					vim.lsp.buf.format({ set_timeout = 2000 })
+					lsp_formatting(bufnr)
 				end,
 			})
 		end
