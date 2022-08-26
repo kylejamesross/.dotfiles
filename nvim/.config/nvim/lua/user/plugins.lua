@@ -60,12 +60,7 @@ return packer.startup(function(use)
 			requires = { "kyazdani42/nvim-web-devicons" },
 		})
 		-- tree
-		use({
-			"kyazdani42/nvim-tree.lua",
-			requires = {
-				"kyazdani42/nvim-web-devicons", -- optional, for file icons
-			},
-		})
+		use({ "nvim-telescope/telescope-file-browser.nvim" })
 
 		-- cmp plugins
 		use("hrsh7th/nvim-cmp") -- the completion plugin
