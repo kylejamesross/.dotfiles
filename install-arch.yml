@@ -66,9 +66,9 @@
     - name: Install alsa-utils
       pacman: name=alsa-utils
     - name: Install pulse-audio
-      pacman: name=pulse-audio
-    - name: Install pulse-audio-alsa
-      pacman: name=pulse-audio-alsa
+      pacman: name=pulseaudio
+    - name: Install pulseaudio-alsa
+      pacman: name=pulseaudio-alsa
     - name: Install curl
       pacman: name=curl
       tags:
@@ -108,6 +108,18 @@
         apply:
           tags:
             - neovim
+    - name: Install yay
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: git clone https://aur.archlinux.org/yay-bin.git && sudo chown -R {{ lookup('env', 'USER') }}:wheel yay-bin && cd yay-bin && makepkg --noconfirm -si
+    - name: Cleanup yay directory
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: sudo rm -rf yay-bin
+    - name: Install nerd fonts
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: yay -S --noconfirm nerd-fonts-jetbrains-mono
     - name: Install tar
       pacman: name=tar
       tags:
