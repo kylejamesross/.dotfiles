@@ -168,8 +168,8 @@
     shell: stow zsh
     tags:
       - dotfiles
-  - name: Stow nvim
-    shell: stow nvim
+  - name: Stow .config
+    shell: stow .config
     tags:
       - dotfiles
   - name: Stow tmux

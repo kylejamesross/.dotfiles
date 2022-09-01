@@ -69,6 +69,8 @@
       pacman: name=pulseaudio
     - name: Install pulseaudio-alsa
       pacman: name=pulseaudio-alsa
+    - name: Install xclip
+      pacman: name=xclip
     - name: Install curl
       pacman: name=curl
       tags:
@@ -206,8 +208,8 @@
       shell: stow zsh
       tags:
         - dotfiles
-    - name: Stow nvim
-      shell: stow nvim
+    - name: Stow .config
+      shell: stow .config
       tags:
         - dotfiles
     - name: Stow tmux
