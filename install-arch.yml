@@ -45,6 +45,8 @@
       pacman: name=xorg-xinit
     - name: Install xbindkeys
       pacman: name=xbindkeys
+    - name: Install playerctl
+      pacman: name=playerctl
     - name: Install lightdm
       pacman: name=lightdm
     - name: Install lightdm-gtk-greeter

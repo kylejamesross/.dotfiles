@@ -83,6 +83,8 @@
 "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
    XF86AudioMicMute
 
+"playerctl --all-players play-pause"
+   XF86AudioPlay
 ##################################
 # End of xbindkeys configuration #
 ##################################
