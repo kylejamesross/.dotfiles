@@ -43,6 +43,8 @@
       pacman: name=xorg-server
     - name: Install xorg-xinit
       pacman: name=xorg-xinit
+    - name: Install xbindkeys
+      pacman: name=xbindkeys
     - name: Install lightdm
       pacman: name=lightdm
     - name: Install lightdm-gtk-greeter
@@ -73,6 +75,8 @@
       pacman: name=xclip
     - name: Install curl
       pacman: name=curl
+    - name: Install xcape
+      pacman: name=xcape
       tags:
         - dotfiles
         - zsh
