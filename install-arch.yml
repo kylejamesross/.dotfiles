@@ -127,7 +127,7 @@
     - name: Install nerd fonts
       become_user: "{{ lookup('env', 'USER') }}"
       become: false
-      shell: yay -S --noconfirm nerd-fonts-jetbrains-mono
+      shell: yay -S --noconfirm nerd-fonts-complete
     - name: Install tar
       pacman: name=tar
       tags:
