@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+systemctl --failed
+
+sudo journalctl -p 3 -xb
+
+sudo pacman -Syyu
