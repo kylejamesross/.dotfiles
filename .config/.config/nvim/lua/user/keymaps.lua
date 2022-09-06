@@ -104,5 +104,8 @@ keymap("n", "<c-t>", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "<c-p>", "<cmd>Telescope git_files<cr>", opts)
 keymap("n", "<c-p>", "<CMD>lua require'user.telescope-config'.project_files()<CR>", opts)
 
+-- git
+
+keymap("n", "<leader>vf", "<cmd>:GcLog -- %<cr>", opts)
 -- terminal
 keymap("n", "<Leader>v", "<cmd>lua _lazygit_toggle()<CR>", opts)
