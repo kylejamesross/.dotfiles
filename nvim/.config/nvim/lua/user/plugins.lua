@@ -58,6 +58,8 @@ return packer.startup(function(use)
 			"goolord/alpha-nvim",
 			requires = { "kyazdani42/nvim-web-devicons" },
 		})
+		use({ "moll/vim-bbye" })
+
 		-- tree
 		use({ "nvim-telescope/telescope-file-browser.nvim" })
 
@@ -93,6 +95,9 @@ return packer.startup(function(use)
 
 		--colors
 		use("NvChad/nvim-colorizer.lua")
+
+		-- git
+		use("tpope/vim-fugitive")
 
 		-- Telescope
 		use("nvim-telescope/telescope.nvim")
