@@ -32,13 +32,13 @@ keymap("n", "<C-Left>", ":vertical resize -2<Ck>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
-keymap("n", "<S-l>", ":bnext<CR>", opts)
-keymap("n", "<S-h>", ":bprevious<CR>", opts)
+keymap("n", "<M-l>", ":bnext<CR>", opts)
+keymap("n", "<M-h>", ":bprevious<CR>", opts)
 keymap("n", "<Leader>bd", ":%bd|e#|bd#<CR>", opts)
 keymap("n", "<Leader>cc", ":cclose<CR>", opts)
 keymap("n", "<Leader>co", ":copen<CR>", opts)
-keymap("n", "<S-j>", ":cnext<CR>", opts)
-keymap("n", "<S-k>", ":cprev<CR>", opts)
+keymap("n", "<M-j>", ":cnext<CR>", opts)
+keymap("n", "<M-k>", ":cprev<CR>", opts)
 
 -- easy executeable file
 keymap("n", "<Leader>x", ":!chmod +x %<CR>", opts)
