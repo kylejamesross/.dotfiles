@@ -79,10 +79,10 @@
       pacman: name=curl
     - name: Install xcape
       pacman: name=xcape
-      tags:
-        - dotfiles
-        - zsh
-        - neovim
+    - name: Install wget
+      pacman: name=wget
+    - name: Download background
+      shell: curl https://iili.io/6huwwg.jpg -o /usr/share/backgrounds/awesome-background.jpg
     - name: Install fzf
       pacman: name=fzf
       tags:
@@ -116,6 +116,7 @@
         apply:
           tags:
             - neovim
+            - long
     - name: Install yay
       become_user: "{{ lookup('env', 'USER') }}"
       become: false
@@ -128,6 +129,8 @@
       become_user: "{{ lookup('env', 'USER') }}"
       become: false
       shell: yay -S --noconfirm nerd-fonts-complete
+      tags:
+        - long
     - name: Install tar
       pacman: name=tar
       tags:

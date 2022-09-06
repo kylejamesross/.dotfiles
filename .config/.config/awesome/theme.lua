@@ -13,22 +13,22 @@ local theme = {}
 
 theme.font = "Hack 12"
 
-theme.bg_normal = "#222222"
-theme.bg_focus = "#535d6c"
+theme.bg_normal = "#282a36"
+theme.bg_focus = "#44475a"
 theme.bg_urgent = "#ff0000"
 theme.bg_minimize = "#444444"
 theme.bg_systray = theme.bg_normal
 
 theme.fg_normal = "#aaaaaa"
-theme.fg_focus = "#ffffff"
-theme.fg_urgent = "#ffffff"
-theme.fg_minimize = "#ffffff"
+theme.fg_focus = "#f8f8f2"
+theme.fg_urgent = "#f8f8f2"
+theme.fg_minimize = "#f8f8f2"
 
-theme.useless_gap = dpi(0)
-theme.border_width = dpi(1)
-theme.border_normal = "#000000"
-theme.border_focus = "#535d6c"
-theme.border_marked = "#91231c"
+theme.useless_gap = dpi(5)
+theme.border_width = dpi(2)
+theme.border_normal = "#282a36"
+theme.border_focus = "#bd93f9"
+theme.border_marked = "#ff5555"
 
 -- There are other variable sets
 -- overriding the default one when
@@ -93,7 +93,7 @@ theme.titlebar_maximized_button_focus_inactive = themes_path .. "default/titleba
 theme.titlebar_maximized_button_normal_active = themes_path .. "default/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active = themes_path .. "default/titlebar/maximized_focus_active.png"
 
-theme.wallpaper = "/usr/share/backgrounds/xfce/xfce-stripes.png"
+theme.wallpaper = "/usr/share/backgrounds/awesome-background.jpg"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path .. "default/layouts/fairhw.png"
