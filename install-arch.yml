@@ -83,6 +83,8 @@
       pacman: name=wget
     - name: Install dmenu
       pacman: name=dmenu
+    - name: Install picom
+      pacman: name=picom
     - name: Download background
       shell: curl https://iili.io/6huwwg.jpg -o /usr/share/backgrounds/awesome-background.jpg
     - name: Install nitrogen

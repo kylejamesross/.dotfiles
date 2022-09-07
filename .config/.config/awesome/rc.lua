@@ -591,3 +591,4 @@ end)
 
 -- Autostart Applications
 awful.spawn("nitrogen --random --set-zoom-fill /usr/share/backgrounds/")
+awful.spawn("picom")

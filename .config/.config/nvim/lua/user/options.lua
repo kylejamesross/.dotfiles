@@ -44,3 +44,4 @@ for k, v in pairs(options) do
 end
 
 vim.cmd("let g:EasyMotion_smartcase = 1")
+vim.cmd("let g:dracula_colorterm = 0 ")
