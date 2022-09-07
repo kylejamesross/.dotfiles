@@ -300,6 +300,9 @@ globalkeys = gears.table.join(
 	awful.key({ modkey }, "Return", function()
 		awful.spawn(terminal)
 	end, { description = "open a terminal", group = "launcher" }),
+	awful.key({ modkey }, "b", function()
+		awful.spawn("chromium")
+	end, { description = "open a browser", group = "launcher" }),
 	awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
 	awful.key({ modkey, "Shift" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
 
@@ -338,8 +341,9 @@ globalkeys = gears.table.join(
 
 	-- Prompt
 	awful.key({ modkey }, "r", function()
-		awful.screen.focused().mypromptbox:run()
-	end, { description = "run prompt", group = "launcher" }),
+		awful.spawn("dmenu_run")
+		--[[ awful.screen.focused().mypromptbox:run() ]]
+	end, { description = "run dmenu", group = "launcher" }),
 
 	awful.key({ modkey }, "x", function()
 		awful.prompt.run({
