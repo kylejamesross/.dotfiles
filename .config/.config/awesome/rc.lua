@@ -360,7 +360,7 @@ clientkeys = gears.table.join(
 		c.fullscreen = not c.fullscreen
 		c:raise()
 	end, { description = "toggle fullscreen", group = "client" }),
-	awful.key({ modkey, "Shift" }, "c", function(c)
+	awful.key({ modkey }, "c", function(c)
 		c:kill()
 	end, { description = "close", group = "client" }),
 	awful.key(
@@ -584,9 +584,6 @@ end)
 client.connect_signal("unfocus", function(c)
 	c.border_color = beautiful.border_normal
 end)
--- }}}
---
 
 -- Autostart Applications
---[[ awful.spawn_with_shell("picom") ]]
---[[ awful.spawn_with_shell("nitrogen --restore") ]]
+awful.spawn("nitrogen --random --set-zoom-fill /usr/share/backgrounds/")

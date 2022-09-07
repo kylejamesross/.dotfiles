@@ -44,8 +44,8 @@
   control+shift + q
 
 # set directly keycode (here control + f with my keyboard)
-"xterm"
-  c:41 + m:0x4
+# "xterm"
+#   c:41 + m:0x4
 
 # specify a mouse button
 "xterm"
@@ -65,7 +65,10 @@
 ## Control + mouse button 2 release event starts rxvt
 #"rxvt"
 #  Control + b:2 + Release
+#
 
+"nitrogen --random --set-zoom-fill /usr/share/backgrounds/"
+   mod4 + F12
 
 # Increase volume
 "pactl set-sink-volume @DEFAULT_SINK@ +1000"

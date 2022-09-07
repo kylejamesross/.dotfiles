@@ -83,6 +83,8 @@
       pacman: name=wget
     - name: Download background
       shell: curl https://iili.io/6huwwg.jpg -o /usr/share/backgrounds/awesome-background.jpg
+    - name: Install nitrogen
+      pacman: name=nitrogen
     - name: Install fzf
       pacman: name=fzf
       tags:
@@ -154,6 +156,13 @@
         update: true
       tags:
         - tmux
+    - name: Install minimal backgrounds
+      git:
+        repo: https://github.com/DenverCoder1/minimalistic-wallpaper-collection
+        dest: /usr/share/backgrounds/minimalistic-wallpaper-collection
+        update: true
+      tags:
+        - theme
     - name: Install unzip
       pacman: name=unzip
       tags:
