@@ -12,14 +12,15 @@ local themes_path = gfs.get_themes_dir()
 local theme = {}
 
 theme.font = "Hack 12"
+theme.wibar_opacity = 0.9
 
 theme.bg_normal = "#282a36"
 theme.bg_focus = "#44475a"
-theme.bg_urgent = "#ff0000"
+theme.bg_urgent = "#ff5555"
 theme.bg_minimize = "#444444"
 theme.bg_systray = theme.bg_normal
 
-theme.fg_normal = "#aaaaaa"
+theme.fg_normal = "#9b9eb3"
 theme.fg_focus = "#f8f8f2"
 theme.fg_urgent = "#f8f8f2"
 theme.fg_minimize = "#f8f8f2"
@@ -29,7 +30,9 @@ theme.border_width = dpi(2)
 theme.border_normal = "#282a36"
 theme.border_focus = "#bd93f9"
 theme.border_marked = "#ff5555"
-
+theme.tasklist_bg_focus = theme.bg_normal
+theme.tasklist_bg_urgent = theme.bg_normal
+theme.taglist_spacing = 10
 -- There are other variable sets
 -- overriding the default one when
 -- defined, the sets are:
@@ -114,8 +117,8 @@ theme.layout_cornersw = themes_path .. "default/layouts/cornersww.png"
 theme.layout_cornerse = themes_path .. "default/layouts/cornersew.png"
 
 -- Generate Awesome icon:
-theme.awesome_icon = theme_assets.awesome_icon(theme.menu_height, theme.bg_focus, theme.fg_focus)
-
+--[[ theme.awesome_icon = theme_assets.awesome_icon(theme.menu_height, theme.bg_focus, theme.fg_focus) ]]
+theme.awesome_icon = "~/.config/awesome/arch-logo.svg"
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 theme.icon_theme = nil
