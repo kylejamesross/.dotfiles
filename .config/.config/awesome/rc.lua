@@ -55,7 +55,7 @@ beautiful.init("~/.config/awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
-editor = os.getenv("EDITOR") or "nano"
+editor = os.getenv("EDITOR") or "nvim"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -126,7 +126,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock("%A %m/%d/%y %I:%M  ")
 
-myseparator = wibox.widget.textbox(" ")
+myseparator = wibox.widget.textbox("  ")
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -191,7 +191,11 @@ awful.screen.connect_for_each_screen(function(s)
 	set_wallpaper(s)
 
 	-- Each screen has its own tag table.
-	awful.tag({ "", "ﭧ", "", "", "", "", "", "ﬄ", "" }, s, awful.layout.layouts[6])
+	awful.tag(
+		{ "  ", " ﭧ ", "  ", "  ", "  ", "  ", "  ", " ﬄ ", "  " },
+		s,
+		awful.layout.layouts[6]
+	)
 
 	-- Create a promptbox for each screen
 	s.mypromptbox = awful.widget.prompt()
@@ -212,11 +216,36 @@ awful.screen.connect_for_each_screen(function(s)
 			awful.layout.inc(-1)
 		end)
 	))
+
+	local colors = {
+		"#dddddd",
+		"#50fa7b",
+		"#f7df1e",
+		"#ffb86c",
+		"#61dbfb",
+		"#dddddd",
+		"#7F3089",
+		"#ff79c6",
+		"#ff5555",
+	}
 	-- Create a taglist widget
 	s.mytaglist = awful.widget.taglist({
 		screen = s,
 		filter = awful.widget.taglist.filter.all,
 		buttons = taglist_buttons,
+		widget_template = {
+			{
+				id = "text_role",
+				widget = wibox.widget.textbox,
+			},
+			id = "background_role",
+			widget = wibox.container.background,
+			create_callback = function(self, t, index, tagsList)
+				self.fg = colors[index]
+				self.fg_focus = colors[index]
+				self.fg_occupied = colors[index]
+			end,
+		},
 	})
 
 	-- Create a tasklist widget
