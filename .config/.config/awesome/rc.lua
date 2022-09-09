@@ -242,8 +242,6 @@ awful.screen.connect_for_each_screen(function(s)
 			widget = wibox.container.background,
 			create_callback = function(self, t, index, tagsList)
 				self.fg = colors[index]
-				self.fg_focus = colors[index]
-				self.fg_occupied = colors[index]
 			end,
 		},
 	})
@@ -253,6 +251,30 @@ awful.screen.connect_for_each_screen(function(s)
 		screen = s,
 		filter = awful.widget.tasklist.filter.currenttags,
 		buttons = tasklist_buttons,
+		widget_template = {
+			{
+				{
+					{
+						{
+							id = "icon_role",
+							widget = wibox.widget.imagebox,
+						},
+						margins = 5,
+						widget = wibox.container.margin,
+					},
+					{
+						id = "text_role",
+						widget = wibox.widget.textbox,
+					},
+					layout = wibox.layout.fixed.horizontal,
+				},
+				left = 10,
+				right = 10,
+				widget = wibox.container.margin,
+			},
+			id = "background_role",
+			widget = wibox.container.background,
+		},
 	})
 
 	-- Create the wibox
@@ -283,13 +305,13 @@ end)
 -- }}}
 
 -- {{{ Mouse bindings
-root.buttons(gears.table.join(
-	awful.button({}, 3, function()
-		mymainmenu:toggle()
-	end),
-	awful.button({}, 4, awful.tag.viewnext),
-	awful.button({}, 5, awful.tag.viewprev)
-))
+--[[ root.buttons(gears.table.join( ]]
+--[[ 	awful.button({}, 3, function() ]]
+--[[ 		mymainmenu:toggle() ]]
+--[[ 	end), ]]
+--[[ 	awful.button({}, 4, awful.tag.viewnext), ]]
+--[[ 	awful.button({}, 5, awful.tag.viewprev) ]]
+--[[ )) ]]
 -- }}}
 
 -- {{{ Key bindings
