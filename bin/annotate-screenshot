@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+image_directory="$HOME/screenshots"
+
+mkdir -p $image_directory
+
+image_path="$image_directory/$(date +%s).png"
+
+sudo maim -s -u "$image_path"
+
+gimp $image_path
+

@@ -87,6 +87,8 @@
       pacman: name=picom
     - name: Install maim
       pacman: name=maim
+    - name: Install gimp
+      pacman: name=gimp
     - name: Download background
       shell: curl https://iili.io/6huwwg.jpg -o /usr/share/backgrounds/awesome-background.jpg
     - name: Install nitrogen

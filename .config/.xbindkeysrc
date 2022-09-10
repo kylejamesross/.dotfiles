@@ -69,6 +69,9 @@
 "maim -s -u | xclip -selection clipboard -t image/png -i"
   Print
 
+"annotate-screenshot"
+   m:0x1 + c:107
+
 "nitrogen --random --set-zoom-fill /usr/share/backgrounds/"
    mod4 + F12
 
