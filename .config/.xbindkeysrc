@@ -66,6 +66,8 @@
 #"rxvt"
 #  Control + b:2 + Release
 #
+"maim -s -u | xclip -selection clipboard -t image/png -i"
+  Print
 
 "nitrogen --random --set-zoom-fill /usr/share/backgrounds/"
    mod4 + F12
