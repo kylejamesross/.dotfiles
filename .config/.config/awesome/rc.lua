@@ -17,7 +17,6 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
-
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -88,32 +87,46 @@ awful.layout.layouts = {
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
-myawesomemenu = {
-	{
-		"hotkeys",
-		function()
-			hotkeys_popup.show_help(nil, awful.screen.focused())
-		end,
-	},
-	{ "manual", terminal .. " -e man awesome" },
-	{ "edit config", editor_cmd .. " " .. awesome.conffile },
-	{ "restart", awesome.restart },
-	{
-		"quit",
-		function()
-			awesome.quit()
-		end,
-	},
-}
+--[[ myawesomemenu = { ]]
+--[[ 	{ ]]
+--[[ 		"hotkeys", ]]
+--[[ 		function() ]]
+--[[ 			hotkeys_popup.show_help(nil, awful.screen.focused()) ]]
+--[[ 		end, ]]
+--[[ 	}, ]]
+--[[ 	{ "manual", terminal .. " -e man awesome" }, ]]
+--[[ 	{ "edit config", editor_cmd .. " " .. awesome.conffile }, ]]
+--[[ 	{ "restart", awesome.restart }, ]]
+--[[ 	{ ]]
+--[[ 		"quit", ]]
+--[[ 		function() ]]
+--[[ 			awesome.quit() ]]
+--[[ 		end, ]]
+--[[ 	}, ]]
+--[[ } ]]
 
-mymainmenu = awful.menu({
-	items = {
-		{ "awesome", myawesomemenu, beautiful.awesome_icon },
-		{ "open terminal", terminal },
-	},
+--[[ mymainmenu = awful.menu({ ]]
+--[[ 	items = { ]]
+--[[ 		{ "awesome", myawesomemenu, beautiful.awesome_icon }, ]]
+--[[ 		{ "open terminal", terminal }, ]]
+--[[ 	}, ]]
+--[[ }) ]]
+
+--[[ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = mymainmenu }) ]]
+local logout_popup = require("awesome-wm-widgets.logout-popup-widget.logout-popup")
+myCustomLauncher = awful.widget.button({
+	image = beautiful.awesome_icon,
 })
-
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = mymainmenu })
+myCustomLauncher:buttons(gears.table.join(
+	myCustomLauncher:buttons(),
+	awful.button({}, 1, nil, function()
+		logout_popup.launch({
+			bg_color = "#282a36",
+			accent_color = "#ff79c6",
+			phrases = {},
+		})
+	end)
+))
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -124,7 +137,17 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock("%A %m/%d/%y %I:%M  ")
+mytextclock = wibox.widget.textclock("%m/%d/%y %I:%M  ")
+
+local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
+local cw = calendar_widget({
+	placement = "top_right",
+})
+mytextclock:connect_signal("button::press", function(_, _, _, button)
+	if button == 1 then
+		cw.toggle()
+	end
+end)
 
 myseparator = wibox.widget.textbox("  ")
 
@@ -224,7 +247,7 @@ awful.screen.connect_for_each_screen(function(s)
 		"#ffb86c",
 		"#61dbfb",
 		"#dddddd",
-		"#7F3089",
+		"#bd93f9",
 		"#ff79c6",
 		"#ff5555",
 	}
@@ -279,14 +302,19 @@ awful.screen.connect_for_each_screen(function(s)
 
 	-- Create the wibox
 	s.mywibox = awful.wibar({ position = "top", screen = s })
-
+	local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
+	local mpris_widget = require("awesome-wm-widgets.mpris-widget")
+	local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
+	local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
+	local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
+	local fs_widget = require("awesome-wm-widgets.fs-widget.fs-widget")
 	-- Add widgets to the wibox
 	s.mywibox:setup({
 		layout = wibox.layout.align.horizontal,
 		{ -- Left widgets
 			layout = wibox.layout.fixed.horizontal,
 			myseparator,
-			mylauncher,
+			myCustomLauncher,
 			myseparator,
 			s.mytaglist,
 			myseparator,
@@ -296,7 +324,18 @@ awful.screen.connect_for_each_screen(function(s)
 		{ -- Right widgets
 			layout = wibox.layout.fixed.horizontal,
 			--[[ mykeyboardlayout, ]]
+			myseparator,
 			wibox.widget.systray(),
+			net_speed_widget(),
+			myseparator,
+			cpu_widget(),
+			myseparator,
+			ram_widget(),
+			myseparator,
+			volume_widget({ widget_type = "arc", size = 25 }),
+			myseparator,
+			mpris_widget(),
+			myseparator,
 			mytextclock,
 			s.mylayoutbox,
 		},
@@ -316,6 +355,9 @@ end)
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
+	awful.key({ modkey }, "l", function()
+		logout_popup.launch()
+	end, { description = "Show logout screen", group = "custom" }),
 	awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
 	awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
 	awful.key({ modkey }, "Right", awful.tag.viewnext, { description = "view next", group = "tag" }),

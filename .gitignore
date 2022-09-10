@@ -4,3 +4,6 @@ tmp/neovim/
 vim/.vim/pack/general/start/ctrlp
 ripgrep.deb
 .config/.config/nvim/plugin
+
+.config/.config/awesome/awesome-buttons/
+.config/.config/awesome/awesome-wm-widgets/

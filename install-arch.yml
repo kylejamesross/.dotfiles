@@ -160,6 +160,20 @@
         update: true
       tags:
         - tmux
+    - name: Install awesome widgets
+      git:
+        repo: https://github.com/streetturtle/awesome-wm-widgets
+        dest: /home/{{ lookup('env', 'USER') }}/.dotfiles/.config/.config/awesome/awesome-wm-widgets
+        update: true
+      tags:
+        - awesome
+    - name: Install awesome button widgets
+      git:
+        repo: https://github.com/streetturtle/awesome-buttons
+        dest: /home/{{ lookup('env', 'USER') }}/.dotfiles/.config/.config/awesome/awesome-buttons
+        update: true
+      tags:
+        - awesome
     - name: Install minimal backgrounds
       git:
         repo: https://github.com/DenverCoder1/minimalistic-wallpaper-collection

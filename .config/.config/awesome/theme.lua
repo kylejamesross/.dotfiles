@@ -11,7 +11,7 @@ local themes_path = gfs.get_themes_dir()
 
 local theme = {}
 
-theme.font = "Hack 12"
+theme.font = "RobotoMono 12"
 theme.wibar_opacity = 0.9
 
 theme.bg_normal = "#282a36"
@@ -19,8 +19,7 @@ theme.bg_focus = "#44475a"
 theme.bg_urgent = "#ff5555"
 theme.bg_minimize = "#444444"
 theme.bg_systray = theme.bg_normal
-
-theme.fg_normal = "#9b9eb3"
+theme.fg_normal = "#b9bbca"
 theme.fg_focus = "#f8f8f2"
 theme.fg_urgent = "#f8f8f2"
 theme.fg_minimize = "#f8f8f2"
