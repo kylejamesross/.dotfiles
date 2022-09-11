@@ -215,7 +215,7 @@ awful.screen.connect_for_each_screen(function(s)
 
 	-- Each screen has its own tag table.
 	awful.tag(
-		{ "  ", " ﭧ ", "  ", "  ", "  ", "  ", "  ", " ﬄ ", "  " },
+		{ " 爵 ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  " },
 		s,
 		awful.layout.layouts[6]
 	)
@@ -361,6 +361,8 @@ globalkeys = gears.table.join(
 	awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
 	awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
 	awful.key({ modkey }, "Right", awful.tag.viewnext, { description = "view next", group = "tag" }),
+	awful.key({ modkey, "Shift" }, "j", awful.tag.viewprev, { description = "view previous", group = "tag" }),
+	awful.key({ modkey, "Shift" }, "k", awful.tag.viewnext, { description = "view next", group = "tag" }),
 	awful.key({ modkey }, "Escape", awful.tag.history.restore, { description = "go back", group = "tag" }),
 
 	awful.key({ modkey }, "j", function()

@@ -89,6 +89,22 @@
       pacman: name=maim
     - name: Install gimp
       pacman: name=gimp
+    - name: Install vlc
+      pacman: name=vlc
+    - name: Install htop
+      pacman: name=htop
+    - name: Install inkscape
+      pacman: name=inkscape
+    - name: Install libreoffice
+      pacman: name=libreoffice-still
+    - name: Install docker
+      pacman: name=docker
+    - name: Start docker
+      shell: systemctl start docker
+    - name: Start docker
+      shell: systemctl enable docker
+    - name: Install pavucontrol
+      pacman: name=pavucontrol
     - name: Download background
       shell: curl https://iili.io/6huwwg.jpg -o /usr/share/backgrounds/awesome-background.jpg
     - name: Install nitrogen
@@ -141,6 +157,25 @@
       shell: yay -S --noconfirm nerd-fonts-complete
       tags:
         - long
+    - name: Install timeshift
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: yay -S --noconfirm timeshift
+      tags:
+        - backup
+    - name: Install Azure Data Studio
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: yay -S --noconfirm azuredatastudio-bin
+      tags:
+        - backup
+        - backup
+    - name: Install Teams
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: yay -S --noconfirm teams
+      tags:
+        - backup
     - name: Install tar
       pacman: name=tar
       tags:
@@ -214,6 +249,10 @@
     - name: Install stylua
       npm:
         name: "@johnnymorganz/stylua-bin"
+        global: true
+    - name: Install eslint_d
+      npm:
+        name: eslint_d
         global: true
     - name: Install prettierd
       npm:
