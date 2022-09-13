@@ -62,7 +62,12 @@ return packer.startup(function(use)
 		use({ "moll/vim-bbye" })
 
 		-- tree
-		use({ "nvim-telescope/telescope-file-browser.nvim" })
+		use({
+			"kyazdani42/nvim-tree.lua",
+			requires = {
+				"kyazdani42/nvim-web-devicons", -- optional, for file icons
+			},
+		})
 
 		-- cmp plugins
 		use("hrsh7th/nvim-cmp") -- the completion plugin

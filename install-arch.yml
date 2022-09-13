@@ -99,6 +99,8 @@
       pacman: name=libreoffice-still
     - name: Install docker
       pacman: name=docker
+    - name: Install docker-compose
+      pacman: name=docker-compose
     - name: Start docker
       shell: systemctl start docker
     - name: Start docker
@@ -111,9 +113,20 @@
       pacman: name=nitrogen
     - name: Install fzf
       pacman: name=fzf
-      tags:
-        - dotfiles
-        - tmux
+    - name: Install mono
+      pacman: name=mono
+    - name: Install dotnet-runtime
+      pacman: name=dotnet-runtime
+    - name: Install dotnet-sdk
+      pacman: name=dotnet-sdk
+    - name: Install cups
+      pacman: name=cups
+    - name: Install cups-pdf
+      pacman: name=cups-pdf
+    - name: Install start cups
+      shell: systemctl start cups.service
+    - name: Install enable cups
+      shell: systemctl enable cups.service
     - name: Install ripgrep
       pacman: name=ripgrep
       tags:

@@ -17,7 +17,7 @@ end
 keymap("n", "<Leader><Tab>", "<C-6>", opts)
 
 -- editor
-keymap("n", "<Leader>e", ":Telescope file_browser path=%:p:h<CR>", opts)
+keymap("n", "<Leader>e", ":NvimTreeFindFileToggle<CR>", opts)
 
 -- easy window movements
 keymap("n", "<C-h>", "<C-w>h", opts)
@@ -28,7 +28,7 @@ keymap("n", "<C-l>", "<C-w>l", opts)
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize +2<CR>", opts)
 keymap("n", "<C-Down>", ":resize -2<CR>", opts)
-keymap("n", "<C-Left>", ":vertical resize -2<Ck>", opts)
+keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
