@@ -97,14 +97,6 @@
       pacman: name=inkscape
     - name: Install libreoffice
       pacman: name=libreoffice-still
-    - name: Install docker
-      pacman: name=docker
-    - name: Install docker-compose
-      pacman: name=docker-compose
-    - name: Start docker
-      shell: systemctl start docker
-    - name: Start docker
-      shell: systemctl enable docker
     - name: Install pavucontrol
       pacman: name=pavucontrol
     - name: Download background
@@ -113,12 +105,6 @@
       pacman: name=nitrogen
     - name: Install fzf
       pacman: name=fzf
-    - name: Install mono
-      pacman: name=mono
-    - name: Install dotnet-runtime
-      pacman: name=dotnet-runtime
-    - name: Install dotnet-sdk
-      pacman: name=dotnet-sdk
     - name: Install cups
       pacman: name=cups
     - name: Install cups-pdf
@@ -176,23 +162,8 @@
       shell: yay -S --noconfirm timeshift
       tags:
         - backup
-    - name: Install Azure Data Studio
-      become_user: "{{ lookup('env', 'USER') }}"
-      become: false
-      shell: yay -S --noconfirm azuredatastudio-bin
-      tags:
-        - backup
-        - backup
-    - name: Install Teams
-      become_user: "{{ lookup('env', 'USER') }}"
-      become: false
-      shell: yay -S --noconfirm teams
-      tags:
-        - backup
     - name: Install tar
       pacman: name=tar
-      tags:
-        - lazygit
     - name: Install lazygit
       shell: |
         LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[0-35.]+')
@@ -334,3 +305,9 @@
         - zsh
     - name: Give ownership of .dotfiles to user
       shell: chown -R {{ lookup('env', 'USER') }}:wheel /home/{{ lookup('env', 'USER') }}/
+    - name: Install workplace
+      include_tasks:
+        file: tasks/install-workplace.yml
+        apply:
+          tags:
+            - work

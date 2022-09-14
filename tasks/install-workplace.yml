@@ -1,0 +1,141 @@
+- name: Install docker
+  pacman: name=docker
+  tags:
+    - work
+- name: Install docker-compose
+  pacman: name=docker-compose
+  tags:
+    - work
+- name: Start docker
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: sudo systemctl start docker
+  tags:
+    - work
+- name: Start docker
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: sudo systemctl enable docker
+  tags:
+    - work
+- name: Pull SQL Server 2022
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: sudo docker pull mcr.microsoft.com/mssql/server:2022-latest
+  tags:
+    - work
+- name: Run SQL Server 2022
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: sudo docker start sql1 || sudo docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=@Password" -p 1433:1433 --name sql1 --hostname sql1 -d mcr.microsoft.com/mssql/server:2022-latest
+  tags:
+    - work
+- name: Autostart SQL Server
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: sudo docker update --restart=unless-stopped sql1
+  tags:
+    - work
+- name: Install dotnet-host-bin
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: yay -S --noconfirm dotnet-host-bin
+  tags:
+    - work
+- name: Install dotnet-runtime-bin
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: yay -S --noconfirm dotnet-runtime-bin
+  tags:
+    - work
+- name: Install dotnet-sdk-bin
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: yay -S --noconfirm dotnet-sdk-bin
+  tags:
+    - work
+- name: Install dotnet-targeting-pack-bin
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: yay -S --noconfirm dotnet-targeting-pack-bin
+  tags:
+    - work
+- name: Install Azure Data Studio
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: yay -S --noconfirm azuredatastudio-bin
+  tags:
+    - work
+- name: Install teams
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: yay -S --noconfirm teams
+  tags:
+    - work
+- name: Install rider
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: yay -S --noconfirm rider
+  tags:
+    - work
+- name: Install powershell-bin
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: yay -S --noconfirm powershell-bin
+  tags:
+    - work
+- name: Download artifacts provider
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: sh -c "$(curl -fsSL https://aka.ms/install-artifacts-credprovider.sh)"
+  tags:
+    - work
+- name: Download dotnet-ef
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: dotnet-ef || dotnet tool install --global dotnet-ef
+  tags:
+    - work
+- name: Create source directory
+  shell: mkdir -p /home/{{ lookup('env', 'USER') }}/source
+  tags:
+    - work
+- name: Add underwriting project
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: |
+    if [ ! -d "/home/{{ lookup('env', 'USER') }}/source/underwriting" ] ; then
+        git clone git@github.com:Nude-Solutions/underwriting.git /home/{{ lookup('env', 'USER') }}/source/underwriting
+    fi
+  tags:
+    - work
+- name: Copy over underwriting config
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: cp -f /home/{{ lookup('env', 'USER') }}/.dotfiles/project-config/underwriting/appsettings.local.json /home/{{ lookup('env', 'USER') }}/source/underwriting/server/Presentation/appsettings.local.json
+  tags:
+    - work
+- name: Add party project
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: |
+    if [ ! -d "/home/{{ lookup('env', 'USER') }}/source/party" ] ; then
+        git clone git@github.com:Nude-Solutions/party.git /home/{{ lookup('env', 'USER') }}/source/party
+    fi
+  tags:
+    - work
+- name: Copy over party config
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: cp -f /home/{{ lookup('env', 'USER') }}/.dotfiles/project-config/party/appsettings.local.json /home/{{ lookup('env', 'USER') }}/source/party/server/Presentation/appsettings.local.json
+  tags:
+    - work
+- name: Add search project
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: |
+    if [ ! -d "/home/{{ lookup('env', 'USER') }}/source/search" ] ; then
+        git clone git@github.com:Nude-Solutions/search.git /home/{{ lookup('env', 'USER') }}/source/search
+    fi
+  tags:
+    - work
