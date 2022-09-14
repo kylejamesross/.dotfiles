@@ -168,10 +168,10 @@ local taglist_buttons = gears.table.join(
 		end
 	end),
 	awful.button({}, 4, function(t)
-		awful.tag.viewnext(t.screen)
+		--[[ awful.tag.viewnext(t.screen) ]]
 	end),
 	awful.button({}, 5, function(t)
-		awful.tag.viewprev(t.screen)
+		--[[ awful.tag.viewprev(t.screen) ]]
 	end)
 )
 
@@ -187,10 +187,10 @@ local tasklist_buttons = gears.table.join(
 		awful.menu.client_list({ theme = { width = 250 } })
 	end),
 	awful.button({}, 4, function()
-		awful.client.focus.byidx(1)
+		--[[ awful.client.focus.byidx(1) ]]
 	end),
 	awful.button({}, 5, function()
-		awful.client.focus.byidx(-1)
+		--[[ awful.client.focus.byidx(-1) ]]
 	end)
 )
 
@@ -688,7 +688,9 @@ end)
 client.connect_signal("unfocus", function(c)
 	c.border_color = beautiful.border_normal
 end)
+local tagC = awful.tag.find_by_name(awful.screen.focused(), "  ")
 
 -- Autostart Applications
 awful.spawn("nitrogen --random --set-zoom-fill /usr/share/backgrounds/")
-awful.spawn("picom")
+awful.spawn("xcape -e 'Control_L=Escape'")
+awful.spawn("setxkbmap -option ctrl:nocaps")

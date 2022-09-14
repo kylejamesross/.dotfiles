@@ -13,7 +13,7 @@
     - name: Ensure .ssh directory exists.
       become_user: root
       file:
-        dest: "{{ dest_key | dirname }}"
+        dest: "{{ dest_key | dirname }}"e
         mode: 0700
         state: directory
       tags:
@@ -63,8 +63,6 @@
       pacman: name=xfce4
     - name: Install alacritty
       pacman: name=alacritty
-    - name: Install chromium
-      pacman: name=chromium
     - name: Install nautilus
       pacman: name=nautilus
     - name: Install alsa-utils
@@ -162,6 +160,12 @@
       shell: yay -S --noconfirm timeshift
       tags:
         - backup
+    - name: Install google-chrome
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: yay -S --noconfirm google-chrome
+      tags:
+        - internet
     - name: Install tar
       pacman: name=tar
     - name: Install lazygit
@@ -305,6 +309,8 @@
         - zsh
     - name: Give ownership of .dotfiles to user
       shell: chown -R {{ lookup('env', 'USER') }}:wheel /home/{{ lookup('env', 'USER') }}/
+    - name: Start keybindings
+      shell: xbindkeys
     - name: Install workplace
       include_tasks:
         file: tasks/install-workplace.yml

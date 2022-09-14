@@ -60,6 +60,18 @@
   shell: yay -S --noconfirm dotnet-targeting-pack-bin
   tags:
     - work
+- name: Install aspnet-runtime-bin
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: yay -S --noconfirm aspnet-runtime-bin
+  tags:
+    - work
+- name: Install aspnet-targeting-pack-bin
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: yay -S --noconfirm aspnet-targeting-pack-bin
+  tags:
+    - work
 - name: Install Azure Data Studio
   become_user: "{{ lookup('env', 'USER') }}"
   become: false
@@ -97,12 +109,14 @@
   tags:
     - work
 - name: Create source directory
-  shell: mkdir -p /home/{{ lookup('env', 'USER') }}/source
+  shell: |
+    mkdir -p /home/{{ lookup('env', 'USER') }}/source
+    chown -R {{ lookup('env', 'USER') }}:wheel /home/{{ lookup('env', 'USER') }}/
   tags:
     - work
 - name: Add underwriting project
   become_user: "{{ lookup('env', 'USER') }}"
-  become: false
+  become: true
   shell: |
     if [ ! -d "/home/{{ lookup('env', 'USER') }}/source/underwriting" ] ; then
         git clone git@github.com:Nude-Solutions/underwriting.git /home/{{ lookup('env', 'USER') }}/source/underwriting
@@ -111,13 +125,13 @@
     - work
 - name: Copy over underwriting config
   become_user: "{{ lookup('env', 'USER') }}"
-  become: false
+  become: true
   shell: cp -f /home/{{ lookup('env', 'USER') }}/.dotfiles/project-config/underwriting/appsettings.local.json /home/{{ lookup('env', 'USER') }}/source/underwriting/server/Presentation/appsettings.local.json
   tags:
     - work
 - name: Add party project
   become_user: "{{ lookup('env', 'USER') }}"
-  become: false
+  become: true
   shell: |
     if [ ! -d "/home/{{ lookup('env', 'USER') }}/source/party" ] ; then
         git clone git@github.com:Nude-Solutions/party.git /home/{{ lookup('env', 'USER') }}/source/party
@@ -126,16 +140,43 @@
     - work
 - name: Copy over party config
   become_user: "{{ lookup('env', 'USER') }}"
-  become: false
+  become: true
   shell: cp -f /home/{{ lookup('env', 'USER') }}/.dotfiles/project-config/party/appsettings.local.json /home/{{ lookup('env', 'USER') }}/source/party/server/Presentation/appsettings.local.json
   tags:
     - work
 - name: Add search project
   become_user: "{{ lookup('env', 'USER') }}"
-  become: false
+  become: true
   shell: |
     if [ ! -d "/home/{{ lookup('env', 'USER') }}/source/search" ] ; then
         git clone git@github.com:Nude-Solutions/search.git /home/{{ lookup('env', 'USER') }}/source/search
+    fi
+  tags:
+    - work
+- name: Add base-components
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: true
+  shell: |
+    if [ ! -d "/home/{{ lookup('env', 'USER') }}/source/base-components" ] ; then
+        git clone git@github.com:Nude-Solutions/base-components.git /home/{{ lookup('env', 'USER') }}/source/base-components
+    fi
+  tags:
+    - work
+- name: Add base-functionality
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: true
+  shell: |
+    if [ ! -d "/home/{{ lookup('env', 'USER') }}/source/base-functionality" ] ; then
+        git clone git@github.com:Nude-Solutions/base-functionality.git /home/{{ lookup('env', 'USER') }}/source/base-functionality
+    fi
+  tags:
+    - work
+- name: Add connex-front-end
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: true
+  shell: |
+    if [ ! -d "/home/{{ lookup('env', 'USER') }}/source/connex-front-end" ] ; then
+        git clone git@github.com:Nude-Solutions/connex-front-end.git /home/{{ lookup('env', 'USER') }}/source/connex-front-end
     fi
   tags:
     - work
