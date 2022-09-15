@@ -84,7 +84,7 @@ return packer.startup(function(use)
 		use("tamago324/nlsp-settings.nvim") -- language server settings defined in json for
 		use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
 		use({ "RRethy/vim-illuminate" })
-		use({ "glepnir/lspsaga.nvim" })
+		--[[ use({ "glepnir/lspsaga.nvim" }) ]]
 		use({ "jose-elias-alvarez/typescript.nvim" })
 
 		-- snippets

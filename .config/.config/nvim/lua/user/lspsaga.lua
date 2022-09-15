@@ -20,7 +20,7 @@ keymap("v", "<leader>la", "<cmd><C-U>Lspsaga range_code_action<CR>", { silent = 
 keymap("n", "lr", "<cmd>Lspsaga rename<CR>", { silent = true })
 
 -- Definition preview
-keymap("n", "gp", "<cmd>Lspsaga preview_definition<CR>", { silent = true })
+keymap("n", "gp", "<cmd>Lspsaga peek_definition<CR>", { silent = true })
 
 -- Show line diagnostics
 keymap("n", "gl", "<cmd>Lspsaga show_line_diagnostics<CR>", { silent = true })
@@ -49,12 +49,12 @@ keymap("n", "gh", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
 -- Signature help
 keymap("n", "ls", "<Cmd>Lspsaga signature_help<CR>", { silent = true })
 
-local action = require("lspsaga.action")
--- scroll in hover doc or  definition preview window
-vim.keymap.set("n", "<C-f>", function()
-	action.smart_scroll_with_saga(1)
-end, { silent = true })
--- scroll in hover doc or  definition preview window
-vim.keymap.set("n", "<C-b>", function()
-	action.smart_scroll_with_saga(-1)
-end, { silent = true })
+--[[ local action = require("lspsaga.action") ]]
+--[[ -- scroll in hover doc or  definition preview window ]]
+--[[ vim.keymap.set("n", "<C-f>", function() ]]
+--[[ 	action.smart_scroll_with_saga(1) ]]
+--[[ end, { silent = true }) ]]
+--[[ -- scroll in hover doc or  definition preview window ]]
+--[[ vim.keymap.set("n", "<C-b>", function() ]]
+--[[ 	action.smart_scroll_with_saga(-1) ]]
+--[[ end, { silent = true }) ]]
