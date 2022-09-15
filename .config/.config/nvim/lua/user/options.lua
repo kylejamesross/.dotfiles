@@ -1,7 +1,7 @@
 local options = {
 	number = true,
 	relativenumber = true,
-	signcolumn = "number",
+	signcolumn = "auto",
 	swapfile = false,
 	backup = false,
 	hlsearch = false,
@@ -37,7 +37,6 @@ local options = {
 	termguicolors = true,
 	autoread = true,
 }
-
 -- set all options
 for k, v in pairs(options) do
 	vim.opt[k] = v
