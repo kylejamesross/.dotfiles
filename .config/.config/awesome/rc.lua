@@ -688,9 +688,9 @@ end)
 client.connect_signal("unfocus", function(c)
 	c.border_color = beautiful.border_normal
 end)
-local tagC = awful.tag.find_by_name(awful.screen.focused(), "  ")
 
 -- Autostart Applications
 awful.spawn("nitrogen --random --set-zoom-fill /usr/share/backgrounds/")
+awful.spawn("picom")
 awful.spawn("xcape -e 'Control_L=Escape'")
 awful.spawn("setxkbmap -option ctrl:nocaps")
