@@ -14,6 +14,7 @@ alias v='nvim'
 alias nuget="mono /usr/local/bin/nuget.exe"
 alias docker="sudo docker"
 alias docker-compose="sudo docker-compose"
+alias timeshift="sudo timeshift-gtk"
 
 export BAT_THEME="gruvbox-dark"
 export DIR_NVIM_OPTIONS="${HOME}/.dotfiles/nvim/.config/nvim/lua/user"

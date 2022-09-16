@@ -456,7 +456,71 @@ globalkeys = gears.table.join(
 	-- Menubar
 	awful.key({ modkey }, "p", function()
 		menubar.show()
-	end, { description = "show the menubar", group = "launcher" })
+	end, { description = "show the menubar", group = "launcher" }),
+	awful.key({ modkey }, "F1", function()
+		local screen = awful.screen.focused()
+		local tag = screen.tags[1]
+		if tag then
+			tag:view_only()
+		end
+		awful.spawn("google-chrome-stable")
+	end, { description = "open browser in tag #1", group = "tag" }),
+	awful.key({ modkey }, "F2", function()
+		local screen = awful.screen.focused()
+		local tag = screen.tags[2]
+		if tag then
+			tag:view_only()
+		end
+		awful.spawn("alacritty")
+	end, { description = "open alacritty in tag #2", group = "tag" }),
+	awful.key({ modkey }, "F3", function()
+		local screen = awful.screen.focused()
+		local tag = screen.tags[3]
+		if tag then
+			tag:view_only()
+		end
+		awful.spawn("google-chrome-stable")
+	end, { description = "open browser in tag #3", group = "tag" }),
+	awful.key({ modkey }, "F4", function()
+		local screen = awful.screen.focused()
+		local tag = screen.tags[4]
+		if tag then
+			tag:view_only()
+		end
+		awful.spawn("azuredatastudio")
+	end, { description = "open azure data studio in tag #4", group = "tag" }),
+	awful.key({ modkey }, "F5", function()
+		local screen = awful.screen.focused()
+		local tag = screen.tags[5]
+		if tag then
+			tag:view_only()
+		end
+		awful.spawn("rider")
+	end, { description = "open rider in tag #5", group = "tag" }),
+	awful.key({ modkey }, "F7", function()
+		local screen = awful.screen.focused()
+		local tag = screen.tags[7]
+		if tag then
+			tag:view_only()
+		end
+		awful.spawn("google-chrome-stable --new-window https://outlook.office.com/")
+	end, { description = "open outlook in tag #7", group = "tag" }),
+	awful.key({ modkey }, "F8", function()
+		local screen = awful.screen.focused()
+		local tag = screen.tags[8]
+		if tag then
+			tag:view_only()
+		end
+		awful.spawn("teams")
+	end, { description = "open teams in tag #8", group = "tag" }),
+	awful.key({ modkey }, "F9", function()
+		local screen = awful.screen.focused()
+		local tag = screen.tags[9]
+		if tag then
+			tag:view_only()
+		end
+		awful.spawn("google-chrome-stable --new-window https://music.youtube.com/")
+	end, { description = "open music in tag #9", group = "tag" })
 )
 
 clientkeys = gears.table.join(

@@ -13,7 +13,7 @@
     - name: Ensure .ssh directory exists.
       become_user: root
       file:
-        dest: "{{ dest_key | dirname }}"e
+        dest: "{{ dest_key | dirname }}"
         mode: 0700
         state: directory
       tags:
@@ -59,8 +59,6 @@
       pacman: name=xterm
     - name: Install awesome
       pacman: name=awesome
-    - name: Install xfce4
-      pacman: name=xfce4
     - name: Install alacritty
       pacman: name=alacritty
     - name: Install nautilus
@@ -113,6 +111,10 @@
       shell: systemctl enable cups.service
     - name: Install ripgrep
       pacman: name=ripgrep
+    - name: Install okular
+      pacman: name=okular
+    - name: Install pdfarranger
+      pacman: name=pdfarranger
       tags:
         - dotfiles
         - tmux
@@ -148,6 +150,18 @@
       become_user: "{{ lookup('env', 'USER') }}"
       become: false
       shell: sudo rm -rf yay-bin
+    - name: Install timeshift
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: git clone https://aur.archlinux.org/timeshift.git && sudo chown -R {{ lookup('env', 'USER') }}:wheel timeshift && cd timeshift && makepkg --noconfirm -si
+      tags:
+        - timeshift
+    - name: Cleanup timeshift directory
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: sudo rm -rf timeshift
+      tags:
+        - timeshift
     - name: Install nerd fonts
       become_user: "{{ lookup('env', 'USER') }}"
       become: false
