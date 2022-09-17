@@ -147,6 +147,42 @@
     fi
   tags:
     - work
+- name: Add finance project
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: true
+  shell: |
+    if [ ! -d "/home/{{ lookup('env', 'USER') }}/source/finance" ] ; then
+        git clone git@github.com:Nude-Solutions/finance.git /home/{{ lookup('env', 'USER') }}/source/finance
+    fi
+  tags:
+    - work
+- name: Add admin project
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: true
+  shell: |
+    if [ ! -d "/home/{{ lookup('env', 'USER') }}/source/admin" ] ; then
+        git clone git@github.com:Nude-Solutions/admin.git /home/{{ lookup('env', 'USER') }}/source/admin
+    fi
+  tags:
+    - work
+- name: Add activity project
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: true
+  shell: |
+    if [ ! -d "/home/{{ lookup('env', 'USER') }}/source/activity" ] ; then
+        git clone git@github.com:Nude-Solutions/activity.git /home/{{ lookup('env', 'USER') }}/source/activity
+    fi
+  tags:
+    - work
+- name: Add integration project
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: true
+  shell: |
+    if [ ! -d "/home/{{ lookup('env', 'USER') }}/source/integration" ] ; then
+        git clone git@github.com:Nude-Solutions/integration.git /home/{{ lookup('env', 'USER') }}/source/integration
+    fi
+  tags:
+    - work
 - name: Add base-components
   become_user: "{{ lookup('env', 'USER') }}"
   become: true

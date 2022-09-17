@@ -87,6 +87,10 @@
       pacman: name=gimp
     - name: Install vlc
       pacman: name=vlc
+    - name: Install reflector
+      pacman: name=reflector
+    - name: Install enable reflector
+      shell: systemctl enable reflector.service
     - name: Install htop
       pacman: name=htop
     - name: Install inkscape
