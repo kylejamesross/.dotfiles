@@ -155,11 +155,23 @@
       become: false
       shell: git clone https://aur.archlinux.org/timeshift.git && sudo chown -R {{ lookup('env', 'USER') }}:wheel timeshift && cd timeshift && makepkg --noconfirm -si
       tags:
+        - long
         - timeshift
     - name: Cleanup timeshift directory
       become_user: "{{ lookup('env', 'USER') }}"
       become: false
       shell: sudo rm -rf timeshift
+      tags:
+        - long
+        - timeshift
+    - name: Start cronie service
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: |
+        sudo systemctl start cronie
+        sudo systemctl start cronie.service
+        sudo systemctl enable cronie
+        sudo systemctl enable cronie.service
       tags:
         - timeshift
     - name: Install nerd fonts
@@ -168,12 +180,6 @@
       shell: yay -S --noconfirm nerd-fonts-complete
       tags:
         - long
-    - name: Install timeshift
-      become_user: "{{ lookup('env', 'USER') }}"
-      become: false
-      shell: yay -S --noconfirm timeshift
-      tags:
-        - backup
     - name: Install google-chrome
       become_user: "{{ lookup('env', 'USER') }}"
       become: false

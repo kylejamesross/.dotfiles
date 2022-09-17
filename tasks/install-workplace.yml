@@ -78,12 +78,6 @@
   shell: yay -S --noconfirm azuredatastudio-bin
   tags:
     - work
-- name: Install teams
-  become_user: "{{ lookup('env', 'USER') }}"
-  become: false
-  shell: yay -S --noconfirm teams
-  tags:
-    - work
 - name: Install rider
   become_user: "{{ lookup('env', 'USER') }}"
   become: false

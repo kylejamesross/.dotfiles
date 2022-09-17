@@ -511,7 +511,7 @@ globalkeys = gears.table.join(
 		if tag then
 			tag:view_only()
 		end
-		awful.spawn("teams")
+		awful.spawn("google-chrome-stable --new-window https://teams.microsoft.com/")
 	end, { description = "open teams in tag #8", group = "tag" }),
 	awful.key({ modkey }, "F9", function()
 		local screen = awful.screen.focused()
