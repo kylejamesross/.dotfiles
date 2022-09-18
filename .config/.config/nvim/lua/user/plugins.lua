@@ -47,7 +47,14 @@ return packer.startup(function(use)
 		use({ "svetliakov/vim-easymotion", as = "vsc-easymotion" })
 	else
 		-- Regular nvim plugins
-		use({ "easymotion/vim-easymotion" })
+		use({
+			"phaazon/hop.nvim",
+			branch = "v2", -- optional but strongly recommended
+			config = function()
+				-- you can configure Hop the way you like here; see :h hop-config
+				require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
+			end,
+		})
 		use("nvim-lua/popup.nvim") -- An implementation of the Popup API from vim in Neovim
 		use("nvim-lua/plenary.nvim") -- Useful lua functions used ny lots of plugins
 		use("numToStr/Comment.nvim") -- Easily comment stuff
