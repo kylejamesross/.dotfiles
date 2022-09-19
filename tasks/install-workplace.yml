@@ -178,8 +178,8 @@
   become_user: "{{ lookup('env', 'USER') }}"
   become: true
   shell: |
-    if [ ! -d "/home/{{ lookup('env', 'USER') }}/source/integration" ] ; then
-        git clone git@github.com:Nude-Solutions/integration.git /home/{{ lookup('env', 'USER') }}/source/integration
+    if [ ! -d "/home/{{ lookup('env', 'USER') }}/source/Integration" ] ; then
+        git clone git@github.com:Nude-Solutions/integration.git /home/{{ lookup('env', 'USER') }}/source/Integration
     fi
   tags:
     - work
