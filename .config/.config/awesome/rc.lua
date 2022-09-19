@@ -754,7 +754,9 @@ client.connect_signal("unfocus", function(c)
 end)
 
 -- Autostart Applications
-awful.spawn("nitrogen --random --set-zoom-fill /usr/share/backgrounds/")
+awful.spawn("nitrogen --random --set-zoom-fill --head=0 /usr/share/backgrounds/")
+awful.spawn("nitrogen --random --set-zoom-fill --head=1 /usr/share/backgrounds/")
+awful.spawn("nitrogen --random --set-zoom-fill --head=2 /usr/share/backgrounds/")
 awful.spawn("picom")
 awful.spawn("xcape -e 'Control_L=Escape'")
 awful.spawn("setxkbmap -option ctrl:nocaps")
