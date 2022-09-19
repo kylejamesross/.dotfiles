@@ -119,9 +119,8 @@
       pacman: name=okular
     - name: Install pdfarranger
       pacman: name=pdfarranger
-      tags:
-        - dotfiles
-        - tmux
+    - name: Install tar
+      pacman: name=tar
     - name: Install fd
       pacman: name=fd
       tags:
@@ -190,8 +189,6 @@
       shell: yay -S --noconfirm google-chrome
       tags:
         - internet
-    - name: Install tar
-      pacman: name=tar
     - name: Install lazygit
       shell: |
         LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[0-35.]+')
@@ -303,10 +300,27 @@
       shell: stow .config
       tags:
         - dotfiles
+        - cursor
     - name: Stow tmux
       shell: stow tmux
       tags:
         - dotfiles
+    - name: Stow .icons
+      shell: stow .icons
+      tags:
+        - cursor
+    - name: Stow .local
+      shell: stow .local
+      tags:
+        - cursor
+    - name: Stow .local
+      shell: stow .local
+      tags:
+        - cursor
+    - name: Link .icon to default
+      shell: ln -s /home/{{ lookup('env', 'USER') }}/.local/share/icons/material_light_cursors/cursors /home/{{ lookup('env', 'USER') }}/.icons/default/cursors
+      tags:
+        - cursor
     - name: Set authorized key took from file
       authorized_key:
         user: "{{ lookup('env', 'USER') }}"
