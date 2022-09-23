@@ -93,6 +93,14 @@
 
 "playerctl --all-players play-pause"
    XF86AudioPlay
+# Mute microphone
+"playerctl --all-players next"
+   m:0x0 + c:171
+   XF86AudioNext
+
+"playerctl --all-players previous"
+   m:0x0 + c:173
+   XF86AudioPre
 ##################################
 # End of xbindkeys configuration #
 ##################################
