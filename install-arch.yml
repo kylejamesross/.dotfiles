@@ -183,6 +183,12 @@
       shell: yay -S --noconfirm nerd-fonts-complete
       tags:
         - long
+    - name: Install emoji font
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: yay -S --noconfirm noto-fonts-emoji
+      tags:
+        - fonts
     - name: Install google-chrome
       become_user: "{{ lookup('env', 'USER') }}"
       become: false
