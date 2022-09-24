@@ -18,6 +18,10 @@
   shell: sudo systemctl enable docker
   tags:
     - work
+- name: Add user to new group
+  shell: usermod -aG docker {{ lookup('env', 'USER') }}
+  tags:
+    - work
 - name: Pull SQL Server 2022
   become_user: "{{ lookup('env', 'USER') }}"
   become: false

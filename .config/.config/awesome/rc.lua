@@ -308,6 +308,7 @@ awful.screen.connect_for_each_screen(function(s)
 	local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
 	local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
 	local fs_widget = require("awesome-wm-widgets.fs-widget.fs-widget")
+	local docker_widget = require("awesome-wm-widgets.docker-widget.docker")
 	-- Add widgets to the wibox
 	s.mywibox:setup({
 		layout = wibox.layout.align.horizontal,
@@ -325,18 +326,23 @@ awful.screen.connect_for_each_screen(function(s)
 			layout = wibox.layout.fixed.horizontal,
 			--[[ mykeyboardlayout, ]]
 			myseparator,
+
 			wibox.widget.systray(),
-			net_speed_widget(),
 			myseparator,
 			cpu_widget(),
 			myseparator,
+			fs_widget(),
+			myseparator,
 			ram_widget(),
 			myseparator,
-			volume_widget({ widget_type = "arc", size = 25 }),
+			volume_widget({ widget_type = "icon_and_text", size = 25 }),
 			myseparator,
 			mpris_widget(),
 			myseparator,
+			docker_widget(),
+			myseparator,
 			mytextclock,
+			myseparator,
 			s.mylayoutbox,
 		},
 	})
