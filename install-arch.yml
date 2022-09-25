@@ -99,8 +99,6 @@
       pacman: name=libreoffice-still
     - name: Install pavucontrol
       pacman: name=pavucontrol
-    - name: Download background
-      shell: curl https://iili.io/6huwwg.jpg -o /usr/share/backgrounds/awesome-background.jpg
     - name: Install nitrogen
       pacman: name=nitrogen
     - name: Install fzf
@@ -323,10 +321,6 @@
       shell: stow .local
       tags:
         - cursor
-    - name: Link .icon to default
-      shell: ln -s /home/{{ lookup('env', 'USER') }}/.local/share/icons/material_light_cursors/cursors /home/{{ lookup('env', 'USER') }}/.icons/default/cursors
-      tags:
-        - cursor
     - name: Set authorized key took from file
       authorized_key:
         user: "{{ lookup('env', 'USER') }}"
@@ -353,8 +347,6 @@
         - zsh
     - name: Give ownership of .dotfiles to user
       shell: chown -R {{ lookup('env', 'USER') }}:wheel /home/{{ lookup('env', 'USER') }}/
-    - name: Start keybindings
-      shell: xbindkeys
     - name: Install workplace
       include_tasks:
         file: tasks/install-workplace.yml
