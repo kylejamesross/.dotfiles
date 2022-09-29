@@ -40,6 +40,18 @@
   shell: sudo docker update --restart=unless-stopped sql1
   tags:
     - work
+- name: Install and run redis
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: sudo docker run --name redis -p 6379:6379 -d redis
+  tags:
+    - work
+- name: Install and run azurite
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: sudo docker run -p 10000:10000 -p 10001:10001 -p 10002:10002 mcr.microsoft.com/azure-storage/azurite
+  tags:
+    - work
 - name: Install dotnet-host-bin
   become_user: "{{ lookup('env', 'USER') }}"
   become: false
@@ -76,6 +88,36 @@
   shell: yay -S --noconfirm aspnet-targeting-pack-bin
   tags:
     - work
+- name: Install aspnet-runtime-5.0-bin
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: yay -S --noconfirm aspnet-runtime-5.0-bin
+  tags:
+    - work2
+- name: Install aspnet-targeting-pack-5.0-bin
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: yay -S --noconfirm aspnet-targeting-pack-5.0-bin
+  tags:
+    - work2
+- name: Install dotnet-runtime-bin-5.0-bin
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: yay -S --noconfirm dotnet-runtime-5.0-bin
+  tags:
+    - work2
+- name: Install dotnet-sdk-5.0-bin
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: yay -S --noconfirm dotnet-sdk-5.0-bin
+  tags:
+    - work2
+- name: Install dotnet-targeting-pack-5.0-bin
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: yay -S --noconfirm dotnet-targeting-pack-5.0-bin
+  tags:
+    - work2
 - name: Install Azure Data Studio
   become_user: "{{ lookup('env', 'USER') }}"
   become: false

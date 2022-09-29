@@ -335,9 +335,9 @@ awful.screen.connect_for_each_screen(function(s)
 			myseparator,
 			ram_widget(),
 			myseparator,
-			volume_widget({ widget_type = "icon_and_text", size = 25 }),
-			myseparator,
 			mpris_widget(),
+			myseparator,
+			volume_widget({ widget_type = "icon_and_text", size = 25 }),
 			myseparator,
 			docker_widget(),
 			myseparator,
@@ -766,3 +766,5 @@ awful.spawn("nitrogen --random --set-zoom-fill --head=2 /usr/share/backgrounds/"
 awful.spawn("picom")
 awful.spawn("xcape -e 'Control_L=Escape'")
 awful.spawn("setxkbmap -option ctrl:nocaps")
+awful.spawn("mkdir -p /home/kyle/google-drive/")
+awful.spawn("rclone mount --daemon google-drive: /home/kyle/google-drive/")

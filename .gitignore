@@ -10,3 +10,4 @@ ripgrep.deb
 zsh/feed-access-token
 .local/.local/share
 .local/.local/state/nvim
+external/uld

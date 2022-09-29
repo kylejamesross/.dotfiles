@@ -119,6 +119,16 @@
       pacman: name=pdfarranger
     - name: Install tar
       pacman: name=tar
+    - name: Install notepadqq
+      pacman: name=notepadqq
+    - name: Install fuse
+      pacman: name=fuse
+      tags:
+        - rclone
+    - name: Install rclone
+      pacman: name=rclone
+      tags:
+        - rclone
     - name: Install fd
       pacman: name=fd
       tags:
@@ -352,4 +362,4 @@
         file: tasks/install-workplace.yml
         apply:
           tags:
-            - work
+            - work2

@@ -105,6 +105,7 @@ return packer.startup(function(use)
 		})
 		use("JoosepAlviste/nvim-ts-context-commentstring")
 		use("p00f/nvim-ts-rainbow")
+		use("windwp/nvim-ts-autotag")
 
 		--colors
 		use("NvChad/nvim-colorizer.lua")
@@ -117,7 +118,7 @@ return packer.startup(function(use)
 		use("nvim-telescope/telescope-media-files.nvim")
 
 		-- Color schemes
-		use({ "dracula/vim", as = "dracula" })
+		use("Mofiqul/dracula.nvim")
 
 		-- Git
 		use("lewis6991/gitsigns.nvim")
