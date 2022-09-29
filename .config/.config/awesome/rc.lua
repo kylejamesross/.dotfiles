@@ -461,7 +461,10 @@ globalkeys = gears.table.join(
 	end, { description = "lua execute prompt", group = "awesome" }),
 	-- Menubar
 	awful.key({ modkey }, "p", function()
-		menubar.show()
+		--[[ menubar.show() ]]
+		awful.spawn(
+			'rofi -combi-modi window,drun -theme solarized -font "mplus Nerd Font Medium 16" -show combi -icon-theme "Papirus" -show-icons /home/kyle/.config/rofi/config.rasi'
+		)
 	end, { description = "show the menubar", group = "launcher" }),
 	awful.key({ modkey }, "F1", function()
 		local screen = awful.screen.focused()

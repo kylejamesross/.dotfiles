@@ -121,6 +121,8 @@
       pacman: name=tar
     - name: Install notepadqq
       pacman: name=notepadqq
+    - name: Install rofi
+      pacman: name=rofi
     - name: Install fuse
       pacman: name=fuse
       tags:
