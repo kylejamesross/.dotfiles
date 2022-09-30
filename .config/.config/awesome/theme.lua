@@ -104,7 +104,7 @@ theme.titlebar_maximized_button_focus_active = themes_path .. "default/titlebar/
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path .. "default/layouts/fairhw.png"
-theme.layout_fairv = themes_path .. "default/layouts/fairvw.png"
+theme.layout_fairv = "/home/kyle/.config/awesome/fairvw.png"
 theme.layout_floating = themes_path .. "default/layouts/floatingw.png"
 theme.layout_magnifier = themes_path .. "default/layouts/magnifierw.png"
 theme.layout_max = themes_path .. "default/layouts/maxw.png"

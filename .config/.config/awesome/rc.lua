@@ -309,6 +309,8 @@ awful.screen.connect_for_each_screen(function(s)
 	local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
 	local fs_widget = require("awesome-wm-widgets.fs-widget.fs-widget")
 	local docker_widget = require("awesome-wm-widgets.docker-widget.docker")
+	local cmus_widget = require("awesome-wm-widgets.cmus-widget.cmus")
+
 	-- Add widgets to the wibox
 	s.mywibox:setup({
 		layout = wibox.layout.align.horizontal,
@@ -329,19 +331,39 @@ awful.screen.connect_for_each_screen(function(s)
 
 			wibox.widget.systray(),
 			myseparator,
-			cpu_widget(),
+			cpu_widget({ color = "#50fa7b" }),
 			myseparator,
-			fs_widget(),
+			fs_widget({ mounts = { "/", "/home" }, widget_bar_color = "#f7df1e", widget_border_color = "#f7df1e" }),
 			myseparator,
-			ram_widget(),
+			ram_widget({ color_free = "#ffb86c", color_used = "#ff5555" }),
 			myseparator,
-			mpris_widget(),
+			{
+				mpris_widget(),
+				fg = "#61dbfb",
+				widget = wibox.container.background,
+			},
 			myseparator,
-			volume_widget({ widget_type = "icon_and_text", size = 25 }),
+			{
+				volume_widget({
+					widget_type = "icon_and_text",
+					icon_dir = "/home/kyle/.config/awesome/volume-icons/",
+					size = 25,
+				}),
+				fg = "#bd93f9",
+				widget = wibox.container.background,
+			},
 			myseparator,
-			docker_widget(),
+			{
+				docker_widget({ icon = "/home/kyle/.config/awesome/docker.svg" }),
+				fg = "#ff79c6",
+				widget = wibox.container.background,
+			},
 			myseparator,
-			mytextclock,
+			{
+				mytextclock,
+				fg = "#ff5555",
+				widget = wibox.container.background,
+			},
 			myseparator,
 			s.mylayoutbox,
 		},
