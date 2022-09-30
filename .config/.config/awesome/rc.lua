@@ -451,6 +451,11 @@ globalkeys = gears.table.join(
 		--[[ awful.screen.focused().mypromptbox:run() ]]
 	end, { description = "run dmenu", group = "launcher" }),
 
+	awful.key({ modkey }, "n", function()
+		awful.spawn("/home/kyle/.joplin/Joplin.AppImage")
+		--[[ awful.screen.focused().mypromptbox:run() ]]
+	end, { description = "run joplin", group = "launcher" }),
+
 	awful.key({ modkey }, "x", function()
 		awful.prompt.run({
 			prompt = "Run Lua code: ",

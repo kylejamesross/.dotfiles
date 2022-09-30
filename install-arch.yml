@@ -213,6 +213,10 @@
         rm lazygit.tar.gz
       tags:
         - lazygit
+    - name: Install joplin
+      shell: wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh | bash
+      tags:
+        - joplin
     - name: Install tmux
       pacman: name=tmux
       tags:
