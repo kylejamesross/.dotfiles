@@ -328,7 +328,6 @@ awful.screen.connect_for_each_screen(function(s)
 			layout = wibox.layout.fixed.horizontal,
 			--[[ mykeyboardlayout, ]]
 			myseparator,
-
 			wibox.widget.systray(),
 			myseparator,
 			cpu_widget({ color = "#50fa7b" }),
