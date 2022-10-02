@@ -428,7 +428,7 @@ globalkeys = gears.table.join(
 		awful.spawn(terminal)
 	end, { description = "open a terminal", group = "launcher" }),
 	awful.key({ modkey }, "b", function()
-		awful.spawn("google-chrome-stable")
+		awful.spawn("brave")
 	end, { description = "open a browser", group = "launcher" }),
 	awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
 	awful.key({ modkey, "Shift" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
@@ -498,7 +498,7 @@ globalkeys = gears.table.join(
 		if tag then
 			tag:view_only()
 		end
-		awful.spawn("google-chrome-stable")
+		awful.spawn("brave")
 	end, { description = "open browser in tag #1", group = "tag" }),
 	awful.key({ modkey }, "F2", function()
 		local screen = awful.screen.focused()
@@ -514,7 +514,7 @@ globalkeys = gears.table.join(
 		if tag then
 			tag:view_only()
 		end
-		awful.spawn("google-chrome-stable")
+		awful.spawn("brave")
 	end, { description = "open browser in tag #3", group = "tag" }),
 	awful.key({ modkey }, "F4", function()
 		local screen = awful.screen.focused()
@@ -538,7 +538,7 @@ globalkeys = gears.table.join(
 		if tag then
 			tag:view_only()
 		end
-		awful.spawn("google-chrome-stable --new-window https://outlook.office.com/")
+		awful.spawn("brave --new-window https://outlook.office.com/")
 	end, { description = "open outlook in tag #7", group = "tag" }),
 	awful.key({ modkey }, "F8", function()
 		local screen = awful.screen.focused()
@@ -546,7 +546,7 @@ globalkeys = gears.table.join(
 		if tag then
 			tag:view_only()
 		end
-		awful.spawn("google-chrome-stable --new-window https://teams.microsoft.com/")
+		awful.spawn("brave --new-window https://teams.microsoft.com/")
 	end, { description = "open teams in tag #8", group = "tag" }),
 	awful.key({ modkey }, "F9", function()
 		local screen = awful.screen.focused()
@@ -554,7 +554,7 @@ globalkeys = gears.table.join(
 		if tag then
 			tag:view_only()
 		end
-		awful.spawn("google-chrome-stable --new-window https://music.youtube.com/")
+		awful.spawn("brave --new-window https://music.youtube.com/")
 	end, { description = "open music in tag #9", group = "tag" })
 )
 
