@@ -199,10 +199,10 @@
       shell: yay -S --noconfirm noto-fonts-emoji
       tags:
         - fonts
-    - name: Install google-chrome
+    - name: Install brave-bin
       become_user: "{{ lookup('env', 'USER') }}"
       become: false
-      shell: yay -S --noconfirm google-chrome
+      shell: yay -S --noconfirm brave-bin
       tags:
         - internet
     - name: Install lazygit
