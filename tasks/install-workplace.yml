@@ -22,24 +22,6 @@
   shell: usermod -aG docker {{ lookup('env', 'USER') }}
   tags:
     - work
-- name: Pull SQL Server 2022
-  become_user: "{{ lookup('env', 'USER') }}"
-  become: false
-  shell: sudo docker pull mcr.microsoft.com/mssql/server:2022-latest
-  tags:
-    - work
-- name: Run SQL Server 2022
-  become_user: "{{ lookup('env', 'USER') }}"
-  become: false
-  shell: sudo docker start sql1 || sudo docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=@Password" -p 1433:1433 --name sql1 --hostname sql1 -d mcr.microsoft.com/mssql/server:2022-latest
-  tags:
-    - work
-- name: Autostart SQL Server
-  become_user: "{{ lookup('env', 'USER') }}"
-  become: false
-  shell: sudo docker update --restart=unless-stopped sql1
-  tags:
-    - work
 - name: Install and run redis
   become_user: "{{ lookup('env', 'USER') }}"
   become: false
