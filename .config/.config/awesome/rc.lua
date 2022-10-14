@@ -788,6 +788,10 @@ client.connect_signal("unfocus", function(c)
 	c.border_color = beautiful.border_normal
 end)
 
+gears.timer.start_new(1200, function()
+	collectgarbage("step", 1024)
+	return true
+end)
 -- Autostart Applications
 awful.spawn("nitrogen --random --set-zoom-fill --head=0 /usr/share/backgrounds/")
 awful.spawn("nitrogen --random --set-zoom-fill --head=1 /usr/share/backgrounds/")

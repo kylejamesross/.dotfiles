@@ -91,8 +91,8 @@
       pacman: name=reflector
     - name: Install enable reflector
       shell: systemctl enable reflector.service
-    - name: Install htop
-      pacman: name=htop
+    - name: Install bpytop
+      pacman: name=bpytop
     - name: Install inkscape
       pacman: name=inkscape
     - name: Install libreoffice
