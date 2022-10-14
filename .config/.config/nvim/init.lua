@@ -19,4 +19,3 @@ require("user.toggleterm")
 require("user.indent-blankline")
 require("user.illuminate")
 require("user.alpha")
---[[ require("user.typescript") ]]
