@@ -106,6 +106,7 @@ return packer.startup(function(use)
 		use("JoosepAlviste/nvim-ts-context-commentstring")
 		use("p00f/nvim-ts-rainbow")
 		use("windwp/nvim-ts-autotag")
+		use("rstacruz/vim-xtract")
 
 		--colors
 		use("NvChad/nvim-colorizer.lua")
