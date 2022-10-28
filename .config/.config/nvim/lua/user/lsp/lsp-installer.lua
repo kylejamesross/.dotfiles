@@ -33,6 +33,11 @@ for _, server in pairs(servers) do
 		opts = vim.tbl_deep_extend("force", sumneko_opts, opts)
 	end
 
+	if server == "omnisharp" then
+		local omnisharp_opts = require("user.lsp.settings.omnisharp")
+		opts = vim.tbl_deep_extend("force", omnisharp_opts, opts)
+	end
+
 	if server ~= "tsserver" then
 		lspconfig[server].setup(opts)
 	end

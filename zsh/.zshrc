@@ -16,6 +16,7 @@ alias docker="sudo docker"
 alias docker-compose="sudo docker-compose"
 alias timeshift="sudo timeshift-gtk"
 alias pr="gh pr create --web"
+alias fonts="fc-list"
 
 export BAT_THEME="gruvbox-dark"
 export DIR_NVIM_OPTIONS="${HOME}/.dotfiles/nvim/.config/nvim/lua/user"

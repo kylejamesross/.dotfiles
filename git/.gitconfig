@@ -13,3 +13,5 @@
 	ac="!git add -A && git commit -m"
 [pull]
     rebase = false
+[pager]
+    branch = false
