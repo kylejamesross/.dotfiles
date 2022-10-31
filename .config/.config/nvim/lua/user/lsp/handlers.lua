@@ -62,6 +62,7 @@ local function lsp_keymaps(bufnr)
 	keymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setqflist()<CR>", opts)
 	keymap(bufnr, "n", "<leader>tia", ":TypescriptAddMissingImports<CR>", opts)
 	keymap(bufnr, "n", "<leader>trf", ":TypescriptRenameFile<CR>", opts)
+	keymap(bufnr, "n", "<leader>tir", ":TypescriptRemoveUnused<CR>", opts)
 	keymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setqflist()<CR>", opts)
 	keymap(bufnr, "n", "gd", ":TypescriptGoToSourceDefinition<CR>", opts)
 
