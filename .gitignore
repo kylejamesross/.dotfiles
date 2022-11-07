@@ -12,3 +12,4 @@ zsh/feed-access-token
 .local/.local/state/nvim
 external/uld
 .config/.config/lazygit/state.yml
+.config/.config/awesome/vicious/

@@ -239,6 +239,13 @@
         update: true
       tags:
         - awesome
+    - name: Install vicious widgets
+      git:
+        repo: https://github.com/vicious-widgets/vicious
+        dest: /home/{{ lookup('env', 'USER') }}/.dotfiles/.config/.config/awesome/vicious
+        update: true
+      tags:
+        - awesome
     - name: Install awesome button widgets
       git:
         repo: https://github.com/streetturtle/awesome-buttons

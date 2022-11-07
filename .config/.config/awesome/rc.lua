@@ -300,16 +300,34 @@ awful.screen.connect_for_each_screen(function(s)
 		},
 	})
 
+	local function span(text, color)
+		return "<span color='" .. color .. "'>" .. text .. "</span>"
+	end
+
 	-- Create the wibox
 	s.mywibox = awful.wibar({ position = "top", screen = s })
-	local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
-	local mpris_widget = require("awesome-wm-widgets.mpris-widget")
-	local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
-	local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
-	local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
-	local fs_widget = require("awesome-wm-widgets.fs-widget.fs-widget")
 	local docker_widget = require("awesome-wm-widgets.docker-widget.docker")
-	local cmus_widget = require("awesome-wm-widgets.cmus-widget.cmus")
+	local vicious = require("vicious")
+
+	local memwidget = wibox.widget.textbox()
+	vicious.cache(vicious.widgets.mem)
+	local memwidget_text = span("RAM: $1%", "#ffb86c")
+	vicious.register(memwidget, vicious.widgets.mem, memwidget_text, 13)
+
+	local cpuwidget = wibox.widget.textbox()
+	vicious.cache(vicious.widgets.cpu)
+	local cpuwidget_text = span("CPU: $1%", "#50fa7b")
+	vicious.register(cpuwidget, vicious.widgets.cpu, cpuwidget_text, 3)
+
+	local fswidget = wibox.widget.textbox()
+	vicious.cache(vicious.widgets.fs)
+	local fswidget_text = span("DISK: ${/home used_p}%", "#f7df1e")
+	vicious.register(fswidget, vicious.widgets.fs, fswidget_text, 1501)
+
+	local volumewidget = wibox.widget.textbox()
+	vicious.cache(vicious.widgets.volume)
+	local volume_text = span("VOL: $1%", "#bd93f9")
+	vicious.register(volumewidget, vicious.widgets.volume, volume_text, 1, "Master")
 
 	-- Add widgets to the wibox
 	s.mywibox:setup({
@@ -330,27 +348,18 @@ awful.screen.connect_for_each_screen(function(s)
 			myseparator,
 			wibox.widget.systray(),
 			myseparator,
-			cpu_widget({ color = "#50fa7b" }),
 			myseparator,
-			fs_widget({ mounts = { "/", "/home" }, widget_bar_color = "#f7df1e", widget_border_color = "#f7df1e" }),
+			cpuwidget,
 			myseparator,
-			ram_widget({ color_free = "#ffb86c", color_used = "#ff5555" }),
 			myseparator,
-			{
-				mpris_widget(),
-				fg = "#61dbfb",
-				widget = wibox.container.background,
-			},
+			fswidget,
 			myseparator,
-			{
-				volume_widget({
-					widget_type = "icon_and_text",
-					icon_dir = "/home/kyle/.config/awesome/volume-icons/",
-					size = 25,
-				}),
-				fg = "#bd93f9",
-				widget = wibox.container.background,
-			},
+			myseparator,
+			memwidget,
+			myseparator,
+			myseparator,
+			volumewidget,
+			myseparator,
 			myseparator,
 			{
 				docker_widget({ icon = "/home/kyle/.config/awesome/docker.svg" }),
