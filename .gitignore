@@ -11,3 +11,4 @@ zsh/feed-access-token
 .local/.local/share
 .local/.local/state/nvim
 external/uld
+.config/.config/lazygit/state.yml
