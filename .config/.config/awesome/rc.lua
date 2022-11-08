@@ -109,8 +109,26 @@ myawesomemenu = {
 
 mymainmenu = awful.menu({
 	items = {
-		{ "Awesome", myawesomemenu, beautiful.awesome_icon },
-		{ "Open Terminal", terminal },
+		{ "  Awesome", myawesomemenu },
+		{ "  Open Terminal", terminal },
+		{
+			"  Suspend",
+			function()
+				awful.spawn.with_shell("systemctl suspend")
+			end,
+		},
+		{
+			"  Reboot",
+			function()
+				awful.spawn.with_shell("reboot")
+			end,
+		},
+		{
+			"⏻  Shutdown",
+			function()
+				awful.spawn.with_shell("shutdown now")
+			end,
+		},
 	},
 })
 
@@ -341,8 +359,14 @@ end)
 
 globalkeys = gears.table.join(
 	awful.key({ modkey }, "l", function()
-		--[[ logout_popup.launch() ]]
-	end, { description = "Show logout screen", group = "custom" }),
+		awful.spawn.with_shell("systemctl suspend")
+	end, { description = "Suspend", group = "custom" }),
+	awful.key({ modkey, "Shift" }, "F11", function()
+		awful.spawn.with_shell("reboot")
+	end, { description = "Reboot", group = "custom" }),
+	awful.key({ modkey, "Shift" }, "F12", function()
+		awful.spawn.with_shell("shutdown now")
+	end, { description = "Shutdown", group = "custom" }),
 	awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
 	awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
 	awful.key({ modkey }, "Right", awful.tag.viewnext, { description = "view next", group = "tag" }),
