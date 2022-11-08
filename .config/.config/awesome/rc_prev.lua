@@ -2,8 +2,6 @@
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
-local vicious = require("vicious")
-
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -19,7 +17,6 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
-
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -53,7 +50,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("/home/kyle/.config/awesome/theme.lua")
+beautiful.init("home/kyle/.config/awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
@@ -90,73 +87,69 @@ awful.layout.layouts = {
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
-myawesomemenu = {
-	{
-		"Hotkeys",
-		function()
-			hotkeys_popup.show_help(nil, awful.screen.focused())
-		end,
-	},
-	{ "Edit config", editor_cmd .. " " .. awesome.conffile },
-	{ "Restart", awesome.restart },
-	{
-		"Quit",
-		function()
-			awesome.quit()
-		end,
-	},
-}
+--[[ myawesomemenu = { ]]
+--[[ 	{ ]]
+--[[ 		"hotkeys", ]]
+--[[ 		function() ]]
+--[[ 			hotkeys_popup.show_help(nil, awful.screen.focused()) ]]
+--[[ 		end, ]]
+--[[ 	}, ]]
+--[[ 	{ "manual", terminal .. " -e man awesome" }, ]]
+--[[ 	{ "edit config", editor_cmd .. " " .. awesome.conffile }, ]]
+--[[ 	{ "restart", awesome.restart }, ]]
+--[[ 	{ ]]
+--[[ 		"quit", ]]
+--[[ 		function() ]]
+--[[ 			awesome.quit() ]]
+--[[ 		end, ]]
+--[[ 	}, ]]
+--[[ } ]]
 
-mymainmenu = awful.menu({
-	items = {
-		{ "Awesome", myawesomemenu, beautiful.awesome_icon },
-		{ "Open Terminal", terminal },
-	},
+--[[ mymainmenu = awful.menu({ ]]
+--[[ 	items = { ]]
+--[[ 		{ "awesome", myawesomemenu, beautiful.awesome_icon }, ]]
+--[[ 		{ "open terminal", terminal }, ]]
+--[[ 	}, ]]
+--[[ }) ]]
+
+--[[ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = mymainmenu }) ]]
+local logout_popup = require("awesome-wm-widgets.logout-popup-widget.logout-popup")
+myCustomLauncher = awful.widget.button({
+	image = beautiful.awesome_icon,
 })
-
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = mymainmenu })
+myCustomLauncher:buttons(gears.table.join(
+	myCustomLauncher:buttons(),
+	awful.button({}, 1, nil, function()
+		logout_popup.launch({
+			bg_color = "#282a36",
+			accent_color = "#ff79c6",
+			phrases = {},
+		})
+	end)
+))
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
+-- Keyboard map indicator and switcher
+mykeyboardlayout = awful.widget.keyboardlayout()
+
 -- {{{ Wibar
 -- Create a textclock widget
-local function span(text, color)
-	return "<span color='" .. color .. "'>" .. text .. "</span>"
-end
+mytextclock = wibox.widget.textclock("%m/%d/%y %I:%M  ")
 
-mytextclock = wibox.widget.textclock(" %m/%d/%y %I:%M")
+local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
+local cw = calendar_widget({
+	placement = "top_right",
+})
+mytextclock:connect_signal("button::press", function(_, _, _, button)
+	if button == 1 then
+		cw.toggle()
+	end
+end)
 
-local month_calendar = awful.widget.calendar_popup.month()
-function month_calendar.call_calendar(self, offset, position, screen)
-	local screen = awful.screen.focused()
-	awful.widget.calendar_popup.call_calendar(self, offset, position, screen)
-end
-
-month_calendar:attach(mytextclock, "tr")
-
-myseparator = wibox.widget.textbox(span("  ", "#dddddd66"))
-
-local memwidget = wibox.widget.textbox()
-vicious.cache(vicious.widgets.mem)
-local memwidget_text = span("  RAM: $1%", "#ffb86c")
-vicious.register(memwidget, vicious.widgets.mem, memwidget_text, 13)
-
-local cpuwidget = wibox.widget.textbox()
-vicious.cache(vicious.widgets.cpu)
-local cpuwidget_text = span(" CPU: $1%", "#50fa7b")
-vicious.register(cpuwidget, vicious.widgets.cpu, cpuwidget_text, 3)
-
-local fswidget = wibox.widget.textbox()
-vicious.cache(vicious.widgets.fs)
-local fswidget_text = span(" HDD: ${/home used_p}%", "#f7df1e")
-vicious.register(fswidget, vicious.widgets.fs, fswidget_text, 1501)
-
-local volumewidget = wibox.widget.textbox()
-vicious.cache(vicious.widgets.volume)
-local volume_text = span(" VOL: $1%", "#bd93f9")
-vicious.register(volumewidget, vicious.widgets.volume, volume_text, 1, "Master")
+myseparator = wibox.widget.textbox("  ")
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -191,7 +184,7 @@ local tasklist_buttons = gears.table.join(
 		end
 	end),
 	awful.button({}, 3, function()
-		--[[ awful.menu.client_list({ theme = { width = 250 } }) ]]
+		awful.menu.client_list({ theme = { width = 250 } })
 	end),
 	awful.button({}, 4, function()
 		--[[ awful.client.focus.byidx(1) ]]
@@ -202,9 +195,15 @@ local tasklist_buttons = gears.table.join(
 )
 
 local function set_wallpaper(s)
-	awful.spawn("nitrogen --random --set-zoom-fill --head=0 /usr/share/backgrounds/")
-	awful.spawn("nitrogen --random --set-zoom-fill --head=1 /usr/share/backgrounds/")
-	awful.spawn("nitrogen --random --set-zoom-fill --head=2 /usr/share/backgrounds/")
+	-- Wallpaper
+	if beautiful.wallpaper then
+		local wallpaper = beautiful.wallpaper
+		-- If wallpaper is a function, call it with the screen
+		if type(wallpaper) == "function" then
+			wallpaper = wallpaper(s)
+		end
+		gears.wallpaper.maximized(wallpaper, s, true)
+	end
 end
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
@@ -216,7 +215,7 @@ awful.screen.connect_for_each_screen(function(s)
 
 	-- Each screen has its own tag table.
 	awful.tag(
-		{ " 爵 ", "   ", "  ", "  ", "  ", "  ", "  ", "   ", "  " },
+		{ " 爵 ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  " },
 		s,
 		awful.layout.layouts[6]
 	)
@@ -234,13 +233,24 @@ awful.screen.connect_for_each_screen(function(s)
 			awful.layout.inc(-1)
 		end),
 		awful.button({}, 4, function()
-			--[[ awful.layout.inc(1) ]]
+			awful.layout.inc(1)
 		end),
 		awful.button({}, 5, function()
-			--[[ awful.layout.inc(-1) ]]
+			awful.layout.inc(-1)
 		end)
 	))
 
+	local colors = {
+		"#dddddd",
+		"#50fa7b",
+		"#f7df1e",
+		"#ffb86c",
+		"#61dbfb",
+		"#dddddd",
+		"#bd93f9",
+		"#ff79c6",
+		"#ff5555",
+	}
 	-- Create a taglist widget
 	s.mytaglist = awful.widget.taglist({
 		screen = s,
@@ -254,17 +264,6 @@ awful.screen.connect_for_each_screen(function(s)
 			id = "background_role",
 			widget = wibox.container.background,
 			create_callback = function(self, t, index, tagsList)
-				local colors = {
-					"#dddddd",
-					"#50fa7b",
-					"#f7df1e",
-					"#ffb86c",
-					"#61dbfb",
-					"#dddddd",
-					"#bd93f9",
-					"#ff79c6",
-					"#ff5555",
-				}
 				self.fg = colors[index]
 			end,
 		},
@@ -301,15 +300,42 @@ awful.screen.connect_for_each_screen(function(s)
 		},
 	})
 
+	local function span(text, color)
+		return "<span color='" .. color .. "'>" .. text .. "</span>"
+	end
+
 	-- Create the wibox
 	s.mywibox = awful.wibar({ position = "top", screen = s })
+	local docker_widget = require("awesome-wm-widgets.docker-widget.docker")
+	local vicious = require("vicious")
+
+	local memwidget = wibox.widget.textbox()
+	vicious.cache(vicious.widgets.mem)
+	local memwidget_text = span("RAM: $1%", "#ffb86c")
+	vicious.register(memwidget, vicious.widgets.mem, memwidget_text, 13)
+
+	local cpuwidget = wibox.widget.textbox()
+	vicious.cache(vicious.widgets.cpu)
+	local cpuwidget_text = span("CPU: $1%", "#50fa7b")
+	vicious.register(cpuwidget, vicious.widgets.cpu, cpuwidget_text, 3)
+
+	local fswidget = wibox.widget.textbox()
+	vicious.cache(vicious.widgets.fs)
+	local fswidget_text = span("DISK: ${/home used_p}%", "#f7df1e")
+	vicious.register(fswidget, vicious.widgets.fs, fswidget_text, 1501)
+
+	local volumewidget = wibox.widget.textbox()
+	vicious.cache(vicious.widgets.volume)
+	local volume_text = span("VOL: $1%", "#bd93f9")
+	vicious.register(volumewidget, vicious.widgets.volume, volume_text, 1, "Master")
 
 	-- Add widgets to the wibox
 	s.mywibox:setup({
 		layout = wibox.layout.align.horizontal,
 		{ -- Left widgets
 			layout = wibox.layout.fixed.horizontal,
-			mylauncher,
+			myseparator,
+			myCustomLauncher,
 			myseparator,
 			s.mytaglist,
 			myseparator,
@@ -318,15 +344,28 @@ awful.screen.connect_for_each_screen(function(s)
 		s.mytasklist, -- Middle widget
 		{ -- Right widgets
 			layout = wibox.layout.fixed.horizontal,
+			--[[ mykeyboardlayout, ]]
+			myseparator,
 			wibox.widget.systray(),
+			myseparator,
 			myseparator,
 			cpuwidget,
 			myseparator,
+			myseparator,
 			fswidget,
+			myseparator,
 			myseparator,
 			memwidget,
 			myseparator,
+			myseparator,
 			volumewidget,
+			myseparator,
+			myseparator,
+			{
+				docker_widget({ icon = "/home/kyle/.config/awesome/docker.svg" }),
+				fg = "#ff79c6",
+				widget = wibox.container.background,
+			},
 			myseparator,
 			{
 				mytextclock,
@@ -338,10 +377,22 @@ awful.screen.connect_for_each_screen(function(s)
 		},
 	})
 end)
+-- }}}
 
+-- {{{ Mouse bindings
+--[[ root.buttons(gears.table.join( ]]
+--[[ 	awful.button({}, 3, function() ]]
+--[[ 		mymainmenu:toggle() ]]
+--[[ 	end), ]]
+--[[ 	awful.button({}, 4, awful.tag.viewnext), ]]
+--[[ 	awful.button({}, 5, awful.tag.viewprev) ]]
+--[[ )) ]]
+-- }}}
+
+-- {{{ Key bindings
 globalkeys = gears.table.join(
 	awful.key({ modkey }, "l", function()
-		--[[ logout_popup.launch() ]]
+		logout_popup.launch()
 	end, { description = "Show logout screen", group = "custom" }),
 	awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
 	awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
@@ -734,6 +785,11 @@ client.connect_signal("request::titlebars", function(c)
 	})
 end)
 
+-- Enable sloppy focus, so that focus follows mouse.
+--[[ client.connect_signal("mouse::enter", function(c) ]]
+--[[ 	c:emit_signal("request::activate", "mouse_enter", { raise = false }) ]]
+--[[ end) ]]
+
 client.connect_signal("focus", function(c)
 	c.border_color = beautiful.border_focus
 end)
@@ -741,6 +797,15 @@ client.connect_signal("unfocus", function(c)
 	c.border_color = beautiful.border_normal
 end)
 
+gears.timer.start_new(10, function()
+	collectgarbage("step", 20000)
+	return true
+end)
+
+-- Autostart Applications
+awful.spawn("nitrogen --random --set-zoom-fill --head=0 /usr/share/backgrounds/")
+awful.spawn("nitrogen --random --set-zoom-fill --head=1 /usr/share/backgrounds/")
+awful.spawn("nitrogen --random --set-zoom-fill --head=2 /usr/share/backgrounds/")
 awful.spawn("picom")
 awful.spawn("xcape -e -d 'Control_L=Escape'")
 awful.spawn("setxkbmap -option ctrl:nocaps")

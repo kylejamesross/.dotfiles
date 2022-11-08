@@ -31,7 +31,7 @@ theme.border_focus = "#bd93f9"
 theme.border_marked = "#ff5555"
 theme.tasklist_bg_focus = theme.bg_normal
 theme.tasklist_bg_urgent = theme.bg_normal
-theme.taglist_spacing = 15
+theme.taglist_spacing = 10
 theme.taglist_shape_border_width = 35
 theme.taglist_shape_border_color = "#ff5555"
 theme.taglist_fg_focus = "#ffffff"
@@ -65,8 +65,8 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(taglist_square_
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
 theme.menu_submenu_icon = themes_path .. "default/submenu.png"
-theme.menu_height = dpi(15)
-theme.menu_width = dpi(100)
+theme.menu_height = dpi(20)
+theme.menu_width = dpi(150)
 
 -- You can add as many variables as
 -- you wish and access them by using
