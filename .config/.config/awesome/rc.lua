@@ -176,6 +176,50 @@ vicious.cache(vicious.widgets.volume)
 local volume_text = span(" VOL: $1%", "#bd93f9")
 vicious.register(volumewidget, vicious.widgets.volume, volume_text, 1, "Master")
 
+local mpris = awful.widget.watch(
+	{
+		awful.util.shell,
+		"-c",
+		"playerctl -f 'status={{status}};artist={{xesam:artist}};title={{xesam:title}};' metadata",
+	},
+	2,
+	function(widget, stdout)
+		local escape_f = require("awful.util").escape
+		local mpris_now = {
+			state = "N/A",
+			artist = "N/A",
+			title = "N/A",
+			art_url = "N/A",
+			album = "N/A",
+			album_artist = "N/A",
+		}
+
+		for k, v in string.gmatch(stdout, "(%w+)=([^;]+);") do
+			if k == "artUrl" then
+				mpris_now.art_url = v
+			elseif k == "artist" then
+				mpris_now.artist = escape_f(v)
+			elseif k == "title" then
+				mpris_now.title = escape_f(v)
+			elseif k == "album" then
+				mpris_now.album = escape_f(v)
+			elseif k == "albumArtist" then
+				mpris_now.album_artist = escape_f(v)
+			elseif k == "status" then
+				mpris_now.state = escape_f(v)
+			end
+		end
+
+		if mpris_now.state == "Playing" or mpris_now.state == "Paused" then
+			widget:set_markup_silently(
+				span("  ", "#dddddd66") .. " " .. mpris_now.artist .. " - " .. mpris_now.title
+			)
+		else
+			widget:set_text("")
+		end
+	end
+)
+
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
 	awful.button({}, 1, function(t)
@@ -337,6 +381,11 @@ awful.screen.connect_for_each_screen(function(s)
 		{ -- Right widgets
 			layout = wibox.layout.fixed.horizontal,
 			wibox.widget.systray(),
+			{
+				mpris,
+				fg = "#61dbfb",
+				widget = wibox.container.background,
+			},
 			myseparator,
 			cpuwidget,
 			myseparator,
