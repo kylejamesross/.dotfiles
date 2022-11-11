@@ -67,14 +67,13 @@
 #  Control + b:2 + Release
 #
 "maim -s -u | xclip -selection clipboard -t image/png -i"
-  Print
+    Print
 
 "annotate-screenshot"
-   m:0x1 + c:107
+    Shift + Print
 
-"nitrogen --random --set-zoom-fill /usr/share/backgrounds/"
-   mod4 + F12
-
+"nitrogen --random --set-zoom-fill --head=0 /usr/share/backgrounds/ && nitrogen --random --set-zoom-fill --head=1 /usr/share/backgrounds/ && nitrogen --random --set-zoom-fill --head=2 /usr/share/backgrounds/"
+    Mod4 + F12
 # Increase volume
 "pactl set-sink-volume @DEFAULT_SINK@ +1000"
    XF86AudioRaiseVolume
