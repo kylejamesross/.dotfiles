@@ -264,9 +264,7 @@ local tasklist_buttons = gears.table.join(
 )
 
 local function set_wallpaper(s)
-	awful.spawn("nitrogen --random --set-zoom-fill --head=0 /usr/share/backgrounds/")
-	awful.spawn("nitrogen --random --set-zoom-fill --head=1 /usr/share/backgrounds/")
-	awful.spawn("nitrogen --random --set-zoom-fill --head=2 /usr/share/backgrounds/")
+	awful.spawn("nitrogen --random --set-zoom-fill --head=" .. s.index .. " /usr/share/backgrounds/")
 end
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
@@ -813,6 +811,15 @@ end)
 client.connect_signal("unfocus", function(c)
 	c.border_color = beautiful.border_normal
 end)
+
+-- Run garbage collector regularly to prevent memory leaks
+gears.timer({
+	timeout = 600,
+	autostart = true,
+	callback = function()
+		collectgarbage()
+	end,
+})
 
 awful.spawn("picom")
 awful.spawn("xcape -e -d 'Control_L=Escape'")

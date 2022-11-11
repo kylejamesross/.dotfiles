@@ -40,16 +40,16 @@
 
 # Examples of commands:
 
-"xbindkeys_show" 
-  control+shift + q
+# "xbindkeys_show" 
+#   control+shift + q
 
 # set directly keycode (here control + f with my keyboard)
 # "xterm"
 #   c:41 + m:0x4
 
 # specify a mouse button
-"xterm"
-  control + b:2
+# "xterm"
+#   control + b:2
 
 #"xterm -geom 50x20+20+20"
 #   Shift+Mod2+alt + s
@@ -66,14 +66,19 @@
 #"rxvt"
 #  Control + b:2 + Release
 #
-"maim -s -u | xclip -selection clipboard -t image/png -i"
-    Print
 
-"annotate-screenshot"
+"/home/kyle/.dotfiles/bin/annotate-screenshot"
+    m:0x1 + c:107
     Shift + Print
 
+"maim -s -u | xclip -selection clipboard -t image/png -i"
+    m:0x0 + c:107
+    Print
+
 "nitrogen --random --set-zoom-fill --head=0 /usr/share/backgrounds/ && nitrogen --random --set-zoom-fill --head=1 /usr/share/backgrounds/ && nitrogen --random --set-zoom-fill --head=2 /usr/share/backgrounds/"
-    Mod4 + F12
+    m:0x40 + c:96
+    Mod4 + F1
+
 # Increase volume
 "pactl set-sink-volume @DEFAULT_SINK@ +1000"
    XF86AudioRaiseVolume
@@ -100,6 +105,7 @@
 "playerctl --all-players previous"
    m:0x0 + c:173
    XF86AudioPre
+
 ##################################
 # End of xbindkeys configuration #
 ##################################
