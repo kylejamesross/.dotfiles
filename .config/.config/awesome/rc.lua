@@ -264,7 +264,7 @@ local tasklist_buttons = gears.table.join(
 )
 
 local function set_wallpaper(s)
-	awful.spawn("nitrogen --random --set-zoom-fill --head=" .. s.index .. " /usr/share/backgrounds/")
+	awful.spawn("nitrogen --random --set-zoom-fill --head=" .. s.index - 1 .. " /usr/share/backgrounds/")
 end
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
@@ -814,7 +814,7 @@ end)
 
 -- Run garbage collector regularly to prevent memory leaks
 gears.timer({
-	timeout = 600,
+	timeout = 30,
 	autostart = true,
 	callback = function()
 		collectgarbage()
