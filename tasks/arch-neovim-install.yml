@@ -1,47 +1,28 @@
-- name: ninja
-  pacman: name=ninja
-  tags: install-neovim
-- name: gettext
-  pacman: name=gettext
-  tags: install-neovim
-- name: libtool
-  pacman: name=libtool 
-  tags: install-neovim
-- name: autoconf 
-  pacman: name=autoconf
-  tags: install-neovim
-- name: libtool
-  pacman: name=libtool
-  tags: install-neovim
-- name: automake
-  pacman: name=automake
-  tags: install-neovim
 - name: cmake
   pacman: name=cmake
-  tags: install-neovim
-- name: pkg-config
-  pacman: name=pkg-config
-  tags: install-neovim
-- name: unzip
-  pacman: name=unzip
-  tags: install-neovim
+  tags: neovim
+- name: ninja
+  pacman: name=ninja
+  tags: neovim
 - name: curl
   pacman: name=curl
-  tags: install-neovim
-- name: doxygen
-  pacman: name=doxygen
-  tags: install-neovim
+  tags: neovim
+- name: unzip
+  pacman: name=unzip
+  tags: neovim
+- name: tree-sitter
+  pacman: name=tree-sitter
+  tags: neovim
 - name: Clone neovim
   git:
     repo: https://github.com/neovim/neovim
     dest: "{{ lookup('env', 'HOME') }}/tmp/neovim"
     update: yes
     force: yes
-  tags: install-neovim
+  tags: neovim
 - name: Install neovim
   shell: |
     cd "{{ lookup('env', 'HOME') }}/tmp/neovim"
     make CMAKE_BUILD_TYPE=Release
-    make install 
-  tags: install-neovim
-
+    make install
+  tags: neovim
