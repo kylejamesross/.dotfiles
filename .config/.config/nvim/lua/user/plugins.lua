@@ -111,9 +111,6 @@ return packer.startup(function(use)
 		--colors
 		use("NvChad/nvim-colorizer.lua")
 
-		-- git
-		use("tpope/vim-fugitive")
-
 		-- Telescope
 		use("nvim-telescope/telescope.nvim")
 		use("nvim-telescope/telescope-media-files.nvim")

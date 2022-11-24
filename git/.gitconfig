@@ -16,3 +16,4 @@
     rebase = false
 [pager]
     branch = false
+    log =  false

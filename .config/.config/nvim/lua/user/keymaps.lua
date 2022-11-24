@@ -106,7 +106,7 @@ keymap("n", "<c-p>", "<CMD>lua require'user.telescope-config'.project_files()<CR
 
 -- git
 -- .config/.config/nvim/lua/user/hi.lua
-keymap("n", "<leader>vf", "<cmd>:GcLog -- %<cr>", opts)
+keymap("n", "<leader>vf", ":terminal git log -p %<CR>", opts)
 -- terminal
 keymap("n", "<Leader>v", "<cmd>lua _lazygit_toggle()<CR>", opts)
 keymap("n", "<Leader>m", "<cmd>lua _bpytop_toggle()<CR>", opts)
