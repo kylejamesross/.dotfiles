@@ -11,6 +11,7 @@ local servers = {
 	"bashls",
 	"jsonls",
 	"yamlls",
+	"csharp_ls",
 }
 
 lsp_installer.setup()
@@ -31,11 +32,6 @@ for _, server in pairs(servers) do
 	if server == "sumneko_lua" then
 		local sumneko_opts = require("user.lsp.settings.sumneko_lua")
 		opts = vim.tbl_deep_extend("force", sumneko_opts, opts)
-	end
-
-	if server == "omnisharp" then
-		local omnisharp_opts = require("user.lsp.settings.omnisharp")
-		opts = vim.tbl_deep_extend("force", omnisharp_opts, opts)
 	end
 
 	if server ~= "tsserver" then

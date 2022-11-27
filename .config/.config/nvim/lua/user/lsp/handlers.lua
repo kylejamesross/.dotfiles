@@ -47,7 +47,7 @@ local function lsp_keymaps(bufnr)
 	local keymap = vim.api.nvim_buf_set_keymap
 
 	keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-	--[[ keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts) ]]
+	keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 	keymap(bufnr, "n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 	keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
 	keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
@@ -64,7 +64,7 @@ local function lsp_keymaps(bufnr)
 	keymap(bufnr, "n", "<leader>trf", ":TypescriptRenameFile<CR>", opts)
 	keymap(bufnr, "n", "<leader>tir", ":TypescriptRemoveUnused<CR>", opts)
 	keymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setqflist()<CR>", opts)
-	keymap(bufnr, "n", "gd", ":TypescriptGoToSourceDefinition<CR>", opts)
+	--[[ keymap(bufnr, "n", "gd", ":TypescriptGoToSourceDefinition<CR>", opts) ]]
 
 	--[[ keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts) ]]
 	--[[ keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts) ]]
