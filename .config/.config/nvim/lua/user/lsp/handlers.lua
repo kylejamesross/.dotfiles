@@ -54,7 +54,13 @@ local function lsp_keymaps(bufnr)
 	keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 	keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
 	vim.keymap.set("n", "<space>f", function()
-		vim.lsp.buf.format({ async = true })
+		vim.lsp.buf.format({
+			async = true,
+			bufopts = bufopts,
+			filter = function(client)
+				return client.name == "null-ls"
+			end,
+		})
 	end, bufopts)
 	keymap(bufnr, "n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
 	keymap(bufnr, "n", "<leader>lj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", opts)
