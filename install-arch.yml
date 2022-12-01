@@ -221,7 +221,11 @@
       tags:
         - lazygit
     - name: Install joplin
-      shell: wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh | bash
+      shell: yay -S --noconfirm joplin
+      tags:
+        - joplin
+    - name: Copy initial joplin config over if does not exists
+      shell: cp -u /home/{{ lookup('env', 'USER') }}/.dotfiles/.config/.config/joplin/import-settings.json /home/{{ lookup('env', 'USER') }}/.config/joplin/settings.json
       tags:
         - joplin
     - name: Install tmux
@@ -296,10 +300,6 @@
     - name: Install eslint_d
       npm:
         name: eslint_d
-        global: true
-    - name: Install joplin
-      npm:
-        name: joplin
         global: true
     - name: Install prettierd
       npm:
