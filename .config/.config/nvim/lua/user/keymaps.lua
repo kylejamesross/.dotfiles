@@ -19,6 +19,12 @@ keymap("n", "<Leader><Tab>", "<C-6>", opts)
 -- editor
 keymap("n", "<Leader>e", ":NvimTreeFindFileToggle<CR>", opts)
 
+-- recenter after page up / page down / searching
+keymap("n", "<C-d>", "<C-d>zz", opts)
+keymap("n", "<C-u>", "<C-u>zz", opts)
+keymap("n", "n", "nzzzv", opts)
+keymap("n", "N", "Nzzzv", opts)
+
 -- easy window movements
 keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
@@ -106,7 +112,7 @@ keymap("n", "<c-p>", "<CMD>lua require'user.telescope-config'.project_files()<CR
 
 -- git
 keymap("n", "<leader>vf", ":terminal git log -p %<CR>", opts)
-keymap("n", "<leader>mc", "ci]x<Esc>", opts)
-keymap("n", "<leader>mu", "ci]<Space><Esc>", opts)
+keymap("n", "<leader>mc", "0ci]x<Esc>", opts)
+keymap("n", "<leader>mu", "0ci]<Space><Esc>", opts)
 keymap("n", "<leader>vf", ":terminal git log -p %<CR>", opts)
 keymap("v", "gx", ":Xtract<Space>", opts)
