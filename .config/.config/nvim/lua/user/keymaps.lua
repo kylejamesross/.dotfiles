@@ -112,7 +112,7 @@ keymap("n", "<c-p>", "<CMD>lua require'user.telescope-config'.project_files()<CR
 
 -- git
 keymap("n", "<leader>vf", ":terminal git log -p %<CR>", opts)
-keymap("n", "<leader>mc", "0ci]x<Esc>", opts)
-keymap("n", "<leader>mu", "0ci]<Space><Esc>", opts)
+keymap("n", "<leader>mc", "0ci]x<Esc>j", opts)
+keymap("n", "<leader>mu", "0ci]<Space><Esc>j", opts)
 keymap("n", "<leader>vf", ":terminal git log -p %<CR>", opts)
 keymap("v", "gx", ":Xtract<Space>", opts)
