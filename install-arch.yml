@@ -301,6 +301,10 @@
       npm:
         name: eslint_d
         global: true
+    - name: Install joplin
+      npm:
+        name: joplin
+        global: true
     - name: Install prettierd
       npm:
         name: "@fsouza/prettierd"
