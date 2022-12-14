@@ -12,12 +12,18 @@
   shell: sudo systemctl start docker
   tags:
     - work
+    - gui
 - name: Start docker
   become_user: "{{ lookup('env', 'USER') }}"
   become: false
   shell: sudo systemctl enable docker
   tags:
     - work
+    - gui
+- name: Stop all docker containers
+  shell: docker stop $(docker ps -a -q)
+- name: Remove all docker containers
+  shell: docker rm $(docker ps -a -q)
 - name: Add user to new group
   shell: usermod -aG docker {{ lookup('env', 'USER') }}
   tags:
@@ -33,6 +39,7 @@
   become: false
   shell: sudo docker run -p 10000:10000 -p 10001:10001 -p 10002:10002 mcr.microsoft.com/azure-storage/azurite
   tags:
+    - gui
     - work
 - name: Install dotnet-host-bin
   become_user: "{{ lookup('env', 'USER') }}"
@@ -75,43 +82,45 @@
   become: false
   shell: yay -S --noconfirm aspnet-runtime-5.0-bin
   tags:
-    - work2
+    - work
 - name: Install aspnet-targeting-pack-5.0-bin
   become_user: "{{ lookup('env', 'USER') }}"
   become: false
   shell: yay -S --noconfirm aspnet-targeting-pack-5.0-bin
   tags:
-    - work2
+    - work
 - name: Install dotnet-runtime-bin-5.0-bin
   become_user: "{{ lookup('env', 'USER') }}"
   become: false
   shell: yay -S --noconfirm dotnet-runtime-5.0-bin
   tags:
-    - work2
+    - work
 - name: Install dotnet-sdk-5.0-bin
   become_user: "{{ lookup('env', 'USER') }}"
   become: false
   shell: yay -S --noconfirm dotnet-sdk-5.0-bin
   tags:
-    - work2
+    - work
 - name: Install dotnet-targeting-pack-5.0-bin
   become_user: "{{ lookup('env', 'USER') }}"
   become: false
   shell: yay -S --noconfirm dotnet-targeting-pack-5.0-bin
   tags:
-    - work2
+    - work
 - name: Install Azure Data Studio
   become_user: "{{ lookup('env', 'USER') }}"
   become: false
   shell: yay -S --noconfirm azuredatastudio-bin
   tags:
     - work
+    - gui
 - name: Install rider
   become_user: "{{ lookup('env', 'USER') }}"
   become: false
   shell: yay -S --noconfirm rider
   tags:
     - work
+    - gui
 - name: Install powershell-bin
   become_user: "{{ lookup('env', 'USER') }}"
   become: false
