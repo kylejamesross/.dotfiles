@@ -13,3 +13,4 @@ zsh/feed-access-token
 external/uld
 .config/.config/lazygit/state.yml
 .config/.config/awesome/vicious/
+vim/.vim/undodir
