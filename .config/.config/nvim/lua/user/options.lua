@@ -14,14 +14,15 @@ local options = {
 	incsearch = true,
 	expandtab = true,
 	wrap = false,
-	shiftwidth = 2,
-	tabstop = 2,
-	softtabstop = 2,
+	shiftwidth = 4,
+	tabstop = 4,
+	softtabstop = 4,
 	hidden = true,
 	autoindent = true,
 	smartindent = true,
-	updatetime = 250,
+	updatetime = 50,
 	fileencoding = "UTF-8",
+	undodir = os.getenv("HOME") .. "/.vim/undodir",
 	--    clipboard = "unnamedplus",
 	cmdheight = 2,
 	conceallevel = 0,
@@ -34,6 +35,7 @@ local options = {
 	undofile = true,
 	numberwidth = 2,
 	guifont = "monospace:h17",
+	guicursor = "",
 	termguicolors = true,
 	autoread = true,
 }
@@ -41,5 +43,3 @@ local options = {
 for k, v in pairs(options) do
 	vim.opt[k] = v
 end
-
-vim.cmd("let g:dracula_colorterm = 0 ")

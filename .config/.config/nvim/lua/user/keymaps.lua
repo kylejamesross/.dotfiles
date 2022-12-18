@@ -7,11 +7,7 @@ keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocallheader = " "
 
-if vim.g.vscode then
-	keymap("n", "<Leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/g", opts)
-else
-	keymap("n", "<Leader>s", ":%s/\\<<C-r><C-w>\\>//g<Left><Left>", opts)
-end
+keymap("n", "<Leader>s", ":%s/\\<<C-r><C-w>\\>//g<Left><Left>", opts)
 
 -- vscode mapping
 keymap("n", "<Leader><Tab>", "<C-6>", opts)
@@ -108,7 +104,15 @@ keymap("", "s", "<cmd>:HopChar1<cr>", {})
 -- telescope
 keymap("n", "<c-t>", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "<c-p>", "<cmd>Telescope git_files<cr>", opts)
-keymap("n", "<c-p>", "<CMD>lua require'user.telescope-config'.project_files()<CR>", opts)
+
+function project_files()
+	local ok = pcall(require("telescope.builtin").git_files, { show_untracked = true })
+	if not ok then
+		require("telescope.builtin").find_files(opts)
+	end
+end
+
+keymap("n", "<c-p>", "<CMD>lua project_files()<CR>", opts)
 
 -- git
 keymap("n", "<leader>vf", ":terminal git log -p %<CR>", opts)
@@ -116,3 +120,5 @@ keymap("n", "<leader>mc", "0ci]x<Esc>j", opts)
 keymap("n", "<leader>mu", "0ci]<Space><Esc>j", opts)
 keymap("n", "<leader>vf", ":terminal git log -p %<CR>", opts)
 keymap("v", "gx", ":Xtract<Space>", opts)
+
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
