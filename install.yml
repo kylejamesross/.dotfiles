@@ -2,7 +2,7 @@
   become: true
   pre_tasks:
     - name: Update cache
-      apt:
+      pacman:
         update_cache: true
   vars:
     source_key: "./ssh/.ssh/id_ed25519"
@@ -10,201 +10,417 @@
     source_pub_key: "./ssh/.ssh/id_ed25519.pub"
     dest_pub_key: "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519.pub"
   tasks:
-  - name: Ensure .ssh directory exists.
-    become_user: root
-    file:
-      dest: "{{ dest_key | dirname }}"
-      mode: 0700
-      state: directory
-    tags:
-      - dotfiles
-      - ssh
-  - name: Install ssh key
-    become_user: root
-    copy:
-      src: "{{ source_key }}"
-      dest: "{{ dest_key }}"
-      mode: 0600
-    tags:
-      - dotfiles
-      - ssh
-  - name: Install ssh pub key
-    become_user: root
-    copy:
-      src: "{{ source_pub_key }}"
-      dest: "{{ dest_pub_key }}"
-      mode: 0600
-    tags:
-      - dotfiles
-      - ssh
-  - name: Give ownership of .ssh to user
-    become_user: "{{ lookup('env', 'USER') }}"
-    shell: chown -R {{ lookup('env', 'USER') }}:{{ lookup('env', 'USER') }} /home/{{ lookup('env', 'USER') }}/.ssh
-  - name: Install curl
-    apt: name=curl
-    tags:
-      - dotfiles
-      - zsh
-      - neovim
-  - name: Install fzf
-    apt: name=fzf
-    tags:
-      - dotfiles
-      - tmux
-  - name: Install ripgrep
-    shell: |
-      RIPGREP_VERSION=$(curl -s "https://api.github.com/repos/BurntSushi/ripgrep/releases/latest" | grep -Po '"tag_name": "\K[0-9.]+')
-      curl -Lo ripgrep.deb "https://github.com/BurntSushi/ripgrep/releases/latest/download/ripgrep_${RIPGREP_VERSION}_amd64.deb"
-      apt install -y ./ripgrep.deb
-    tags:
-      - dotfiles
-      - tmux
-  - name: Install fd
-    apt: name=fd-find
-    tags:
-      - dotfiles
-      - tmux
-  - name: Install zsh
-    apt: name=zsh 
-    tags:
-      - zsh
-  - name: Install antibody
-    shell: curl -sfL git.io/antibody|sh -s - -b /usr/local/bin 
-    tags:
-      - zsh
-  - name: Install git 
-    apt: name=git
-    tags:
-      - git
-  - name: Install neovim
-    include_tasks:
-      file: tasks/neovim-install.yml
-      apply:
-        tags:
-          - neovim
-  - name: Install tar
-    apt: name=tar
-    tags:
-      - lazygit
-  - name: Install lazygit
-    shell: |
-      LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[0-35.]+')
-      curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
-      tar xf lazygit.tar.gz -C /usr/local/bin lazygit
-      rm lazygit.tar.gz
-    tags:
-      - lazygit
-  - name: Install tmux
-    apt: name=tmux
-    tags:
-      - tmux
-  - name: Install tmux plugin manager
-    git:
-      repo: https://github.com/tmux-plugins/tpm
-      dest: /home/{{ lookup('env', 'USER') }}/.tmux/plugins/tpm
-      update: true
-    tags:
-      - tmux
-  - name: Install unzip
-    apt: name=unzip
-    tags:
-      - neovim
-  - name: Install node
-    apt: name=nodejs
-    tags:
-      - node
-  - name: Install npm
-    apt: name=npm
-    tags:
-      - node
-  - name: Install n
-    npm:
-      name: n
-      global: true
-    tags:
-      - node
-  - name: Node 16
-    shell: n 16
-    tags:
-      - node
-  - name: Install tldr
-    npm:
-      name: tldr
-      global: true
-  - name: Install stylua
-    npm:
-      name: "@johnnymorganz/stylua-bin"
-      global: true
-  - name: Install prettierd
-    npm:
-      name: "@fsouza/prettierd"
-      global: true
-  - name: Install typescript
-    npm:
-      name: "typescript"
-      global: true
-  - name: Install stow
-    apt: name=stow
-    tags:
-      - dotfiles
-      - stow
-  - name: Install bat
-    apt: name=bat
-    tags:
-      - bat
-  - name: Install packer neovim plugin
-    git:
-      repo: https://github.com/wbthomason/packer.nvim
-      dest: ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-      update: true
-      depth: 1
-    tags:
-      - neovim
-  - name: Stow git
-    shell: stow git
-    tags:
-      - dotfiles
-  - name: Stow zsh
-    shell: stow zsh
-    tags:
-      - dotfiles
-  - name: Stow .config
-    shell: stow .config
-    tags:
-      - dotfiles
-  - name: Stow tmux
-    shell: stow tmux
-    tags:
-      - dotfiles
-  - name: Set authorized key took from file
-    authorized_key:
-      user: "{{ lookup('env', 'USER') }}"
-      state: present
-      key: "{{ lookup('file', item) }}"
-    with_fileglob:
-      - ./ssh/.ssh/id_ed25519.pub
-    tags:
-      - dotfiles
-      - ssh
-  - name: Configure zsh to shells
-    shell: command -v zsh | tee -a /etc/shells
-    tags: 
-      - zsh
-  - name: Change shell to zsh
-    shell: "chsh -s $(which zsh) {{ lookup('env', 'USER') }}" 
-    tags: 
-      - zsh
-  - name: Install zsh_plugins
-    become: false
-    become_user: "{{ lookup('env', 'USER') }}"
-    shell: "antibody bundle < /home/{{ lookup('env', 'USER') }}/.zsh_plugins.txt > /home/{{ lookup('env', 'USER') }}/.zsh_plugins.sh"
-    tags: 
-      - zsh
-  - name: Give ownership of .dotfiles to user
-    shell: chown -R {{ lookup('env', 'USER') }}:{{ lookup('env', 'USER') }} /home/{{ lookup('env', 'USER') }}/.dotfiles
-  - name: Install neovim clipboard support for wsl
-    shell: |
-      curl -sLo/tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
-      unzip -p /tmp/win32yank.zip win32yank.exe > /tmp/win32yank.exe
-      chmod +x /tmp/win32yank.exe
-      mv /tmp/win32yank.exe /usr/local/bin/
+    - name: Ensure .ssh directory exists.
+      become_user: root
+      file:
+        dest: "{{ dest_key | dirname }}"
+        mode: 0700
+        state: directory
+      tags:
+        - dotfiles
+        - ssh
+    - name: Install ssh key
+      become_user: root
+      copy:
+        src: "{{ source_key }}"
+        dest: "{{ dest_key }}"
+        mode: 0600
+      tags:
+        - dotfiles
+        - ssh
+    - name: Install ssh pub key
+      become_user: root
+      copy:
+        src: "{{ source_pub_key }}"
+        dest: "{{ dest_pub_key }}"
+        mode: 0600
+      tags:
+        - dotfiles
+        - ssh
+    - name: Give ownership of .ssh to user
+      shell: chown -R {{ lookup('env', 'USER') }}:wheel  /home/{{ lookup('env', 'USER') }}/.ssh
+    - name: Install xorg-server
+      pacman: name=xorg-server
+      tags: gui
+    - name: Install xorg-xinit
+      pacman: name=xorg-xinit
+      tags: gui
+    - name: Install xbindkeys
+      pacman: name=xbindkeys
+      tags: gui
+    - name: Install playerctl
+      pacman: name=playerctl
+      tags: gui
+    - name: Install lightdm
+      pacman: name=lightdm
+      tags: gui
+    - name: Install lightdm-gtk-greeter
+      pacman: name=lightdm-gtk-greeter
+      tags: gui
+    - name: Install lightdm-gtk-greeter-settings
+      pacman: name=lightdm-gtk-greeter-settings
+      tags: gui
+    - name: Enable lightdm service
+      shell: systemctl enable lightdm
+      tags: gui
+    - name: Install xterm
+      pacman: name=xterm
+      tags: gui
+    - name: Install awesome
+      pacman: name=awesome
+      tags: gui
+    - name: Install alacritty
+      pacman: name=alacritty
+      tags: gui
+    - name: Install nautilus
+      pacman: name=nautilus
+      tags: gui
+    - name: Install alsa-utils
+      pacman: name=alsa-utils
+      tags: gui
+    - name: Install pulse-audio
+      pacman: name=pulseaudio
+      tags: gui
+    - name: Install pulseaudio-alsa
+      pacman: name=pulseaudio-alsa
+      tags: gui
+    - name: Install xclip
+      pacman: name=xclip
+      tags: gui
+    - name: Install curl
+      pacman: name=curl
+    - name: Install xcape
+      pacman: name=xcape
+      tags: gui
+    - name: Install wget
+      pacman: name=wget
+    - name: Install dmenu
+      pacman: name=dmenu
+      tags: gui
+    - name: Install picom
+      pacman: name=picom
+      tags: gui
+    - name: Install maim
+      pacman: name=maim
+      tags: gui
+    - name: Install gimp
+      pacman: name=gimp
+      tags: gui
+    - name: Install vlc
+      pacman: name=vlc
+      tags: gui
+    - name: Install lazygit
+      pacman: name=lazygit
+    - name: Install reflector
+      pacman: name=reflector
+    - name: Install enable reflector
+      shell: systemctl enable reflector.service
+      tags: gui
+    - name: Install bpytop
+      pacman: name=bpytop
+    - name: Install inkscape
+      pacman: name=inkscape
+      tags: gui
+    - name: Install libreoffice
+      pacman: name=libreoffice-still
+      tags: gui
+    - name: Install pavucontrol
+      pacman: name=pavucontrol
+      tags: gui
+    - name: Install nitrogen
+      pacman: name=nitrogen
+      tags: gui
+    - name: Install fzf
+      pacman: name=fzf
+    - name: Install cups
+      pacman: name=cups
+      tags: gui
+    - name: Install cups-pdf
+      pacman: name=cups-pdf
+      tags: gui
+    - name: Install start cups
+      shell: systemctl start cups.service
+      tags: gui
+    - name: Install enable cups
+      shell: systemctl enable cups.service
+      tags: gui
+    - name: Install ripgrep
+      pacman: name=ripgrep
+    - name: Install okular
+      pacman: name=okular
+      tags: gui
+    - name: Install pdfarranger
+      pacman: name=pdfarranger
+      tags: gui
+    - name: Install tar
+      pacman: name=tar
+    - name: Install notepadqq
+      pacman: name=notepadqq
+      tags: gui
+    - name: Install rofi
+      pacman: name=rofi
+      tags: gui
+    - name: Install fuse
+      pacman: name=fuse
+      tags:
+        - rclone
+        - gui
+    - name: Install rclone
+      pacman: name=rclone
+      tags:
+        - rclone
+    - name: Install fd
+      pacman: name=fd
+      tags:
+        - dotfiles
+        - tmux
+    - name: Install zsh
+      pacman: name=zsh
+      tags:
+        - zsh
+    - name: Install antibody
+      shell: curl -sfL git.io/antibody|sh -s - -b /usr/local/bin
+      tags:
+        - zsh
+    - name: Install git
+      pacman: name=git
+      tags:
+        - git
+    - name: Install github-cli
+      pacman: name=github-cli
+      tags:
+        - git
+    - name: Install neovim
+      include_tasks:
+        file: tasks/install-neovim.yml
+        apply:
+          tags:
+            - neovim
+            - long
+      tags:
+        - neovim
+        - long
+    - name: Install yay
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: git clone https://aur.archlinux.org/yay-bin.git && sudo chown -R {{ lookup('env', 'USER') }}:wheel yay-bin && cd yay-bin && makepkg --noconfirm -si
+    - name: Cleanup yay directory
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: sudo rm -rf yay-bin
+    - name: Install timeshift
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: git clone https://aur.archlinux.org/timeshift.git && sudo chown -R {{ lookup('env', 'USER') }}:wheel timeshift && cd timeshift && makepkg --noconfirm -si
+      tags:
+        - long
+        - timeshift
+        - gui
+    - name: Cleanup timeshift directory
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: sudo rm -rf timeshift
+      tags:
+        - long
+        - timeshift
+        - gui
+    - name: Start cronie service
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: |
+        sudo systemctl start cronie
+        sudo systemctl start cronie.service
+        sudo systemctl enable cronie
+        sudo systemctl enable cronie.service
+      tags:
+        - timeshift
+        - gui
+    - name: Install nerd fonts
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: yay -S --noconfirm nerd-fonts-complete
+      tags:
+        - long
+        - gui
+    - name: Install emoji font
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: yay -S --noconfirm noto-fonts-emoji
+      tags:
+        - fonts
+        - gui
+    - name: Install brave-bin
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: yay -S --noconfirm brave-bin
+      tags:
+        - internet
+    - name: Install tmux
+      pacman: name=tmux
+      tags:
+        - tmux
+    - name: Install tmux plugin manager
+      git:
+        repo: https://github.com/tmux-plugins/tpm
+        dest: /home/{{ lookup('env', 'USER') }}/.tmux/plugins/tpm
+        update: true
+      tags:
+        - tmux
+    - name: Install awesome widgets
+      git:
+        repo: https://github.com/streetturtle/awesome-wm-widgets
+        dest: /home/{{ lookup('env', 'USER') }}/.dotfiles/.config/.config/awesome/awesome-wm-widgets
+        update: true
+      tags:
+        - awesome
+        - gui
+    - name: Install vicious widgets
+      git:
+        repo: https://github.com/vicious-widgets/vicious
+        dest: /home/{{ lookup('env', 'USER') }}/.dotfiles/.config/.config/awesome/vicious
+        update: true
+      tags:
+        - awesome
+        - gui
+    - name: Install awesome button widgets
+      git:
+        repo: https://github.com/streetturtle/awesome-buttons
+        dest: /home/{{ lookup('env', 'USER') }}/.dotfiles/.config/.config/awesome/awesome-buttons
+        update: true
+      tags:
+        - awesome
+        - gui
+    - name: Install minimal backgrounds
+      git:
+        repo: https://github.com/DenverCoder1/minimalistic-wallpaper-collection
+        dest: /usr/share/backgrounds/minimalistic-wallpaper-collection
+        update: true
+      tags:
+        - theme
+        - gui
+    - name: Install unzip
+      pacman: name=unzip
+      tags:
+        - neovim
+    - name: Install node
+      pacman: name=nodejs
+      tags:
+        - node
+    - name: Install npm
+      pacman: name=npm
+      tags:
+        - node
+    - name: Install n
+      npm:
+        name: n
+        global: true
+      tags:
+        - node
+    - name: Node 16
+      shell: n 16
+      tags:
+        - node
+    - name: Install tldr
+      npm:
+        name: tldr
+        global: true
+    - name: Install stylua
+      npm:
+        name: "@johnnymorganz/stylua-bin"
+        global: true
+    - name: Install eslint_d
+      npm:
+        name: eslint_d
+        global: true
+    - name: Install joplin
+      npm:
+        name: joplin
+        global: true
+    - name: Install prettierd
+      npm:
+        name: "@fsouza/prettierd"
+        global: true
+    - name: Install typescript
+      npm:
+        name: "typescript"
+        global: true
+    - name: Install stow
+      pacman: name=stow
+      tags:
+        - dotfiles
+        - stow
+    - name: Install bat
+      pacman: name=bat
+      tags:
+        - bat
+    - name: Install packer neovim plugin
+      git:
+        repo: https://github.com/wbthomason/packer.nvim
+        dest: ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+        update: true
+        depth: 1
+      tags:
+        - neovim
+    - name: Stow git
+      shell: stow git
+      tags:
+        - dotfiles
+    - name: Stow zsh
+      shell: stow zsh
+      tags:
+        - dotfiles
+    - name: Stow .config
+      shell: stow .config
+      tags:
+        - dotfiles
+        - cursor
+    - name: Stow tmux
+      shell: stow tmux
+      tags:
+        - dotfiles
+    - name: Stow .icons
+      shell: stow .icons
+      tags:
+        - cursor
+    - name: Stow .local
+      shell: stow .local
+      tags:
+        - cursor
+    - name: Stow .local
+      shell: stow .local
+      tags:
+        - cursor
+    - name: Set authorized key took from file
+      authorized_key:
+        user: "{{ lookup('env', 'USER') }}"
+        state: present
+        key: "{{ lookup('file', item) }}"
+      with_fileglob:
+        - ./ssh/.ssh/id_ed25519.pub
+      tags:
+        - dotfiles
+        - ssh
+    - name: Configure zsh to shells
+      shell: command -v zsh | tee -a /etc/shells
+      tags:
+        - zsh
+    - name: Change shell to zsh
+      shell: "chsh -s $(which zsh) {{ lookup('env', 'USER') }}"
+      tags:
+        - zsh
+    - name: Install zsh_plugins
+      become: false
+      become_user: "{{ lookup('env', 'USER') }}"
+      shell: "antibody bundle < /home/{{ lookup('env', 'USER') }}/.zsh_plugins.txt > /home/{{ lookup('env', 'USER') }}/.zsh_plugins.sh"
+      tags:
+        - zsh
+    - name: Give ownership of .dotfiles to user
+      shell: chown -R {{ lookup('env', 'USER') }}:wheel /home/{{ lookup('env', 'USER') }}/
+    - name: Install workplace
+      include_tasks:
+        file: tasks/install-workplace.yml
+        apply:
+          tags:
+            - work
+      tags:
+        - work

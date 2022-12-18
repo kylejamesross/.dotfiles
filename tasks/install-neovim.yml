@@ -1,3 +1,6 @@
+- name: base-devel
+  pacman: name=base-devel
+  tags: neovim
 - name: cmake
   pacman: name=cmake
   tags: neovim
