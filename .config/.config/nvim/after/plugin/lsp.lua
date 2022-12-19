@@ -17,11 +17,11 @@ lsp.set_preferences({
     error = "",
     warn = "",
     hint = "",
-    info = ""
-  }
+    info = "",
+  },
 })
 
-local formatOnPreWriteGroup = vim.api.nvim_create_augroup('formatOnWrite', {})
+local formatOnPreWriteGroup = vim.api.nvim_create_augroup("formatOnWrite", {})
 
 -- lsp config
 lsp.on_attach(function(client, bufnr)
@@ -41,7 +41,9 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "<leader>ll", vim.diagnostic.setloclist, opts)
   vim.keymap.set("n", "<leader>lq", vim.diagnostic.setqflist, opts)
   vim.keymap.set("n", "<leader>z", vim.lsp.buf.format, opts)
-  vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ bufnr, async = true }) end, opts)
+  vim.keymap.set("n", "<leader>f", function()
+    vim.lsp.buf.format({ bufnr, async = true })
+  end, opts)
 
   if client.supports_method("textDocument/formatting") then
     vim.api.nvim_clear_autocmds({ group = formatOnPreWriteGroup, buffer = bufnr })
@@ -49,83 +51,65 @@ lsp.on_attach(function(client, bufnr)
       group = formatOnPreWriteGroup,
       buffer = bufnr,
       callback = function()
-        vim.lsp.buf.format({ bufnr });
+        vim.lsp.buf.format({ bufnr })
       end,
     })
   end
 end)
 
-lsp.configure('sumneko_lua', {
+lsp.configure("sumneko_lua", {
   settings = {
     Lua = {
       diagnostics = {
-        globals = { 'vim' }
-      }
-    }
-  }
+        globals = { "vim" },
+      },
+    },
+  },
 })
 
 -- Extra typescript support
-lsp.configure('tsserver', {
+lsp.configure("tsserver", {
   on_attach = function(client, bufnr)
-    vim.api.nvim_buf_create_user_command(
-      bufnr,
-      "TypescriptRemoveUnused",
-      function(opts)
-        local typescript_status_ok, typescript = pcall(require, "typescript")
-        if typescript_status_ok then
-          typescript.actions.removeUnused({ sync = opts.bang, bufnr = bufnr })
+    vim.api.nvim_buf_create_user_command(bufnr, "TypescriptRemoveUnused", function(opts)
+      local typescript_status_ok, typescript = pcall(require, "typescript")
+      if typescript_status_ok then
+        typescript.actions.removeUnused({ sync = opts.bang, bufnr = bufnr })
+      end
+    end, { bang = true })
+    vim.api.nvim_buf_create_user_command(bufnr, "TypescriptAddMissingImports", function(opts)
+      local typescript_status_ok, typescript = pcall(require, "typescript")
+      if typescript_status_ok then
+        typescript.actions.addMissingImports({ sync = opts.bang, bufnr = bufnr })
+      end
+    end, { bang = true })
+    vim.api.nvim_buf_create_user_command(bufnr, "TypescriptRenameFile", function(opts)
+      local source = vim.api.nvim_buf_get_name(bufnr)
+      vim.ui.input({ prompt = "New path: ", default = source }, function(input)
+        if input == "" or input == source or input == nil then
+          return
         end
-      end,
-      { bang = true }
-    )
-    vim.api.nvim_buf_create_user_command(
-      bufnr,
-      "TypescriptAddMissingImports",
-      function(opts)
-        local typescript_status_ok, typescript = pcall(require, "typescript")
-        if typescript_status_ok then
-          typescript.actions.addMissingImports({ sync = opts.bang, bufnr = bufnr })
-        end
-      end,
-      { bang = true }
-    )
-    vim.api.nvim_buf_create_user_command(
-      bufnr,
-      "TypescriptRenameFile",
-      function(opts)
-        local source = vim.api.nvim_buf_get_name(bufnr)
-        vim.ui.input(
-          { prompt = "New path: ", default = source },
-          function(input)
-            if input == "" or input == source or input == nil then
-              return
-            end
 
-            local typescript_status_ok, typescript = pcall(require, "typescript")
-            if typescript_status_ok then
-              typescript.renameFile(source, input, { force = opts.bang })
-            end
-          end
-        )
-      end,
-      { bang = true }
-    )
+        local typescript_status_ok, typescript = pcall(require, "typescript")
+        if typescript_status_ok then
+          typescript.renameFile(source, input, { force = opts.bang })
+        end
+      end)
+    end, { bang = true })
 
     local opts = { buffer = bufnr, remap = false, silent = true }
 
     vim.keymap.set("n", "<leader>tia", ":TypescriptAddMissingImports<CR>", opts)
     vim.keymap.set("n", "<leader>trf", ":TypescriptRenameFile<CR>", opts)
     vim.keymap.set("n", "<leader>tir", ":TypescriptRemoveUnused<CR>", opts)
-  end
+  end,
 })
 
-lsp.configure('eslint', {
+lsp.configure("eslint", {
   on_attach = function(client, bufnr)
     local opts = { buffer = bufnr, remap = false, silent = true }
 
     vim.keymap.set("n", "<leader>fe", ":EslintFixAll<CR>", opts)
-  end
+  end,
 })
 
 -- snippets
