@@ -8,6 +8,7 @@ vim.g.mapleader = " "
 vim.g.maplocallheader = " "
 
 keymap("n", "<Leader>s", ":%s/\\<<C-r><C-w>\\>//g<Left><Left>", opts)
+keymap("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", opts)
 
 -- vscode mapping
 keymap("n", "<Leader><Tab>", "<C-6>", opts)
@@ -103,7 +104,6 @@ keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 keymap("", "s", "<cmd>:HopChar1<cr>", {})
 -- telescope
 keymap("n", "<c-t>", "<cmd>Telescope live_grep<cr>", opts)
-keymap("n", "<c-p>", "<cmd>Telescope git_files<cr>", opts)
 
 function project_files()
 	local ok = pcall(require("telescope.builtin").git_files, { show_untracked = true })
