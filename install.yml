@@ -56,10 +56,14 @@
       tags: gui
     - name: Install lightdm-gtk-greeter
       pacman: name=lightdm-gtk-greeter
-      tags: gui
+      tags: 
+        - gui
+        - lightdm
     - name: Install lightdm-gtk-greeter-settings
       pacman: name=lightdm-gtk-greeter-settings
-      tags: gui
+      tags: 
+        - gui
+        - lightdm
     - name: Enable lightdm service
       shell: systemctl enable lightdm
       tags: gui
