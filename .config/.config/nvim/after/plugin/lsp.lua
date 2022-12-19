@@ -42,8 +42,17 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "<leader>f", ":LspZeroFormat<CR>", opts)
 end)
 
+local augroup = vim.api.nvim_create_augroup
+local formatOnWriteGroup = augroup('formatOnWrite', {})
+
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  group = formatOnWriteGroup,
+  pattern = "*",
+  command = [[ :LspZeroFormat! ]],
+})
+
 lsp.configure('sumneko_lua', {
-  settings = {
+    settings = {
     Lua = {
       diagnostics = {
         globals = { 'vim' }
@@ -52,6 +61,7 @@ lsp.configure('sumneko_lua', {
   }
 })
 
+-- Extra typescript support
 lsp.configure('tsserver', {
   on_attach = function(client, bufnr)
     vim.api.nvim_buf_create_user_command(
