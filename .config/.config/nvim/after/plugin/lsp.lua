@@ -6,9 +6,10 @@ end
 lsp.preset("recommended")
 
 lsp.ensure_installed({
+  "html",
+  "cssls",
   "tsserver",
   "eslint",
-  "rust_analyzer",
 })
 
 lsp.set_preferences({
@@ -38,11 +39,7 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "<leader>ll", vim.diagnostic.setloclist, opts)
   vim.keymap.set("n", "<leader>lq", vim.diagnostic.setqflist, opts)
   vim.keymap.set("n", "<leader>z", vim.lsp.buf.format, opts)
-  vim.keymap.set("n", "<leader>tia", ":TypescriptAddMissingImports<CR>", opts)
-  vim.keymap.set("n", "<leader>trf", ":TypescriptRenameFile<CR>", opts)
-  vim.keymap.set("n", "<leader>tir", ":TypescriptRemoveUnused<CR>", opts)
   vim.keymap.set("n", "<leader>f", ":LspZeroFormat<CR>", opts)
-  vim.keymap.set("n", "<leader>fe", ":EslintFixAll<CR>", opts)
 end)
 
 lsp.configure('sumneko_lua', {
@@ -55,24 +52,70 @@ lsp.configure('sumneko_lua', {
   }
 })
 
+lsp.configure('tsserver', {
+  on_attach = function(client, bufnr)
+    vim.api.nvim_buf_create_user_command(
+      bufnr,
+      "TypescriptRemoveUnused",
+      function(opts)
+        local typescript_status_ok, typescript = pcall(require, "typescript")
+        if typescript_status_ok then
+          typescript.actions.removeUnused({ sync = opts.bang, bufnr = bufnr })
+        end
+      end,
+      { bang = true }
+    )
+    vim.api.nvim_buf_create_user_command(
+      bufnr,
+      "TypescriptAddMissingImports",
+      function(opts)
+        local typescript_status_ok, typescript = pcall(require, "typescript")
+        if typescript_status_ok then
+          typescript.actions.addMissingImports({ sync = opts.bang, bufnr = bufnr })
+        end
+      end,
+      { bang = true }
+    )
+    vim.api.nvim_buf_create_user_command(
+      bufnr,
+      "TypescriptRenameFile",
+      function(opts)
+        local source = vim.api.nvim_buf_get_name(bufnr)
+        vim.ui.input(
+          { prompt = "New path: ", default = source },
+          function(input)
+            if input == "" or input == source or input == nil then
+              return
+            end
+
+            local typescript_status_ok, typescript = pcall(require, "typescript")
+            if typescript_status_ok then
+              typescript.renameFile(source, input, { force = opts.bang })
+            end
+          end
+        )
+      end,
+      { bang = true }
+    )
+
+    local opts = { buffer = bufnr, remap = false, silent = true }
+
+    vim.keymap.set("n", "<leader>tia", ":TypescriptAddMissingImports<CR>", opts)
+    vim.keymap.set("n", "<leader>trf", ":TypescriptRenameFile<CR>", opts)
+    vim.keymap.set("n", "<leader>tir", ":TypescriptRemoveUnused<CR>", opts)
+  end
+})
+
+lsp.configure('eslint', {
+  on_attach = function(client, bufnr)
+    local opts = { buffer = bufnr, remap = false, silent = true }
+
+    vim.keymap.set("n", "<leader>fe", ":EslintFixAll<CR>", opts)
+  end
+})
+
 -- snippets
 require("luasnip/loaders/from_vscode").lazy_load()
 
 lsp.nvim_workspace()
 lsp.setup()
-
--- Override with extended typescript support
-local typescript_status_ok, typescript = pcall(require, "typescript")
-if not typescript_status_ok then
-	return
-end
-
-typescript.setup({
-	debug = false,
-	go_to_source_definition = {
-		fallback = true,
-	},
-	server = {
-		on_attach = lsp.on_attach,
-	},
-})
