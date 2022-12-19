@@ -21,6 +21,8 @@ lsp.set_preferences({
   }
 })
 
+local formatOnPreWriteGroup = vim.api.nvim_create_augroup('formatOnWrite', {})
+
 -- lsp config
 lsp.on_attach(function(client, bufnr)
   local opts = { buffer = bufnr, remap = false, silent = true }
@@ -39,20 +41,22 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "<leader>ll", vim.diagnostic.setloclist, opts)
   vim.keymap.set("n", "<leader>lq", vim.diagnostic.setqflist, opts)
   vim.keymap.set("n", "<leader>z", vim.lsp.buf.format, opts)
-  vim.keymap.set("n", "<leader>f", ":LspZeroFormat<CR>", opts)
+  vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ bufnr, async = true }) end, opts)
+
+  if client.supports_method("textDocument/formatting") then
+    vim.api.nvim_clear_autocmds({ group = formatOnPreWriteGroup, buffer = bufnr })
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = formatOnPreWriteGroup,
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.format({ bufnr });
+      end,
+    })
+  end
 end)
 
-local augroup = vim.api.nvim_create_augroup
-local formatOnWriteGroup = augroup('formatOnWrite', {})
-
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  group = formatOnWriteGroup,
-  pattern = "*",
-  command = [[ :LspZeroFormat! ]],
-})
-
 lsp.configure('sumneko_lua', {
-    settings = {
+  settings = {
     Lua = {
       diagnostics = {
         globals = { 'vim' }
