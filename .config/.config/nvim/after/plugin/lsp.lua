@@ -25,7 +25,7 @@ local formatOnPreWriteGroup = vim.api.nvim_create_augroup("formatOnWrite", {})
 
 -- lsp config
 lsp.on_attach(function(client, bufnr)
-  local opts = { buffer = bufnr, remap = false, silent = true }
+  local opts = { buffer = bufnr, remap = true, silent = true }
 
   vim.keymap.set("n", "gh", vim.lsp.buf.hover, opts)
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
@@ -41,7 +41,7 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "<leader>ll", vim.diagnostic.setloclist, opts)
   vim.keymap.set("n", "<leader>lq", vim.diagnostic.setqflist, opts)
   vim.keymap.set("n", "<leader>z", vim.lsp.buf.format, opts)
-  vim.keymap.set("n", "<leader>f", function()
+  vim.keymap.set("n", "gf", function()
     vim.lsp.buf.format({ bufnr, async = true })
   end, opts)
 
@@ -104,11 +104,20 @@ lsp.configure("tsserver", {
   end,
 })
 
+local formatEslintFixAllPreWrite = vim.api.nvim_create_augroup("eslintFixAllWrite", {});
+
 lsp.configure("eslint", {
   on_attach = function(client, bufnr)
-    local opts = { buffer = bufnr, remap = false, silent = true }
+    local opts = { buffer = bufnr, remap = true, silent = false }
 
-    vim.keymap.set("n", "<leader>fe", ":EslintFixAll<CR>", opts)
+    vim.api.nvim_clear_autocmds({ group = formatEslintFixAllPreWrite, buffer = bufnr })
+    vim.api.nvim_clear_autocmds({ group = formatOnPreWriteGroup, buffer = bufnr })
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = formatEslintFixAllPreWrite,
+      buffer = bufnr,
+      command = ":execute 'LspZeroFormat' | EslintFixAll",
+    })
+    vim.keymap.set("n", "<leader>f", ":execute 'LspZeroFormat' | EslintFixAll<CR>", opts)
   end,
 })
 
