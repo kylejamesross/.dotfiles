@@ -19,6 +19,7 @@ alias pr="gh pr create --web"
 alias fonts="fc-list"
 alias st="python3 ${HOME}/.dotfiles/bin/speedtest.py"
 alias update="yay -Syu"
+alias buildantibody="antibody bundle < /home/kyle/.zsh_plugins.txt > /home/kyle/.zsh_plugins.sh"
 
 export BAT_THEME="gruvbox-dark"
 export DIR_NVIM_OPTIONS="${HOME}/.dotfiles/nvim/.config/nvim/lua/user"
@@ -43,6 +44,7 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
+autoload -Uz compinit && compinit
 
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
   exec tmux
