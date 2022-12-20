@@ -23,7 +23,7 @@ lsp.set_preferences({
 
 -- lsp config
 lsp.on_attach(function(client, bufnr)
-  local opts = { buffer = bufnr, remap = true, silent = true }
+  local opts = { buffer = bufnr, remap = false, silent = true }
 
   vim.keymap.set("n", "gh", vim.lsp.buf.hover, opts)
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
@@ -39,7 +39,7 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "<leader>ll", vim.diagnostic.setloclist, opts)
   vim.keymap.set("n", "<leader>lq", vim.diagnostic.setqflist, opts)
   vim.keymap.set("n", "<leader>z", vim.lsp.buf.format, opts)
-  vim.keymap.set("n", "f", function()
+  vim.keymap.set("n", "<leader>f", function()
     vim.lsp.buf.format({ bufnr, async = true })
   end, opts)
 end)
@@ -93,7 +93,7 @@ lsp.configure("tsserver", {
 
 lsp.configure("eslint", {
   on_attach = function(client, bufnr)
-    local opts = { buffer = bufnr, remap = true, silent = false }
+    local opts = { buffer = bufnr, remap = false, silent = false }
     vim.keymap.set("n", "<leader>fe", ":EslintFixAll<CR>", opts)
   end,
 })
