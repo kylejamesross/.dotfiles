@@ -1,9 +1,5 @@
 window:
-  padding:
-    x: 5
-    y: 5
   opacity: 0.90
-
 font:
   normal:
     family: JetBrains Mono Nerd Font
