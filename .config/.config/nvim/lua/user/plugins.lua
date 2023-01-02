@@ -87,7 +87,10 @@ return packer.startup(function(use)
     use("JoosepAlviste/nvim-ts-context-commentstring")
     use("p00f/nvim-ts-rainbow")
     use("windwp/nvim-ts-autotag")
+
+    -- utilities
     use("rstacruz/vim-xtract")
+    use("tpope/vim-surround")
 
     --colors
     use("NvChad/nvim-colorizer.lua")
@@ -140,7 +143,8 @@ return packer.startup(function(use)
   use({ "RRethy/vim-illuminate" })
   use({ "jose-elias-alvarez/typescript.nvim" })
 
-  --[[ use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters ]]
+  -- AI
+  use { 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
