@@ -92,7 +92,7 @@ lsp.configure("tsserver", {
 })
 
 lsp.configure("eslint", {
-	on_attach = function(client, bufnr)
+	on_attach = function(_, bufnr)
 		local opts = { buffer = bufnr, remap = false, silent = false }
 		vim.keymap.set("n", "<leader>fe", ":EslintFixAll<CR>", opts)
 	end,
