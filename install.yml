@@ -73,8 +73,8 @@
     - name: Install awesome
       pacman: name=awesome
       tags: gui
-    - name: Install alacritty
-      pacman: name=alacritty
+    - name: Install kitty
+      pacman: name=kitty
       tags: gui
     - name: Install nautilus
       pacman: name=nautilus
