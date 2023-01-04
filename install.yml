@@ -75,7 +75,16 @@
       tags: gui
     - name: Install kitty
       pacman: name=kitty
-      tags: gui
+      tags: 
+        - gui
+        - kitty
+    - name: Install kitty icon
+      shell: |
+        cp -f /home/{{ lookup('env', 'USER') }}/.dotfiles/.config/.config/kitty/kitty.png /usr/lib/kitty/logo/kitty.png
+        cp -f /home/{{ lookup('env', 'USER') }}/.dotfiles/.config/.config/kitty/kitty-128.png /usr/lib/kitty/logo/kitty-128.png
+      tags: 
+        - gui
+        - kitty
     - name: Install nautilus
       pacman: name=nautilus
       tags: gui
