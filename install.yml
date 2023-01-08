@@ -248,17 +248,17 @@
       tags:
         - timeshift
         - gui
-    - name: Install nerd fonts
-      become_user: "{{ lookup('env', 'USER') }}"
-      become: false
-      shell: yay -S --noconfirm nerd-fonts-complete
-      tags:
-        - long
-        - gui
     - name: Install emoji font
       become_user: "{{ lookup('env', 'USER') }}"
       become: false
       shell: yay -S --noconfirm noto-fonts-emoji
+      tags:
+        - fonts
+        - gui
+    - name: Install JetBrainMono font
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: yay -S --noconfirm nerd-fonts-jetbrains-mono
       tags:
         - fonts
         - gui
