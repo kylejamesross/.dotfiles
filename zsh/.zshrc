@@ -24,6 +24,7 @@ alias buildantibody="antibody bundle < /home/kyle/.zsh_plugins.txt > /home/kyle/
 export BAT_THEME="gruvbox-dark"
 export DIR_NVIM_OPTIONS="${HOME}/.dotfiles/nvim/.config/nvim/lua/user"
 export DIR_DOTFILES="${HOME}/.dotfiles"
+export EDITOR="nvim"
 
 if [ -f "$HOME/.dotfiles/zsh/feed-access-token" ]; then
   export FEED_ACCESSTOKEN=$(cat $HOME/.dotfiles/zsh/feed-access-token)

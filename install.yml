@@ -88,6 +88,8 @@
     - name: Install nautilus
       pacman: name=nautilus
       tags: gui
+    - name: Install lf
+      pacman: name=lf
     - name: Install alsa-utils
       pacman: name=alsa-utils
       tags: gui
