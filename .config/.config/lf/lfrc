@@ -1,34 +1,14 @@
-# interpreter for shell commands
+# options
 set shell zsh
-
-# set '-eu' options for shell commands
-# These options are used to have safer shell commands. Option '-e' is used to
-# exit on error and option '-u' is used to give error for unset variables.
-# Option '-f' disables pathname expansion which can be useful when $f, $fs, and
-# $fx variables contain names with '*' or '?' characters. However, this option
-# is used selectively within individual commands as it can be limiting at
-# times.
-
-# set internal field separator (IFS) to "\n" for shell commands
-# This is useful to automatically split file names in $fs and $fx properly
-# since default file separator used in these variables (i.e. 'filesep' option)
-# is newline. You need to consider the values of these options and create your
-# commands accordingly.
 set ifs "\n"
-
 set drawbox
-
-# leave some space at the top and the bottom of the screen
 set scrolloff 10
-
-# dedicated keys for file opener actions
-map o &mimeopen $f
-map O $mimeopen --ask $f
-
 set hidden true
 set ignorecase true
 set icons true
+set relativenumber true
 
+# custom commands
 cmd open &{{
     case $(file --mime-type -Lb $f) in
         text/*) lf -remote "send $id \$$EDITOR \$fx";;
@@ -38,22 +18,9 @@ cmd open &{{
 
 cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
 
-# make sure trash folder exists
 %mkdir -p ~/.trash
 
-# move current file or selected files to trash folder
-# (also see 'man mv' for backup/overwrite options)
-cmd trash %set -f; mv $fx ~/.trash
-
-# define a custom 'delete' command
-cmd delete ${{
-    set -f
-    printf "$fx\n"
-    printf "delete?[y/n]"
-    read ans
-    [ "$ans" = "y" ] && rm -rf $fx
-}}
-
+cmd trash %set -f; echo "$fx" | xargs -d '\n' -I {} mv -f {} ~/.trash
 
 cmd extract ${{
     set -f
@@ -67,22 +34,6 @@ cmd extract ${{
     esac
 }}
 
-cmd tar ${{
-    set -f
-    mkdir $1
-    cp -r $fx $1
-    tar czf $1.tar.gz $1
-    rm -rf $1
-}}
-
-cmd zip ${{
-    set -f
-    mkdir $1
-    cp -r $fx $1
-    zip -r $1.zip $1
-    rm -rf $1
-}}
-
 cmd mkdir ${{
   printf "Directory Name: "
   read ans
@@ -92,37 +43,24 @@ cmd mkdir ${{
 cmd mkfile ${{
   printf "File Name: "
   read ans
-  $EDITOR $ans
+  touch $ans
 }}
 
-cmd openInEditor ${{
-  $EDITOR $fx
-}}
-
-# Remove some defaults
-map m
-# map n
-# map "'"
-# map '"'
-
-map e openInEditor
+# system command bindings
+map o &mimeopen $f
+map O $mimeopen --ask $f
 map <enter> open
 map . set hidden!
-map <enter> open
-map R reload
-map mf mkfile
-map md mkdir
-map x $$f
-map X !$f
-#map <delete> trash
-map <delete> delete
 map r push :rename<space>
+map R reload
+map <delete> trash
 
+# custom commands bindings
 map gx extract
-map gz zip
-map gt tar
+map gmf mkfile
+map gmd mkdir
 
-# Movement
+# movement bindings
 map gD cd ~/documents
 map gdn cd ~/Downloads
 map gdo cd ~/.dotfiles
