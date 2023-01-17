@@ -51,6 +51,18 @@ cmd mkfile ${{
   touch $ans
 }}
 
+cmd fzf_jump ${{
+    res="$(find . -maxdepth 1 | fzf --reverse --header='Jump to location' | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    if [ -d "$res" ] ; then
+        cmd="cd"
+    elif [ -f "$res" ] ; then
+        cmd="select"
+    else
+        exit 0
+    fi
+    lf -remote "send $id $cmd \"$res\""
+}}
+
 # system command bindings
 map o &mimeopen $f
 map O $mimeopen --ask $f
@@ -59,6 +71,7 @@ map . set hidden!
 map r push :rename<space>
 map R reload
 map <delete> trash
+map <c-p> :fzf_jump
 
 # custom commands bindings
 map gx extract
