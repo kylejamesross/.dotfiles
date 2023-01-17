@@ -7,6 +7,7 @@ set hidden true
 set ignorecase true
 set icons true
 set relativenumber true
+set info size:time
 
 # custom commands
 cmd open &{{
@@ -21,6 +22,8 @@ cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
 %mkdir -p ~/.trash
 
 cmd trash %set -f; echo "$fx" | xargs -d '\n' -I {} mv -f {} ~/.trash
+
+cmd svgo %set -f; echo "$fx" | xargs -d '\n' -I {} svgo {}
 
 cmd extract ${{
     set -f
@@ -59,12 +62,14 @@ map <delete> trash
 map gx extract
 map gmf mkfile
 map gmd mkdir
+map gsv svgo
 
 # movement bindings
 map gD cd ~/documents
 map gdn cd ~/Downloads
+map gdf cd ~/definitions
 map gdo cd ~/.dotfiles
-map gs cd ~/source
+map gso cd ~/source
 map gbc cd ~/source/base-components
 map gbf cd ~/source/base-functionality
 map gc cd ~/source/connex-front-end
