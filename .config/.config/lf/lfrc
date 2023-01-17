@@ -1,6 +1,8 @@
 # options
 set shell zsh
+set shellopts '-euy'
 set ifs "\n"
+set filesep "\n"
 set drawbox
 set scrolloff 10
 set hidden true
