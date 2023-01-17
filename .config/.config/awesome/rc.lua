@@ -551,8 +551,8 @@ globalkeys = gears.table.join(
 		if tag then
 			tag:view_only()
 		end
-		awful.spawn("azuredatastudio")
-	end, { description = "open azure data studio in tag #4", group = "tag" }),
+		awful.spawn("dbeaver")
+	end, { description = "open dbeaver in tag #4", group = "tag" }),
 	awful.key({ modkey }, "F5", function()
 		local screen = awful.screen.focused()
 		local tag = screen.tags[5]
