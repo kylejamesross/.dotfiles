@@ -42,6 +42,4 @@ set mouse=a
 
 set clipboard+=unnamedplus
 
-packadd! dracula
 syntax enable
-colorscheme dracula

@@ -70,6 +70,8 @@
     - name: Install xterm
       pacman: name=xterm
       tags: gui
+    - name: Install neofetch
+      pacman: name=neofetch
     - name: Install awesome
       pacman: name=awesome
       tags: gui
