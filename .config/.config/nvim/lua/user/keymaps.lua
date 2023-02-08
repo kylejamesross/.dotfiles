@@ -10,8 +10,10 @@ vim.g.maplocallheader = " "
 keymap("n", "<Leader>s", ":%s/\\<<C-r><C-w>\\>//g<Left><Left>", opts)
 keymap("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", opts)
 
--- vscode mapping
+-- vscode mapping for file navigation
 keymap("n", "<Leader><Tab>", "<C-6>", opts)
+keymap("n", "<s-tab>", "<plug>(CybuLastusedPrev)", opts)
+keymap("n", "<tab>", "<plug>(CybuLastusedNext)", opts)
 
 -- editor
 keymap("n", "<Leader>e", ":NvimTreeFindFileToggle<CR>", opts)
@@ -80,12 +82,12 @@ keymap("i", "<C-l>", "<Right>", opts)
 keymap("i", "<C-h>", "<Left>", opts)
 
 -- tab enhancements
-keymap("n", ">>", "<Nop>", term_opts)
-keymap("n", "<<", "<Nop>", term_opts)
+--[[ keymap("n", ">>", "<Nop>", term_opts) ]]
+--[[ keymap("n", "<<", "<Nop>", term_opts) ]]
 keymap("v", ">>", "<Nop>", term_opts)
 keymap("v", "<<", "<Nop>", term_opts)
 --[[ keymap("n", "<Tab>",">>", opts); ]]
-keymap("n", "<S-Tab>", "<<", opts)
+--[[ keymap("n", "<S-Tab>", "<<", opts) ]]
 keymap("v", "<Tab>", ">><Esc>gv", opts)
 keymap("v", "<S-Tab>", "<<<Esc>gv", opts)
 
