@@ -51,6 +51,14 @@ cmd mkfile ${{
   touch $ans
 }}
 
+cmd delete ${{
+  set -f
+  printf "$fx\n"
+  printf "delete?[y/n]"
+  read ans
+  [ "$ans" = "y" ] && rm -rf $fx
+}}
+
 cmd fzf_jump ${{
     res="$(find . -maxdepth 1 | fzf --reverse --header='Jump to location' | sed 's/\\/\\\\/g;s/"/\\"/g')"
     if [ -d "$res" ] ; then
@@ -70,7 +78,7 @@ map <enter> open
 map . set hidden!
 map r push :rename<space>
 map R reload
-map <delete> trash
+map <delete> delete
 map <c-p> :fzf_jump
 
 # custom commands bindings
