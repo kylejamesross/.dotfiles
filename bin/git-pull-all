@@ -12,6 +12,4 @@ do
   else
     echo -e "\e[1;31m Git pull executed incorrectly for $folder \e[0m"
   fi
-
-  cd ..
 done
