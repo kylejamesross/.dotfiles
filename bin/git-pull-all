@@ -5,7 +5,7 @@ directories=$(ls $parent_directory)
 
 for folder in $directories
 do
-  cd "$folder"
+  cd "$parent_directory/$folder"
   git pull -q
   if [ $? -eq 0 ]; then
     echo "Git pull executed successfully for $folder"
