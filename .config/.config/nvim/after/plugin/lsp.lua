@@ -61,7 +61,7 @@ lsp.configure("sumneko_lua", {
 
 -- Extra typescript support
 lsp.configure("tsserver", {
-  on_attach = function(_, bufnr)
+  on_attach = function(client, bufnr)
     vim.api.nvim_buf_create_user_command(bufnr, "TypescriptRemoveUnused", function(opts)
       local typescript_status_ok, typescript = pcall(require, "typescript")
       if typescript_status_ok then
@@ -93,8 +93,8 @@ lsp.configure("tsserver", {
     vim.keymap.set("n", "<leader>tia", ":TypescriptAddMissingImports<CR>", opts)
     vim.keymap.set("n", "<leader>trf", ":TypescriptRenameFile<CR>", opts)
     vim.keymap.set("n", "<leader>tir", ":TypescriptRemoveUnused<CR>", opts)
-    end,
-  })
+  end,
+})
 
 lsp.configure("eslint", {
   on_attach = function(_, bufnr)
