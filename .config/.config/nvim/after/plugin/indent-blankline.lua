@@ -4,9 +4,6 @@ if not status_ok then
   return
 end
 
-vim.cmd [[highlight IndentBlanklineIndent1 guifg=#585c74 gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineSpaceChar guifg=#585c74 gui=nocombine]]
-
 vim.opt.list = true
 vim.opt.listchars:append "space:⋅"
 vim.opt.listchars:append "eol:↴"
@@ -17,5 +14,10 @@ indentBlankline.setup {
   space_char_blankline = " ",
   char_highlight_list = {
     "IndentBlanklineIndent1",
+    "IndentBlanklineIndent2",
+    "IndentBlanklineIndent3",
+    "IndentBlanklineIndent4",
+    "IndentBlanklineIndent5",
+    "IndentBlanklineIndent6",
   },
 }

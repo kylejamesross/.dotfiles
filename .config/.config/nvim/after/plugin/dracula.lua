@@ -32,4 +32,20 @@ dracula.setup({
   italic_comment = true,
 })
 
-vim.cmd("colorscheme dracula")
+vim.cmd [[highlight IndentBlanklineChar guifg=#3a4049 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineSpaceChar guifg=#3a4049 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineSpaceCharBlankline guifg=#3a4049 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineContextChar guifg=#3a4049 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineContextSpaceChar guifg=#3a4049 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineContextStart guifg=#3a4049 gui=underline]]
+
+
+vim.cmd [[highlight IndentBlanklineIndent1 guifg=#3c3066 gui=nocombine]] -- purple
+vim.cmd [[highlight IndentBlanklineIndent2 guifg=#3c493c gui=nocombine]] -- green
+vim.cmd [[highlight IndentBlanklineIndent3 guifg=#663c30 gui=nocombine]] -- red
+vim.cmd [[highlight IndentBlanklineIndent4 guifg=#663c4f gui=nocombine]] -- pink
+vim.cmd [[highlight IndentBlanklineIndent5 guifg=#66663c gui=nocombine]] -- yellow
+vim.cmd [[highlight IndentBlanklineIndent6 guifg=#663c30 gui=nocombine]] -- orange
+vim.cmd [[highlight IndentBlanklineIndent7 guifg=#304c43 gui=nocombine]] -- cyan
+
+vim.cmd [[colorscheme dracula]]

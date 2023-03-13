@@ -102,6 +102,7 @@ return packer.startup(function(use)
 
     -- Color schemes
     use("Mofiqul/dracula.nvim")
+    --[[ use("dracula/vim") ]]
 
     -- Git
     use("lewis6991/gitsigns.nvim")
