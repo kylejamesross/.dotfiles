@@ -107,10 +107,8 @@
   shell: yay -S --noconfirm dotnet-targeting-pack-5.0-bin
   tags:
     - work
-- name: Install Azure Data Studio
-  become_user: "{{ lookup('env', 'USER') }}"
-  become: false
-  shell: yay -S --noconfirm azuredatastudio-bin
+- name: Install dbeaver
+  pacman: name=dbeaver
   tags:
     - work
     - gui
