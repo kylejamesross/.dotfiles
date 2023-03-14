@@ -77,34 +77,34 @@
   shell: yay -S --noconfirm aspnet-targeting-pack-bin
   tags:
     - work
-- name: Install aspnet-runtime-5.0-bin
+- name: Install aspnet-runtime-6.0-bin
   become_user: "{{ lookup('env', 'USER') }}"
   become: false
-  shell: yay -S --noconfirm aspnet-runtime-5.0-bin
+  shell: yay -S --noconfirm aspnet-runtime-6.0-bin
   tags:
     - work
-- name: Install aspnet-targeting-pack-5.0-bin
+- name: Install aspnet-targeting-pack-6.0-bin
   become_user: "{{ lookup('env', 'USER') }}"
   become: false
-  shell: yay -S --noconfirm aspnet-targeting-pack-5.0-bin
+  shell: yay -S --noconfirm aspnet-targeting-pack-6.0-bin
   tags:
     - work
 - name: Install dotnet-runtime-bin-5.0-bin
   become_user: "{{ lookup('env', 'USER') }}"
   become: false
-  shell: yay -S --noconfirm dotnet-runtime-5.0-bin
+  shell: yay -S --noconfirm dotnet-runtime-6.0-bin
   tags:
     - work
-- name: Install dotnet-sdk-5.0-bin
+- name: Install dotnet-sdk-6.0-bin
   become_user: "{{ lookup('env', 'USER') }}"
   become: false
-  shell: yay -S --noconfirm dotnet-sdk-5.0-bin
+  shell: yay -S --noconfirm dotnet-sdk-6.0-bin
   tags:
     - work
-- name: Install dotnet-targeting-pack-5.0-bin
+- name: Install dotnet-targeting-pack-6.0-bin
   become_user: "{{ lookup('env', 'USER') }}"
   become: false
-  shell: yay -S --noconfirm dotnet-targeting-pack-5.0-bin
+  shell: yay -S --noconfirm dotnet-targeting-pack-6.0-bin
   tags:
     - work
 - name: Install dbeaver
@@ -173,6 +173,36 @@
   shell: cp -f /home/{{ lookup('env', 'USER') }}/.dotfiles/project-config/party/appsettings.local.json /home/{{ lookup('env', 'USER') }}/source/party/server/Presentation/appsettings.local.json
   tags:
     - work
+- name: Add admin project
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: true
+  shell: |
+    if [ ! -d "/home/{{ lookup('env', 'USER') }}/source/admin" ] ; then
+        git clone git@github.com:Nude-Solutions/admin.git /home/{{ lookup('env', 'USER') }}/source/admin
+    fi
+  tags:
+    - work
+- name: Copy over admin config
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: true
+  shell: cp -f /home/{{ lookup('env', 'USER') }}/.dotfiles/project-config/admin/appsettings.local.json /home/{{ lookup('env', 'USER') }}/source/admin/server/Presentation/appsettings.local.json
+  tags:
+    - work
+- name: Add storage project
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: true
+  shell: |
+    if [ ! -d "/home/{{ lookup('env', 'USER') }}/source/storage" ] ; then
+        git clone git@github.com:Nude-Solutions/storage.git /home/{{ lookup('env', 'USER') }}/source/storage
+    fi
+  tags:
+    - work
+- name: Copy over storage config
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: true
+  shell: cp -f /home/{{ lookup('env', 'USER') }}/.dotfiles/project-config/storage/appsettings.local.json /home/{{ lookup('env', 'USER') }}/source/storage/server/Presentation/appsettings.local.json
+  tags:
+    - work
 - name: Add search project
   become_user: "{{ lookup('env', 'USER') }}"
   become: true
@@ -191,6 +221,12 @@
     fi
   tags:
     - work
+- name: Copy over finance config
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: true
+  shell: cp -f /home/{{ lookup('env', 'USER') }}/.dotfiles/project-config/finance/appsettings.local.json /home/{{ lookup('env', 'USER') }}/source/finance/server/Presentation/appsettings.local.json
+  tags:
+    - work
 - name: Add admin project
   become_user: "{{ lookup('env', 'USER') }}"
   become: true
@@ -207,6 +243,69 @@
     if [ ! -d "/home/{{ lookup('env', 'USER') }}/source/activity" ] ; then
         git clone git@github.com:Nude-Solutions/activity.git /home/{{ lookup('env', 'USER') }}/source/activity
     fi
+  tags:
+    - work
+- name: Copy over activity config
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: true
+  shell: cp -f /home/{{ lookup('env', 'USER') }}/.dotfiles/project-config/activity/appsettings.local.json /home/{{ lookup('env', 'USER') }}/source/activity/server/Presentation/appsettings.local.json
+  tags:
+    - work
+- name: Add doc-gen project
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: true
+  shell: |
+    if [ ! -d "/home/{{ lookup('env', 'USER') }}/source/doc-gen" ] ; then
+        git clone git@github.com:Nude-Solutions/doc-gen.git /home/{{ lookup('env', 'USER') }}/source/doc-gen
+    fi
+  tags:
+    - work
+- name: Add home-evaluator project
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: true
+  shell: |
+    if [ ! -d "/home/{{ lookup('env', 'USER') }}/source/home-evaluator" ] ; then
+        git clone git@github.com:Nude-Solutions/home-evaluator.git /home/{{ lookup('env', 'USER') }}/source/home-evaluator
+    fi
+  tags:
+    - work
+- name: Add NudeSolutions.Core.Authorization project
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: true
+  shell: |
+    if [ ! -d "/home/{{ lookup('env', 'USER') }}/source/NudeSolutions.Core.Authorization" ] ; then
+        git clone git@github.com:Nude-Solutions/NudeSolutions.Core.Authorization.git /home/{{ lookup('env', 'USER') }}/source/NudeSolutions.Core.Authorization
+    fi
+  tags:
+    - work
+- name: Add sanctions-search project
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: true
+  shell: |
+    if [ ! -d "/home/{{ lookup('env', 'USER') }}/source/sanctions-search" ] ; then
+        git clone git@github.com:Nude-Solutions/sanctions-search.git /home/{{ lookup('env', 'USER') }}/source/sanctions-search
+    fi
+  tags:
+    - work
+- name: Copy over sanctions-search config
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: true
+  shell: cp -f /home/{{ lookup('env', 'USER') }}/.dotfiles/project-config/sanctions-search/appsettings.local.json /home/{{ lookup('env', 'USER') }}/source/sanctions-search/server/Presentation/appsettings.local.json
+  tags:
+    - work
+- name: Add stakeholder-management project
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: true
+  shell: |
+    if [ ! -d "/home/{{ lookup('env', 'USER') }}/source/stakeholder-management" ] ; then
+        git clone git@github.com:Nude-Solutions/stakeholder-management.git /home/{{ lookup('env', 'USER') }}/source/stakeholder-management
+    fi
+  tags:
+    - work
+- name: Copy over stakeholder-management config
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: true
+  shell: cp -f /home/{{ lookup('env', 'USER') }}/.dotfiles/project-config/stakeholder-management/appsettings.local.json /home/{{ lookup('env', 'USER') }}/source/stakeholder-management/server/Presentation/appsettings.local.json
   tags:
     - work
 - name: Add integration project
