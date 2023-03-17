@@ -83,9 +83,18 @@
 "pactl set-sink-volume @DEFAULT_SINK@ +1000"
    XF86AudioRaiseVolume
 
+"pactl set-sink-volume @DEFAULT_SINK@ +1000"
+    m:0x4 + c:110
+    Control + Home
+
 # Decrease volume
 "pactl set-sink-volume @DEFAULT_SINK@ -1000"
    XF86AudioLowerVolume
+
+
+"pactl set-sink-volume @DEFAULT_SINK@ -1000"
+    m:0x4 + c:115
+    Control + End
 
 # Mute volume
 "pactl set-sink-mute @DEFAULT_SINK@ toggle"
@@ -97,14 +106,27 @@
 
 "playerctl --all-players play-pause"
    XF86AudioPlay
+
+"playerctl --all-players play-pause"
+    m:0x4 + c:36
+    Control + Return
+
 # Mute microphone
 "playerctl --all-players next"
    m:0x0 + c:171
    XF86AudioNext
 
+"playerctl --all-players next"
+    m:0x4 + c:112
+    Control + Prior
+
 "playerctl --all-players previous"
    m:0x0 + c:173
    XF86AudioPre
+
+"playerctl --all-players previous"
+    m:0x4 + c:117
+    Control + Next
 
 ##################################
 # End of xbindkeys configuration #
