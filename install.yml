@@ -203,10 +203,6 @@
       pacman: name=git
       tags:
         - git
-    - name: Install github-cli
-      pacman: name=github-cli
-      tags:
-        - git
     - name: Install neovim
       include_tasks:
         file: tasks/install-neovim.yml
