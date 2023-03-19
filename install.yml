@@ -45,6 +45,9 @@
     - name: Install xorg-xinit
       pacman: name=xorg-xinit
       tags: gui
+    - name: Set xorg config
+      shell: sudo mkdir -p /etc/X11/xorg.conf.d && sudo cp /home/kyle/.dotfiles/external/10-monitor.conf /etc/X11/xorg.conf.d/  
+      tags: gui
     - name: Install xbindkeys
       pacman: name=xbindkeys
       tags: gui
