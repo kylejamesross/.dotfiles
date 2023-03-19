@@ -203,6 +203,18 @@
       pacman: name=git
       tags:
         - git
+    - name: Install noto-fonts
+      pacman: name=noto-fonts
+      tags:
+        - fonts
+    - name: Install noto-fonts-emoji
+      pacman: name=noto-fonts-emoji
+      tags:
+        - fonts
+    - name: Install noto-fonts-extra
+      pacman: name=noto-fonts-extra
+      tags:
+        - fonts
     - name: Install neovim
       include_tasks:
         file: tasks/install-neovim.yml
@@ -248,17 +260,10 @@
       tags:
         - timeshift
         - gui
-    - name: Install emoji font
-      become_user: "{{ lookup('env', 'USER') }}"
-      become: false
-      shell: yay -S --noconfirm noto-fonts-emoji
-      tags:
-        - fonts
-        - gui
     - name: Install JetBrainMono font
       become_user: "{{ lookup('env', 'USER') }}"
       become: false
-      shell: yay -S --noconfirm nerd-fonts-jetbrains-mono
+      shell: yay -S --noconfirm ttf-jetbrains-mono-nerd
       tags:
         - fonts
         - gui

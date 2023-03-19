@@ -6,24 +6,20 @@
   pacman: name=docker-compose
   tags:
     - work
-- name: Start docker
+- name: Start docker service
   become_user: "{{ lookup('env', 'USER') }}"
   become: false
   shell: sudo systemctl start docker
   tags:
     - work
     - gui
-- name: Start docker
+- name: Enable docker service
   become_user: "{{ lookup('env', 'USER') }}"
   become: false
   shell: sudo systemctl enable docker
   tags:
     - work
     - gui
-- name: Stop all docker containers
-  shell: docker stop $(docker ps -a -q)
-- name: Remove all docker containers
-  shell: docker rm $(docker ps -a -q)
 - name: Add user to new group
   shell: usermod -aG docker {{ lookup('env', 'USER') }}
   tags:
@@ -40,6 +36,12 @@
   shell: sudo docker run -p 10000:10000 -p 10001:10001 -p 10002:10002 mcr.microsoft.com/azure-storage/azurite
   tags:
     - gui
+    - work
+- name: Install azure-cli
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: yay -S --noconfirm azure-cli
+  tags:
     - work
 - name: Install dotnet-host-bin
   become_user: "{{ lookup('env', 'USER') }}"
