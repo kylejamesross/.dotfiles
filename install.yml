@@ -39,6 +39,9 @@
         - ssh
     - name: Give ownership of .ssh to user
       shell: chown -R {{ lookup('env', 'USER') }}:wheel  /home/{{ lookup('env', 'USER') }}/.ssh
+    - name: Set timedatectl to ntp
+      become_user: root
+      shell: timedatectl ntp 1
     - name: Install xorg-server
       pacman: name=xorg-server
       tags: gui
@@ -46,7 +49,8 @@
       pacman: name=xorg-xinit
       tags: gui
     - name: Set xorg config
-      shell: sudo mkdir -p /etc/X11/xorg.conf.d && sudo cp /home/kyle/.dotfiles/external/10-monitor.conf /etc/X11/xorg.conf.d/  
+      become_user: root
+      shell: mkdir -p /etc/X11/xorg.conf.d && sudo cp /home/{{ lookup('env', 'USER') }}/.dotfiles/external/10-monitor.conf /etc/X11/xorg.conf.d/  
       tags: gui
     - name: Install xbindkeys
       pacman: name=xbindkeys
