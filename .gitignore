@@ -14,3 +14,4 @@ external/uld
 .config/.config/lazygit/state.yml
 .config/.config/awesome/vicious/
 vim/.vim/undodir
+.config/.config/joplin

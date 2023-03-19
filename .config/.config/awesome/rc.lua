@@ -98,7 +98,7 @@ myawesomemenu = {
     end,
   },
   { "Edit config", editor_cmd .. " " .. awesome.conffile },
-  { "Restart", awesome.restart },
+  { "Restart",     awesome.restart },
   {
     "Quit",
     function()
@@ -110,7 +110,15 @@ myawesomemenu = {
 mymainmenu = awful.menu({
   items = {
     { "  Awesome", myawesomemenu },
-    { "  Open Terminal", terminal },
+    { "  Open Terminal",
+      function()
+        awful.spawn.with_shell(
+          "sudo ln -sf /home/kyle/.dotfiles/.config/.config/kitty/kitty.png /usr/lib/kitty/logo/kitty.png")
+        awful.spawn.with_shell(
+          "sudo ln -sf /home/kyle/.dotfiles/.config/.config/kitty/kitty-128.png /usr/lib/kitty/logo/kitty-128.png")
+        awful.spawn(terminal)
+      end,
+    },
     {
       "  Suspend",
       function()
@@ -367,7 +375,8 @@ awful.screen.connect_for_each_screen(function(s)
   -- Add widgets to the wibox
   s.mywibox:setup({
     layout = wibox.layout.align.horizontal,
-    { -- Left widgets
+    {
+      -- Left widgets
       layout = wibox.layout.fixed.horizontal,
       mylauncher,
       myseparator,
@@ -376,7 +385,8 @@ awful.screen.connect_for_each_screen(function(s)
       s.mypromptbox,
     },
     s.mytasklist, -- Middle widget
-    { -- Right widgets
+    {
+      -- Right widgets
       layout = wibox.layout.fixed.horizontal,
       wibox.widget.systray(),
       {
@@ -420,7 +430,6 @@ globalkeys = gears.table.join(
   awful.key({ modkey, "Shift" }, "j", awful.tag.viewprev, { description = "view previous", group = "tag" }),
   awful.key({ modkey, "Shift" }, "k", awful.tag.viewnext, { description = "view next", group = "tag" }),
   awful.key({ modkey }, "Escape", awful.tag.history.restore, { description = "go back", group = "tag" }),
-
   awful.key({ modkey }, "j", function()
     awful.client.focus.byidx(1)
   end, { description = "focus next by index", group = "client" }),
@@ -454,6 +463,10 @@ globalkeys = gears.table.join(
 
   -- Standard program
   awful.key({ modkey }, "Return", function()
+    awful.spawn.with_shell(
+      "sudo ln -sf /home/kyle/.dotfiles/.config/.config/kitty/kitty.png /usr/lib/kitty/logo/kitty.png")
+    awful.spawn.with_shell(
+      "sudo ln -sf /home/kyle/.dotfiles/.config/.config/kitty/kitty-128.png /usr/lib/kitty/logo/kitty-128.png")
     awful.spawn(terminal)
   end, { description = "open a terminal", group = "launcher" }),
   awful.key({ modkey }, "b", function()
@@ -461,7 +474,6 @@ globalkeys = gears.table.join(
   end, { description = "open a browser", group = "launcher" }),
   awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
   awful.key({ modkey, "Shift" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
-
   awful.key({ modkey }, "l", function()
     awful.tag.incmwfact(0.05)
   end, { description = "increase master width factor", group = "layout" }),
@@ -712,7 +724,7 @@ awful.rules.rules = {
   {
     rule_any = {
       instance = {
-        "DTA", -- Firefox addon DownThemAll.
+        "DTA",   -- Firefox addon DownThemAll.
         "copyq", -- Includes session name in class.
         "pinentry",
       },
@@ -721,23 +733,22 @@ awful.rules.rules = {
         "Blueman-manager",
         "Gpick",
         "Kruler",
-        "MessageWin", -- kalarm.
+        "MessageWin",  -- kalarm.
         "Sxiv",
         "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
         "Wpa_gui",
         "veromix",
         "xtightvncviewer",
       },
-
       -- Note that the name property shown in xprop might be set slightly after creation of the client
       -- and the name shown there might not match defined rules here.
       name = {
         "Event Tester", -- xev.
       },
       role = {
-        "AlarmWindow", -- Thunderbird's calendar.
+        "AlarmWindow",   -- Thunderbird's calendar.
         "ConfigManager", -- Thunderbird's about:config.
-        "pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
+        "pop-up",        -- e.g. Google Chrome's (detached) Developer Tools.
       },
     },
     properties = { floating = true },
@@ -780,20 +791,24 @@ client.connect_signal("request::titlebars", function(c)
   )
 
   awful.titlebar(c):setup({
-    { -- Left
+    {
+      -- Left
       awful.titlebar.widget.iconwidget(c),
       buttons = buttons,
       layout = wibox.layout.fixed.horizontal,
     },
-    { -- Middle
-      { -- Title
+    {
+      -- Middle
+      {
+        -- Title
         align = "center",
         widget = awful.titlebar.widget.titlewidget(c),
       },
       buttons = buttons,
       layout = wibox.layout.flex.horizontal,
     },
-    { -- Right
+    {
+      -- Right
       awful.titlebar.widget.floatingbutton(c),
       awful.titlebar.widget.maximizedbutton(c),
       awful.titlebar.widget.stickybutton(c),
