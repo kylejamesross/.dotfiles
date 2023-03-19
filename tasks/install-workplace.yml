@@ -24,19 +24,19 @@
   shell: usermod -aG docker {{ lookup('env', 'USER') }}
   tags:
     - work
-- name: Install and run redis
-  become_user: "{{ lookup('env', 'USER') }}"
-  become: false
-  shell: sudo docker run --name redis -p 6379:6379 -d redis
-  tags:
-    - work
-- name: Install and run azurite
-  become_user: "{{ lookup('env', 'USER') }}"
-  become: false
-  shell: sudo docker run -p 10000:10000 -p 10001:10001 -p 10002:10002 mcr.microsoft.com/azure-storage/azurite
-  tags:
-    - gui
-    - work
+# - name: Install and run redis
+#   become_user: "{{ lookup('env', 'USER') }}"
+#   become: false
+#   shell: sudo docker run --name redis -p 6379:6379 -d redis
+#   tags:
+#     - work
+# - name: Install and run azurite
+#   become_user: "{{ lookup('env', 'USER') }}"
+#   become: false
+#   shell: sudo docker run -p 10000:10000 -p 10001:10001 -p 10002:10002 mcr.microsoft.com/azure-storage/azurite
+#   tags:
+#     - gui
+#     - work
 - name: Install azure-cli
   become_user: "{{ lookup('env', 'USER') }}"
   become: false
