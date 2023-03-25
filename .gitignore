@@ -15,3 +15,4 @@ external/uld
 .config/.config/awesome/vicious/
 vim/.vim/undodir
 .config/.config/joplin
+.config/.config/nvim/lazy-lock.json

@@ -361,14 +361,6 @@
       pacman: name=bat
       tags:
         - bat
-    - name: Install packer neovim plugin
-      git:
-        repo: https://github.com/wbthomason/packer.nvim
-        dest: ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-        update: true
-        depth: 1
-      tags:
-        - neovim
     - name: Stow git
       shell: stow git
       tags:
