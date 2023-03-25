@@ -52,6 +52,7 @@ local plugins = {
   "JoosepAlviste/nvim-ts-context-commentstring",
   "p00f/nvim-ts-rainbow",
   "windwp/nvim-ts-autotag",
+
   -- Utilities
   "rstacruz/vim-xtract",
   "tpope/vim-surround",
