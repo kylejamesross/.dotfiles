@@ -17,6 +17,8 @@ if not status_ok then
 end
 
 local plugins = {
+
+  -- Regular
   {
     "phaazon/hop.nvim",
   },
@@ -30,13 +32,19 @@ local plugins = {
     dependencies = { "kyazdani42/nvim-web-devicons" },
   },
   "windwp/nvim-autopairs",
+
+  -- Tree
   {
     "kyazdani42/nvim-tree.lua",
     dependencies = {
       "kyazdani42/nvim-web-devicons",
     },
   },
+
+  -- Snippets
   "kylejamesross/snippets",
+
+  -- Treesitter
   {
     "nvim-treesitter/nvim-treesitter",
     cmd = "TSUpdate",
@@ -44,20 +52,37 @@ local plugins = {
   "JoosepAlviste/nvim-ts-context-commentstring",
   "p00f/nvim-ts-rainbow",
   "windwp/nvim-ts-autotag",
+  -- Utilities
   "rstacruz/vim-xtract",
   "tpope/vim-surround",
   "NvChad/nvim-colorizer.lua",
+  {
+    "ghillb/cybu.nvim",
+    dependencies = { "kyazdani42/nvim-web-devicons", "nvim-lua/plenary.nvim" },
+  },
+
+  -- Telescope
   "nvim-telescope/telescope.nvim",
   "nvim-telescope/telescope-fzy-native.nvim",
   "nvim-telescope/telescope-media-files.nvim",
+
+  -- Color schemes
   "Mofiqul/dracula.nvim",
+
+  -- Git
   "lewis6991/gitsigns.nvim",
+
+  -- Lines
   { "akinsho/bufferline.nvim", dependencies = { "kyazdani42/nvim-web-devicons" } },
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "kyazdani42/nvim-web-devicons" },
   },
+
+  -- Scrollbar
   "petertriho/nvim-scrollbar",
+
+  -- LSP
   "mbbill/undotree",
   {
     "VonHeikemen/lsp-zero.nvim",
@@ -75,12 +100,8 @@ local plugins = {
       { "L3MON4D3/LuaSnip" },
     },
   },
-  "RRethy/vim-illuminate",
   "jose-elias-alvarez/typescript.nvim",
-  {
-    "ghillb/cybu.nvim",
-    dependencies = { "kyazdani42/nvim-web-devicons", "nvim-lua/plenary.nvim" },
-  }
+  "RRethy/vim-illuminate",
 }
 
 lazy.setup(plugins)
