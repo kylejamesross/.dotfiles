@@ -43,6 +43,12 @@
   shell: yay -S --noconfirm azure-cli
   tags:
     - work
+- name: Install insomnia
+  become_user: "{{ lookup('env', 'USER') }}"
+  become: false
+  shell: yay -S --noconfirm insomnia
+  tags:
+    - work
 - name: Install dotnet-host-bin
   become_user: "{{ lookup('env', 'USER') }}"
   become: false

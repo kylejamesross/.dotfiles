@@ -10,6 +10,15 @@ vim.g.maplocallheader = " "
 keymap("n", "<Leader>s", ":%s/\\<<C-r><C-w>\\>//g<Left><Left>", opts)
 keymap("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", opts)
 
+function auto_indent()
+  local save_cursor = vim.fn.winsaveview()
+  vim.cmd("%normal! =G")
+  vim.fn.winrestview(save_cursor)
+end
+
+vim.api.nvim_set_keymap("n", "<Leader>a", ":lua auto_indent()<CR>", opts)
+keymap("n", "<Leader>=", ":lua auto_indent()<CR>", opts)
+
 -- vscode mapping for file navigation
 keymap("n", "<Leader><Tab>", "<C-6>", opts)
 keymap("n", "<s-tab>", "<plug>(CybuLastusedPrev)", opts)
@@ -108,10 +117,10 @@ keymap("", "<c-s>", "<cmd>:HopChar1<cr>", {})
 keymap("n", "<c-t>", "<cmd>Telescope live_grep<cr>", opts)
 
 function project_files()
-	local ok = pcall(require("telescope.builtin").git_files, { show_untracked = true })
-	if not ok then
-		require("telescope.builtin").find_files(opts)
-	end
+  local ok = pcall(require("telescope.builtin").git_files, { show_untracked = true })
+  if not ok then
+    require("telescope.builtin").find_files(opts)
+  end
 end
 
 keymap("n", "<c-p>", "<CMD>lua project_files()<CR>", opts)
