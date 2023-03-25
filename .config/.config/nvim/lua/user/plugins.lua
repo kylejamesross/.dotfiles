@@ -17,10 +17,8 @@ if not status_ok then
 end
 
 local plugins = {
-  "kyazdani42/nvim-web-devicons",
   {
     "phaazon/hop.nvim",
-    branch = "v2",
   },
   "nvim-lua/popup.nvim",
   "nvim-lua/plenary.nvim",
@@ -54,7 +52,7 @@ local plugins = {
   "nvim-telescope/telescope-media-files.nvim",
   "Mofiqul/dracula.nvim",
   "lewis6991/gitsigns.nvim",
-  { "akinsho/bufferline.nvim", tag = "v3.*", dependencies = { "kyazdani42/nvim-web-devicons" } },
+  { "akinsho/bufferline.nvim", dependencies = { "kyazdani42/nvim-web-devicons" } },
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "kyazdani42/nvim-web-devicons" },
@@ -63,6 +61,7 @@ local plugins = {
   "mbbill/undotree",
   {
     "VonHeikemen/lsp-zero.nvim",
+    branch = "v1.x",
     dependencies = {
       { "neovim/nvim-lspconfig" },
       { "williamboman/mason.nvim" },

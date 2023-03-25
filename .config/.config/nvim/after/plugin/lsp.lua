@@ -14,6 +14,7 @@ lsp.ensure_installed({
   "cssls",
   "tsserver",
   "eslint",
+  "lua_ls",
 })
 
 lsp.set_preferences({
@@ -49,7 +50,7 @@ lsp.on_attach(function(_, bufnr)
   end, opts)
 end)
 
-lsp.configure("sumneko_lua", {
+lsp.configure("lua_ls", {
   settings = {
     Lua = {
       diagnostics = {
