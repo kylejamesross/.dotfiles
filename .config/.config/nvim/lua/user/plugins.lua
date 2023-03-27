@@ -48,7 +48,8 @@ local plugins = {
   "kylejamesross/snippets",
 
   -- Treesitter
-  { -- Highlight, edit, and navigate code
+  {
+    -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     config = function()
       pcall(require('nvim-treesitter.install').update { with_sync = true })
@@ -61,6 +62,7 @@ local plugins = {
   -- Utilities
   "rstacruz/vim-xtract",
   "tpope/vim-surround",
+  { 'j-hui/fidget.nvim',       opts = {} },
   "NvChad/nvim-colorizer.lua",
   {
     "ghillb/cybu.nvim",
