@@ -1,5 +1,7 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
+  vim.env.GIT_DIR = nil
+  vim.env.GIT_WORK_TREE = nil
   vim.fn.system({
     "git",
     "clone",
@@ -24,6 +26,7 @@ local plugins = {
   },
   "nvim-lua/popup.nvim",
   "nvim-lua/plenary.nvim",
+  "tpope/vim-sleuth",
   "numToStr/Comment.nvim",
   "lewis6991/impatient.nvim",
   "lukas-reineke/indent-blankline.nvim",
@@ -45,9 +48,11 @@ local plugins = {
   "kylejamesross/snippets",
 
   -- Treesitter
-  {
-    "nvim-treesitter/nvim-treesitter",
-    cmd = "TSUpdate",
+  { -- Highlight, edit, and navigate code
+    'nvim-treesitter/nvim-treesitter',
+    config = function()
+      pcall(require('nvim-treesitter.install').update { with_sync = true })
+    end,
   },
   "JoosepAlviste/nvim-ts-context-commentstring",
   "p00f/nvim-ts-rainbow",
@@ -86,20 +91,25 @@ local plugins = {
   -- LSP
   "mbbill/undotree",
   {
-    "VonHeikemen/lsp-zero.nvim",
-    branch = "v1.x",
+    'VonHeikemen/lsp-zero.nvim',
     dependencies = {
-      { "neovim/nvim-lspconfig" },
-      { "williamboman/mason.nvim" },
-      { "williamboman/mason-lspconfig.nvim" },
-      { "hrsh7th/nvim-cmp" },
-      { "hrsh7th/cmp-buffer" },
-      { "hrsh7th/cmp-path" },
-      { "saadparwaiz1/cmp_luasnip" },
-      { "hrsh7th/cmp-nvim-lsp" },
-      { "hrsh7th/cmp-nvim-lua" },
-      { "L3MON4D3/LuaSnip" },
-    },
+      -- LSP Support
+      { 'neovim/nvim-lspconfig' },             -- Required
+      { 'williamboman/mason.nvim' },           -- Optional
+      { 'williamboman/mason-lspconfig.nvim' }, -- Optional
+
+      -- Autocompletion
+      { 'hrsh7th/nvim-cmp' },         -- Required
+      { 'hrsh7th/cmp-nvim-lsp' },     -- Required
+      { 'hrsh7th/cmp-buffer' },       -- Optional
+      { 'hrsh7th/cmp-path' },         -- Optional
+      { 'saadparwaiz1/cmp_luasnip' }, -- Optional
+      { 'hrsh7th/cmp-nvim-lua' },     -- Optional
+
+      -- Snippets
+      { 'L3MON4D3/LuaSnip' },             -- Required
+      { 'rafamadriz/friendly-snippets' }, -- Optional
+    }
   },
   "jose-elias-alvarez/typescript.nvim",
   "RRethy/vim-illuminate",

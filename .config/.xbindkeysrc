@@ -108,8 +108,9 @@
    XF86AudioPlay
 
 "playerctl --all-players play-pause"
-    m:0x4 + c:36
-    Control + Return
+    m:0x4 + c:51
+    Control + backslash
+
 
 # Mute microphone
 "playerctl --all-players next"
