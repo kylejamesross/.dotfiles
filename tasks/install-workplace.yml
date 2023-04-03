@@ -2,6 +2,10 @@
   pacman: name=docker
   tags:
     - work
+- name: Install kwalletmanager
+  pacman: name=kwalletmanager
+  tags:
+    - work
 - name: Install docker-compose
   pacman: name=docker-compose
   tags:
