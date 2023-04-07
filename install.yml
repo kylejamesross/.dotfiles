@@ -205,6 +205,10 @@
       pacman: name=git
       tags:
         - git
+    - name: Install exa
+      pacman: name=exa
+      tags:
+        - exa
     - name: Install noto-fonts
       pacman: name=noto-fonts
       tags:

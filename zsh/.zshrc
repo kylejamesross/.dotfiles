@@ -7,7 +7,7 @@ fi
 
 alias list-npm-globals='npm list -g --depth=0'
 
-alias ls='ls -alh --color'
+alias ls='exa -lhabg --git --color auto'
 alias pb='git branch --merged | grep -v -E "main|master|staging|dev|$(git rev-parse --abbrev-ref HEAD)" > /tmp/merged-branches && vim /tmp/merged-branches && xargs git branch -d </tmp/merged-branches'
 alias vim='nvim'
 alias v='nvim'
@@ -21,7 +21,6 @@ alias st="python3 ${HOME}/.dotfiles/bin/speedtest.py"
 alias update="yay -Syu"
 alias buildantibody="antibody bundle < /home/kyle/.zsh_plugins.txt > /home/kyle/.zsh_plugins.sh"
 
-export BAT_THEME="gruvbox-dark"
 export DIR_NVIM_OPTIONS="${HOME}/.dotfiles/nvim/.config/nvim/lua/user"
 export DIR_DOTFILES="${HOME}/.dotfiles"
 export EDITOR="nvim"
