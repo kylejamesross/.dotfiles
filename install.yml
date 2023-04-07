@@ -209,6 +209,18 @@
       pacman: name=exa
       tags:
         - exa
+    - name: Install dust
+      pacman: name=dust
+      tags:
+        - dust
+    - name: Install tealdeer
+      pacman: name=tealdeer
+      tags:
+        - tealdeer
+    - name: Update tldr
+      shell: tldr --update
+      tags:
+        - tealdeer
     - name: Install noto-fonts
       pacman: name=noto-fonts
       tags:
@@ -344,10 +356,6 @@
       shell: n 16
       tags:
         - node
-    - name: Install tldr
-      npm:
-        name: tldr
-        global: true
     - name: Install joplin
       npm:
         name: joplin
