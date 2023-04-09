@@ -16,7 +16,6 @@ function auto_indent()
   vim.fn.winrestview(save_cursor)
 end
 
-vim.api.nvim_set_keymap("n", "<Leader>a", ":lua auto_indent()<CR>", opts)
 keymap("n", "<Leader>=", ":lua auto_indent()<CR>", opts)
 
 -- vscode mapping for file navigation
