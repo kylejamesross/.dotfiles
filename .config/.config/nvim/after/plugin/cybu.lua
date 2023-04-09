@@ -10,9 +10,9 @@ cybu.setup({
     anchor = "topcenter", -- topleft, topcenter, topright,
     -- centerleft, center, centerright,
     -- bottomleft, bottomcenter, bottomright
-    vertical_offset = -1, -- vertical offset from anchor in lines
+    vertical_offset = -10000, -- vertical offset from anchor in lines
     horizontal_offset = -1, -- vertical offset from anchor in columns
-    max_win_height = 5, -- height of cybu window in lines
+    max_win_height = 1, -- height of cybu window in lines
     max_win_width = 0.5, -- integer for absolute in columns
     -- float for relative width to win/editor
   },

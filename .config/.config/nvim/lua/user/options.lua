@@ -35,7 +35,6 @@ local options = {
 	undofile = true,
 	numberwidth = 2,
 	guifont = "monospace:h17",
-	guicursor = "",
 	termguicolors = true,
 	autoread = true,
 }

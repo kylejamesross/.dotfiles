@@ -51,9 +51,7 @@ local plugins = {
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
-    config = function()
-      pcall(require('nvim-treesitter.install').update { with_sync = true })
-    end,
+    build = ":TSUpdate",
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
@@ -67,10 +65,6 @@ local plugins = {
   "tpope/vim-surround",
   { 'j-hui/fidget.nvim',       opts = {} },
   "NvChad/nvim-colorizer.lua",
-  {
-    "ghillb/cybu.nvim",
-    dependencies = { "kyazdani42/nvim-web-devicons", "nvim-lua/plenary.nvim" },
-  },
 
   -- Telescope
   "nvim-telescope/telescope.nvim",

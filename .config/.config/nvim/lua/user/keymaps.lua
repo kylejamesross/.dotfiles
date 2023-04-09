@@ -19,9 +19,7 @@ end
 keymap("n", "<Leader>=", ":lua auto_indent()<CR>", opts)
 
 -- vscode mapping for file navigation
-keymap("n", "<Leader><Tab>", "<C-6>", opts)
-keymap("n", "<s-tab>", "<plug>(CybuLastusedPrev)", opts)
-keymap("n", "<tab>", "<plug>(CybuLastusedNext)", opts)
+keymap("n", "<Tab>", "<C-6>", opts)
 
 -- editor
 keymap("n", "<Leader>e", ":NvimTreeFindFileToggle<CR>", opts)
