@@ -37,6 +37,7 @@ local options = {
 	guifont = "monospace:h17",
 	termguicolors = true,
 	autoread = true,
+	jumpoptions = 'stack'
 }
 -- set all options
 for k, v in pairs(options) do
