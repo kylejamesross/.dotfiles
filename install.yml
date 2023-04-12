@@ -128,6 +128,8 @@
       tags: gui
     - name: Install lazygit
       pacman: name=lazygit
+    - name: Install tig
+      pacman: name=tig
     - name: Install reflector
       pacman: name=reflector
     - name: Install enable reflector
