@@ -129,7 +129,7 @@ keymap("n", "<c-p>", "<CMD>lua project_files()<CR>", opts)
 -- git
 keymap("n", "<leader>mc", "0ci]x<Esc>j", opts)
 keymap("n", "<leader>mu", "0ci]<Space><Esc>j", opts)
-keymap("n", "<leader>vf", ":Gllog<CR>", opts)
+keymap("n", "<leader>vf", ":Gllog %<CR>", opts)
 keymap("v", "gx", ":Xtract<Space>", opts)
 
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
