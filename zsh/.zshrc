@@ -7,7 +7,7 @@ fi
 
 alias list-npm-globals='npm list -g --depth=0'
 
-alias ls='exa -lhabg --git --color auto'
+alias ls='exa -labg --git --color auto'
 alias cat='bat'
 alias pb='git branch --merged | grep -v -E "main|master|staging|dev|$(git rev-parse --abbrev-ref HEAD)" > /tmp/merged-branches && vim /tmp/merged-branches && xargs git branch -d </tmp/merged-branches'
 alias vim='nvim'
