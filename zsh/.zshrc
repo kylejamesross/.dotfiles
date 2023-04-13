@@ -8,6 +8,7 @@ fi
 alias list-npm-globals='npm list -g --depth=0'
 
 alias ls='exa -lhabg --git --color auto'
+alias cat='bat'
 alias pb='git branch --merged | grep -v -E "main|master|staging|dev|$(git rev-parse --abbrev-ref HEAD)" > /tmp/merged-branches && vim /tmp/merged-branches && xargs git branch -d </tmp/merged-branches'
 alias vim='nvim'
 alias v='nvim'
@@ -25,6 +26,7 @@ export DIR_NVIM_OPTIONS="${HOME}/.dotfiles/nvim/.config/nvim/lua/user"
 export DIR_DOTFILES="${HOME}/.dotfiles"
 export EDITOR="nvim"
 export OPENER="xdg-open"
+export BAT_THEME="Dracula"
 
 
 if [ -f "$HOME/.dotfiles/zsh/feed-access-token" ]; then

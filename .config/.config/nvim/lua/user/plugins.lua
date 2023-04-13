@@ -35,6 +35,7 @@ local plugins = {
     dependencies = { "kyazdani42/nvim-web-devicons" },
   },
   "windwp/nvim-autopairs",
+  "tpope/vim-fugitive",
 
   -- Tree
   {

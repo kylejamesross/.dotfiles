@@ -48,8 +48,12 @@ keymap("n", "<M-h>", ":bprevious<CR>", opts)
 keymap("n", "<Leader>bd", ":%bd|e#|bd#<CR>", opts)
 keymap("n", "<Leader>cc", ":cclose<CR>", opts)
 keymap("n", "<Leader>co", ":copen<CR>", opts)
+keymap("n", "<Leader>ll", ":lclose<CR>", opts)
+keymap("n", "<Leader>lo", ":lopen<CR>", opts)
 keymap("n", "<M-j>", ":cnext<CR>", opts)
 keymap("n", "<M-k>", ":cprev<CR>", opts)
+keymap("n", "<M-]>", ":lnext<CR>", opts)
+keymap("n", "<M-[>", ":lprev<CR>", opts)
 
 -- easy executeable file
 keymap("n", "<Leader>x", ":!chmod +x %<CR>", opts)
@@ -123,10 +127,9 @@ end
 keymap("n", "<c-p>", "<CMD>lua project_files()<CR>", opts)
 
 -- git
-keymap("n", "<leader>vf", ":terminal git log -p %<CR>", opts)
 keymap("n", "<leader>mc", "0ci]x<Esc>j", opts)
 keymap("n", "<leader>mu", "0ci]<Space><Esc>j", opts)
-keymap("n", "<leader>vf", ":terminal git log -p %<CR>", opts)
+keymap("n", "<leader>vf", ":Gllog<CR>", opts)
 keymap("v", "gx", ":Xtract<Space>", opts)
 
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
