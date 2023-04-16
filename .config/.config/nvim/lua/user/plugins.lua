@@ -84,9 +84,6 @@ local plugins = {
       { "<leader>as", desc = "summarize text" },
       { "<leader>ag", desc = "generate git message" },
     },
-    config = function()
-      require("neoai").setup({})
-    end,
   },
 
   -- Utilities
