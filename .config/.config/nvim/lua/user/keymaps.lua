@@ -136,3 +136,10 @@ keymap("n", "<leader>vl", "<cmd>diffget //3<CR>", opts)
 keymap("v", "gx", ":Xtract<Space>", opts)
 
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+
+-- AI
+vim.keymap.set("n", "<leader>aa", "<cmd>:NeoAI<CR>", opts)
+vim.keymap.set("n", "<leader>ac", "<cmd>:NeoAIContext<CR>", opts)
+vim.keymap.set("v", "<leader>ac", "<cmd>:'<,'>NeoAIContext<CR>", opts)
+vim.keymap.set("n", "<leader>ai", ":NeoAIInjectContext ", opts)
+vim.keymap.set("v", "<leader>ai", ":'<,'>NeoAIInjectContext ", opts)
