@@ -87,8 +87,17 @@
       tags: 
         - gui
         - kitty
-    - name: Install nautilus
-      pacman: name=nautilus
+    - name: Install thunar
+      pacman: name=thunar
+      tags: gui
+    - name: Install thunar
+      pacman: name=thunar
+      tags: gui
+    - name: Install thunar-archive-plugin
+      pacman: name=thunar-archive-plugin
+      tags: gui
+    - name: Install file-roller
+      pacman: name=file-roller
       tags: gui
     - name: Install lf
       pacman: name=lf
@@ -293,6 +302,18 @@
       shell: yay -S --noconfirm brave-bin
       tags:
         - internet
+    - name: Install dracula-gtk-theme
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: yay -S --noconfirm dracula-gtk-theme
+      tags:
+        - theme
+    - name: Install dracula-icons-git
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: yay -S --noconfirm dracula-icons-git
+      tags:
+        - theme
     - name: Install tmux
       pacman: name=tmux
       tags:
