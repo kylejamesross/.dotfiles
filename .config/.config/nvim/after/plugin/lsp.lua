@@ -124,12 +124,7 @@ lsp.configure("eslint", {
 require("luasnip/loaders/from_vscode").lazy_load()
 
 -- cmp
-cmp.setup({
-  mapping = {
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-  }
-})
+cmp.setup()
 
 lsp.nvim_workspace() -- To be removed
 lsp.setup()
