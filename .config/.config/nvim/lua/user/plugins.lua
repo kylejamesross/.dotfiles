@@ -91,6 +91,7 @@ local plugins = {
   "tpope/vim-surround",
   { 'j-hui/fidget.nvim',       opts = {} },
   "NvChad/nvim-colorizer.lua",
+  "folke/which-key.nvim",
 
   -- Telescope
   "nvim-telescope/telescope.nvim",
@@ -133,7 +134,6 @@ local plugins = {
 
       -- Snippets
       { 'L3MON4D3/LuaSnip' },             -- Required
-      { 'rafamadriz/friendly-snippets' }, -- Optional
     }
   },
   "jose-elias-alvarez/typescript.nvim",

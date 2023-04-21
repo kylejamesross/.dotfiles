@@ -16,3 +16,5 @@ external/uld
 vim/.vim/undodir
 .config/.config/joplin
 .config/.config/nvim/lazy-lock.json
+.local/.local/state/wireplumber/default-routes
+.local/.local/state/wireplumber/restore-stream

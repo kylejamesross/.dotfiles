@@ -46,6 +46,7 @@ neoai.setup({
             ]],
             modes = { "v" },
             strip_function = nil,
+            desc = "Rewrite text"
         },
         {
             key = "<leader>ag",
@@ -55,11 +56,12 @@ neoai.setup({
                     Using the following git diff generate a consise and
                     clear git commit message, with a short title summary
                     that is 75 characters or less:
-                ]] .. vim.fn.system("git diff --cached") .. vim.fn.system("git diff")
+                ]] .. vim.fn.system("git diff --minimal --cached | head -n 230")
 
             end,
             modes = { "n" },
             strip_function = nil,
+            desc = "Commit message"
         },
     },
 })

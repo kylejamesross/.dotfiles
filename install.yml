@@ -104,11 +104,11 @@
     - name: Install alsa-utils
       pacman: name=alsa-utils
       tags: gui
-    - name: Install pulse-audio
-      pacman: name=pulseaudio
+    - name: Install pipewire
+      pacman: name=pipewire
       tags: gui
-    - name: Install pulseaudio-alsa
-      pacman: name=pulseaudio-alsa
+    - name: Install pipewire-pulse
+      pacman: name=pipewire-pulse
       tags: gui
     - name: Install xclip
       pacman: name=xclip
