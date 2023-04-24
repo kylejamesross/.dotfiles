@@ -58,21 +58,11 @@
     - name: Install playerctl
       pacman: name=playerctl
       tags: gui
-    - name: Install lightdm
-      pacman: name=lightdm
+    - name: Install sddm
+      pacman: name=sddm
       tags: gui
-    - name: Install lightdm-gtk-greeter
-      pacman: name=lightdm-gtk-greeter
-      tags: 
-        - gui
-        - lightdm
-    - name: Install lightdm-gtk-greeter-settings
-      pacman: name=lightdm-gtk-greeter-settings
-      tags: 
-        - gui
-        - lightdm
-    - name: Enable lightdm service
-      shell: systemctl enable lightdm
+    - name: Enable sddm service
+      shell: systemctl enable sddm
       tags: gui
     - name: Install xterm
       pacman: name=xterm
@@ -302,6 +292,18 @@
       shell: yay -S --noconfirm brave-bin
       tags:
         - internet
+    - name: Install archlinux-themes-sddm
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: yay -S --noconfirm archlinux-themes-sddm
+      tags:
+        - gui
+    - name: Config sddm theme
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: sudo sed -i 's/^Current=.*/Current=archlinux-simplyblack/' /usr/lib/sddm/sddm.conf.d/default.conf
+      tags:
+        - gui
     - name: Install dracula-gtk-theme
       become_user: "{{ lookup('env', 'USER') }}"
       become: false
