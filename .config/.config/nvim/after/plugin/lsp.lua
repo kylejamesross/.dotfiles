@@ -103,12 +103,12 @@ lsp.configure("tsserver", {
 
     local opts = { buffer = bufnr, remap = false, silent = true }
 
-    vim.keymap.set("n", "<leader>lta", ":TypescriptAddMissingImports<CR>",
+    vim.keymap.set("n", "<leader>l1", ":TypescriptAddMissingImports<CR>",
     { buffer = bufnr, remap = false, silent = true, desc = "Add missing imports" })
-    vim.keymap.set("n", "<leader>ltf", ":TypescriptRenameFile<CR>",
-    { buffer = bufnr, remap = false, silent = true, desc = "File rename" })
-    vim.keymap.set("n", "<leader>ltr", ":TypescriptRemoveUnused<CR>",
+    vim.keymap.set("n", "<leader>l2", ":TypescriptRemoveUnused<CR>",
     { buffer = bufnr, remap = false, silent = true, desc = "Remove unused imports" })
+    vim.keymap.set("n", "<leader>l3", ":TypescriptRenameFile<CR>",
+    { buffer = bufnr, remap = false, silent = true, desc = "File rename" })
   end,
 })
 
