@@ -1,0 +1,408 @@
+- hosts: localhost
+  become: true
+  pre_tasks:
+    - name: Update cache
+      pacman:
+        update_cache: true
+  vars:
+    source_key: "./ssh/.ssh/id_ed25519"
+    dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519"
+    source_pub_key: "./ssh/.ssh/id_ed25519.pub"
+    dest_pub_key: "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519.pub"
+  tasks:
+    - name: Ensure .ssh directory exists.
+      become_user: root
+      file:
+        dest: "{{ dest_key | dirname }}"
+        mode: 0700
+        state: directory
+      tags:
+        - dotfiles
+        - ssh
+    - name: Install ssh key
+      become_user: root
+      copy:
+        src: "{{ source_key }}"
+        dest: "{{ dest_key }}"
+        mode: 0600
+      tags:
+        - dotfiles
+        - ssh
+    - name: Install ssh pub key
+      become_user: root
+      copy:
+        src: "{{ source_pub_key }}"
+        dest: "{{ dest_pub_key }}"
+        mode: 0600
+      tags:
+        - dotfiles
+        - ssh
+    - name: Give ownership of .ssh to user
+      shell: chown -R {{ lookup('env', 'USER') }}:wheel  /home/{{ lookup('env', 'USER') }}/.ssh
+    - name: Set timedatectl to ntp
+      become_user: root
+      shell: timedatectl ntp 1
+    - name: Install yay
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: git clone https://aur.archlinux.org/yay-bin.git && sudo chown -R {{ lookup('env', 'USER') }}:wheel yay-bin && cd yay-bin && makepkg --noconfirm -si
+    - name: Cleanup yay directory
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: sudo rm -rf yay-bin
+    - name: Install pipewire
+      pacman: name=pipewire
+      tags: gui
+    - name: Install pipewire-pulse
+      pacman: name=pipewire-pulse
+      tags: gui
+    - name: Install hyprland
+      pacman: name=hyprland
+      tags: gui
+    - name: Install mako
+      pacman: name=mako
+      tags: gui
+    - name: Install waybar-hyprland
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: yay -S --noconfirm waybar-hyprland
+      tags:
+        - gui
+    - name: Install xdg-desktop-portal-hyprland-git
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: yay -S --noconfirm xdg-desktop-portal-hyprland-git      
+      tags:
+        - gui
+    - name: Install wofi
+      pacman: name=wofi
+      tags: gui
+    - name: Install grim
+      pacman: name=grim
+      tags: gui
+    - name: Install slurp
+      pacman: name=slurp
+      tags: gui
+    - name: Install playerctl
+      pacman: name=playerctl
+      tags: gui
+    - name: Install sddm
+      pacman: name=sddm
+      tags: gui
+    - name: Enable sddm service
+      shell: systemctl enable sddm
+      tags: gui
+    - name: Install neofetch
+      pacman: name=neofetch
+    - name: Install kitty
+      pacman: name=kitty
+      tags: 
+        - gui
+        - kitty
+    - name: Install thunar
+      pacman: name=thunar
+      tags: gui
+    - name: Install thunar
+      pacman: name=thunar
+      tags: gui
+    - name: Install thunar-archive-plugin
+      pacman: name=thunar-archive-plugin
+      tags: gui
+    - name: Install file-roller
+      pacman: name=file-roller
+      tags: gui
+    - name: Install lf
+      pacman: name=lf
+    - name: Install alsa-utils
+      pacman: name=alsa-utils
+      tags: gui
+    - name: Install xclip
+      pacman: name=xclip
+      tags: gui
+    - name: Install curl
+      pacman: name=curl
+    - name: Install xcape
+      pacman: name=xcape
+      tags: gui
+    - name: Install wget
+      pacman: name=wget
+    - name: Install dmenu
+      pacman: name=dmenu
+      tags: gui
+    - name: Install gimp
+      pacman: name=gimp
+      tags: gui
+    - name: Install vlc
+      pacman: name=vlc
+      tags: gui
+    - name: Install lazygit
+      pacman: name=lazygit
+    - name: Install tig
+      pacman: name=tig
+    - name: Install reflector
+      pacman: name=reflector
+    - name: Install enable reflector
+      shell: systemctl enable reflector.service
+      tags: gui
+    - name: Install bpytop
+      pacman: name=bpytop
+    - name: Install inkscape
+      pacman: name=inkscape
+      tags: gui
+    - name: Install libreoffice
+      pacman: name=libreoffice-still
+      tags: gui
+    - name: Install nitrogen
+      pacman: name=nitrogen
+      tags: gui
+    - name: Install fzf
+      pacman: name=fzf
+    - name: Install cups
+      pacman: name=cups
+      tags: gui
+    - name: Install cups-pdf
+      pacman: name=cups-pdf
+      tags: gui
+    - name: Install start cups
+      shell: systemctl start cups.service
+      tags: gui
+    - name: Install enable cups
+      shell: systemctl enable cups.service
+      tags: gui
+    - name: Install ripgrep
+      pacman: name=ripgrep
+    - name: Install okular
+      pacman: name=okular
+      tags: gui
+    - name: Install pdfarranger
+      pacman: name=pdfarranger
+      tags: gui
+    - name: Install tar
+      pacman: name=tar
+    - name: Install notepadqq
+      pacman: name=notepadqq
+      tags: gui
+    - name: Install optipng
+      pacman: name=optipng
+    - name: Install fuse
+      pacman: name=fuse
+      tags:
+        - rclone
+        - gui
+    - name: Install rclone
+      pacman: name=rclone
+      tags:
+        - rclone
+    - name: Install fd
+      pacman: name=fd
+      tags:
+        - dotfiles
+        - tmux
+    - name: Install zsh
+      pacman: name=zsh
+      tags:
+        - zsh
+    - name: Install antibody
+      shell: curl -sfL git.io/antibody|sh -s - -b /usr/local/bin
+      tags:
+        - zsh
+    - name: Install git
+      pacman: name=git
+      tags:
+        - git
+    - name: Install exa
+      pacman: name=exa
+      tags:
+        - exa
+    - name: Install dust
+      pacman: name=dust
+      tags:
+        - dust
+    - name: Install tealdeer
+      pacman: name=tealdeer
+      tags:
+        - tealdeer
+    - name: Update tldr
+      shell: tldr --update
+      tags:
+        - tealdeer
+    - name: Install noto-fonts
+      pacman: name=noto-fonts
+      tags:
+        - fonts
+    - name: Install noto-fonts-emoji
+      pacman: name=noto-fonts-emoji
+      tags:
+        - fonts
+    - name: Install noto-fonts-extra
+      pacman: name=noto-fonts-extra
+      tags:
+        - fonts
+    - name: Install neovim
+      include_tasks:
+        file: tasks/install-neovim.yml
+        apply:
+          tags:
+            - neovim
+            - long
+      tags:
+        - neovim
+        - long
+    - name: Install JetBrainMono font
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: yay -S --noconfirm ttf-jetbrains-mono-nerd
+      tags:
+        - fonts
+        - gui
+    - name: Install brave-bin
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: yay -S --noconfirm brave-bin
+      tags:
+        - internet
+    - name: Install archlinux-themes-sddm
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: yay -S --noconfirm archlinux-themes-sddm
+      tags:
+        - gui
+    - name: Config sddm theme
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: sudo sed -i 's/^Current=.*/Current=archlinux-simplyblack/' /usr/lib/sddm/sddm.conf.d/default.conf
+      tags:
+        - gui
+    - name: Install dracula-gtk-theme
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: yay -S --noconfirm dracula-gtk-theme
+      tags:
+        - theme
+    - name: Install dracula-icons-git
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: yay -S --noconfirm dracula-icons-git
+      tags:
+        - theme
+    - name: Install tmux
+      pacman: name=tmux
+      tags:
+        - tmux
+    - name: Install tmux plugin manager
+      git:
+        repo: https://github.com/tmux-plugins/tpm
+        dest: /home/{{ lookup('env', 'USER') }}/.tmux/plugins/tpm
+        update: true
+      tags:
+        - tmux
+    - name: Install minimal backgrounds
+      git:
+        repo: https://github.com/DenverCoder1/minimalistic-wallpaper-collection
+        dest: /usr/share/backgrounds/minimalistic-wallpaper-collection
+        update: true
+      tags:
+        - theme
+        - gui
+    - name: Install unzip
+      pacman: name=unzip
+      tags:
+        - neovim
+    - name: Install node
+      pacman: name=nodejs
+      tags:
+        - node
+    - name: Install npm
+      pacman: name=npm
+      tags:
+        - node
+    - name: Install n
+      npm:
+        name: n
+        global: true
+      tags:
+        - node
+    - name: Node 16
+      shell: n 16
+      tags:
+        - node
+    - name: Install joplin
+      npm:
+        name: joplin
+        global: true
+    - name: Install typescript
+      npm:
+        name: "typescript"
+        global: true
+    - name: Install stow
+      pacman: name=stow
+      tags:
+        - dotfiles
+        - stow
+    - name: Install bat
+      pacman: name=bat
+      tags:
+        - bat
+    - name: Stow git
+      shell: stow git
+      tags:
+        - dotfiles
+    - name: Stow zsh
+      shell: stow zsh
+      tags:
+        - dotfiles
+    - name: Stow .config
+      shell: stow .config
+      tags:
+        - dotfiles
+        - cursor
+    - name: Stow tmux
+      shell: stow tmux
+      tags:
+        - dotfiles
+    - name: Stow .icons
+      shell: stow .icons
+      tags:
+        - cursor
+    - name: Stow .local
+      shell: stow .local
+      tags:
+        - cursor
+    - name: Stow .local
+      shell: stow .local
+      tags:
+        - cursor
+    - name: Set authorized key took from file
+      authorized_key:
+        user: "{{ lookup('env', 'USER') }}"
+        state: present
+        key: "{{ lookup('file', item) }}"
+      with_fileglob:
+        - ./ssh/.ssh/id_ed25519.pub
+      tags:
+        - dotfiles
+        - ssh
+    - name: Configure zsh to shells
+      shell: command -v zsh | tee -a /etc/shells
+      tags:
+        - zsh
+    - name: Change shell to zsh
+      shell: "chsh -s $(which zsh) {{ lookup('env', 'USER') }}"
+      tags:
+        - zsh
+    - name: Install zsh_plugins
+      become: false
+      become_user: "{{ lookup('env', 'USER') }}"
+      shell: "antibody bundle < /home/{{ lookup('env', 'USER') }}/.zsh_plugins.txt > /home/{{ lookup('env', 'USER') }}/.zsh_plugins.sh"
+      tags:
+        - zsh
+    - name: Give ownership of .dotfiles to user
+      shell: chown -R {{ lookup('env', 'USER') }}:wheel /home/{{ lookup('env', 'USER') }}/
+    # - name: Install workplace
+    #   include_tasks:
+    #     file: tasks/install-workplace.yml
+    #     apply:
+    #       tags:
+    #         - work
+    #   tags:
+    #     - work
