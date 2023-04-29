@@ -39,9 +39,6 @@
         - ssh
     - name: Give ownership of .ssh to user
       shell: chown -R {{ lookup('env', 'USER') }}:wheel  /home/{{ lookup('env', 'USER') }}/.ssh
-    - name: Set timedatectl to ntp
-      become_user: root
-      shell: timedatectl ntp 1
     - name: Install yay
       become_user: "{{ lookup('env', 'USER') }}"
       become: false
@@ -68,6 +65,12 @@
       shell: yay -S --noconfirm waybar-hyprland
       tags:
         - gui
+    - name: Install swww
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: yay -S --noconfirm swww
+      tags:
+        - gui
     - name: Install xdg-desktop-portal-hyprland-git
       become_user: "{{ lookup('env', 'USER') }}"
       become: false
@@ -83,6 +86,15 @@
     - name: Install slurp
       pacman: name=slurp
       tags: gui
+    - name: Install interception-dual-function-keys
+      pacman: name=interception-dual-function-keys
+    - name: Set udevmon config
+      become_user: root
+      shell: mkdir -p /etc/interception/udevmon.d/ && cp -f /home/kyle/.dotfiles/external/my-udevmon.yaml /etc/interception/udevmon.d/my-udevmon.yaml  
+      tags: gui
+    - name: Enable udevmon
+      become_user: root
+      shell: systemctl enable udevmon
     - name: Install playerctl
       pacman: name=playerctl
       tags: gui
@@ -116,8 +128,8 @@
     - name: Install alsa-utils
       pacman: name=alsa-utils
       tags: gui
-    - name: Install xclip
-      pacman: name=xclip
+    - name: Install wl-clipboard
+      pacman: name=wl-clipboard
       tags: gui
     - name: Install curl
       pacman: name=curl
