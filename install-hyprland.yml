@@ -141,9 +141,6 @@
       tags: gui
     - name: Install wget
       pacman: name=wget
-    - name: Install dmenu
-      pacman: name=dmenu
-      tags: gui
     - name: Install gimp
       pacman: name=gimp
       tags: gui
