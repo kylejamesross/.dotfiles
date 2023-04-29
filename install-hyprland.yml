@@ -80,6 +80,9 @@
     - name: Install wofi
       pacman: name=wofi
       tags: gui
+    - name: Install swappy
+      pacman: name=swappy
+      tags: gui
     - name: Install grim
       pacman: name=grim
       tags: gui
@@ -295,6 +298,12 @@
       become_user: "{{ lookup('env', 'USER') }}"
       become: false
       shell: yay -S --noconfirm dracula-icons-git
+      tags:
+        - theme
+    - name: Set icon theme
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: gsettings set org.gnome.desktop.interface icon-theme "Dracula"
       tags:
         - theme
     - name: Install tmux
