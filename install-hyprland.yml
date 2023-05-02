@@ -78,8 +78,7 @@
       become_user: "{{ lookup('env', 'USER') }}"
       become: false
       shell: yay -S --noconfirm xdg-desktop-portal-hyprland-git      
-      tags
-        - gui
+      tags: gui
     - name: Install wofi
       pacman: name=wofi
       tags: gui
