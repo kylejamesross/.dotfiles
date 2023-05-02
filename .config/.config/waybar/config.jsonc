@@ -7,23 +7,29 @@
         "wlr/workspaces"
     ],
     "modules-center": [
-        "hyprland/window"
+        "clock#date",
+        "wlr/taskbar",
+        "custom/updates"
     ],
     "modules-right": [
         "cpu",
         "disk",
         "memory",
         "pulseaudio",
-        "network",
-        "clock"
+        "pulseaudio#microphone",
+        "clock#time"
     ],
-    "hyprland/window": {
-        "format": "{}"
-    },
     "custom/arch-logo": {
         "format": "",
-        "on-click": "",
+        "on-click": "pkill wofi || wofi -n -c ~/.dotfiles/.config/.config/waybar/top-bar-wofi-config",
         "tooltip": false
+    },
+    "custom/updates": {
+        "format": "{}",
+        "exec": "~/.dotfiles/.config/.config/waybar/update-sys",
+        "on-click": "~/.dotfiles/.config/.config/waybar/update-sys update",
+        "interval": 600,
+        "tooltip": true
     },
     "wlr/workspaces": {
         "disable-scroll": true,
@@ -42,10 +48,16 @@
             "10": []
         }
     },
-    "hyprland/window": {
-        "format": "{}",
-        "separate-outputs": true,
-        "max-length": 40
+    "wlr/taskbar": {
+        "format": "{icon} {title}",
+        "icon-size": 24,
+        "all-outputs": false,
+        "tooltip-format": "{title}",
+        "on-click": "activate",
+        "on-click-middle": "close",
+        "ignore-list": [
+            "wofi"
+        ]
     },
     "cpu": {
         "interval": 10,
@@ -81,17 +93,20 @@
             ]
         }
     },
-    "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "  {signalStrength}%",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{essid} - {ifname} via {gwaddr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}:{essid} {ipaddr}/{cidr}"
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "format-source": " Mic",
+        "format-source-muted": " Muted",
+        "on-click": "pamixer --default-source -t",
+        // "on-scroll-up": "pamixer --default-source -i 5",
+        // "on-scroll-down": "pamixer --default-source -d 5",
+        "scroll-step": 5
     },
-    "clock": {
-        "format": "{: %a, %b %e  %I:%M %p  }",
+    "clock#date": {
+        "format": "{: %a, %b %e}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
-    }
+    },
+    "clock#time": {
+        "format": "{: %I:%M %p  }"
+    },
 }

@@ -59,6 +59,9 @@
     - name: Install mako
       pacman: name=mako
       tags: gui
+    - name: Install polkit
+      pacman: name=polkit
+      tags: gui
     - name: Install waybar-hyprland
       become_user: "{{ lookup('env', 'USER') }}"
       become: false
@@ -75,7 +78,7 @@
       become_user: "{{ lookup('env', 'USER') }}"
       become: false
       shell: yay -S --noconfirm xdg-desktop-portal-hyprland-git      
-      tags:
+      tags
         - gui
     - name: Install wofi
       pacman: name=wofi
@@ -89,6 +92,11 @@
     - name: Install slurp
       pacman: name=slurp
       tags: gui
+    - name: Install pamixer
+      pacman: name=pamixer
+      tags: gui
+    - name: Install pacman-contrib
+      pacman: name=pacman-contrib
     - name: Install interception-dual-function-keys
       pacman: name=interception-dual-function-keys
     - name: Set udevmon config
@@ -128,6 +136,10 @@
       tags: gui
     - name: Install lf
       pacman: name=lf
+    - name: Install xfce4-settings
+      pacman: name=xfce4-settings
+    - name: Install lxappearance
+      pacman: name=lxappearance
     - name: Install alsa-utils
       pacman: name=alsa-utils
       tags: gui
@@ -297,10 +309,22 @@
       shell: yay -S --noconfirm dracula-icons-git
       tags:
         - theme
+    - name: Set theme
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: gsettings set org.gnome.desktop.interface gtk-theme "Dracula" && xfconf-query -c xsettings -p /Net/ThemeName -s "Dracula"
+      tags:
+        - theme
     - name: Set icon theme
       become_user: "{{ lookup('env', 'USER') }}"
       become: false
-      shell: gsettings set org.gnome.desktop.interface icon-theme "Dracula"
+      shell: gsettings set org.gnome.desktop.interface icon-theme "Dracula" && xfconf-query -c xsettings -p /Net/IconThemeName -s "Dracula"
+      tags:
+        - theme
+    - name: Set cursor theme
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: gsettings set org.gnome.desktop.interface cursor-theme "material_light_cursors" && xfconf-query --channel xsettings --property /Gtk/CursorThemeName --set material_light_cursors
       tags:
         - theme
     - name: Install tmux
@@ -322,10 +346,6 @@
       tags:
         - theme
         - gui
-    - name: Install unzip
-      pacman: name=unzip
-      tags:
-        - neovim
     - name: Install node
       pacman: name=nodejs
       tags:
