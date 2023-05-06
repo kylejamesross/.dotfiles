@@ -171,12 +171,12 @@ vicious.register(memwidget, vicious.widgets.mem, memwidget_text, 13)
 
 local cpuwidget = wibox.widget.textbox()
 vicious.cache(vicious.widgets.cpu)
-local cpuwidget_text = span(" CPU: $1%", "#50fa7b")
+local cpuwidget_text = span(" CPU: $1%", "#50fa7b")
 vicious.register(cpuwidget, vicious.widgets.cpu, cpuwidget_text, 3)
 
 local fswidget = wibox.widget.textbox()
 vicious.cache(vicious.widgets.fs)
-local fswidget_text = span(" HDD: ${/home used_p}%", "#f7df1e")
+local fswidget_text = span(" HDD: ${/home used_p}%", "#f7df1e")
 vicious.register(fswidget, vicious.widgets.fs, fswidget_text, 1501)
 
 local volumewidget = wibox.widget.textbox()
@@ -284,7 +284,7 @@ awful.screen.connect_for_each_screen(function(s)
 
   -- Each screen has its own tag table.
   awful.tag(
-    { " 爵 ", "   ", "  ", "  ", "  ", "  ", "  ", "   ", "  " },
+    { "  ", "   ", "  ", "  ", " 󰌛 ", "  ", " 󰇮 ", "   ", "  " },
     s,
     awful.layout.layouts[6]
   )

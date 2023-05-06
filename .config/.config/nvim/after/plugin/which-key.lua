@@ -20,15 +20,6 @@ which_key.register({
 }, { prefix = "<leader>" })
 
 which_key.register({
-  l = {
-    name = "[LSP]",
-    t = {
-      name = "[TYPESCRIPT]",
-    }
-  }
-}, { prefix = "<leader>" })
-
-which_key.register({
   t = {
     name = "[TYPESCRIPT]",
   }
@@ -48,7 +39,7 @@ which_key.register({
 
 which_key.register({
   l = {
-    name = "[LOCATION_LIST]"
+    name = "[LSP]"
   }
 }, { prefix = "<leader>" })
 
