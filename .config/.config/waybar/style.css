@@ -1,0 +1,199 @@
+* {
+    font-family: "JetBrainsMono Nerd Font";
+    font-weight: 900;
+    font-size: 1rem;
+}
+
+window#waybar {
+    background: transparent;
+    color: #ffffff;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+button {
+    border: none;
+    border-radius: 0;
+}
+
+.modules-left, .modules-center, .modules-right {
+    background: rgba(34, 33, 44, 0.7);
+    border-radius: 10px;
+    margin: 10px 10px 0 10px;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#mpd, 
+#custom-arch-logo,
+#custom-updates,
+#taskbar {
+    padding: 5px 10px;
+    color: #fff;
+}
+
+#custom-arch-logo {
+    font-size: 1.5rem;
+    margin-right: 5px;
+    color: #1793d0;
+}
+
+
+#workspaces button {
+    color: #fff;
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+}
+#workspaces button:last-child {
+    color: #fff;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#workspaces button:hover {
+}
+#workspaces button.active {
+    border-bottom: 2px solid white
+}
+
+#workspaces button.focused {
+}
+
+#workspaces button.urgent {
+    background-color: #eb4d4b;
+}
+
+#clock.date {
+    color: #ffff80;
+}
+
+#taskbar {
+}
+
+#cpu {
+    color: #8aff80;
+}
+
+#disk {
+    color: #ffff80;
+}
+
+#memory, #custom-updates {
+    color: #ff9580;
+}
+
+#pulseaudio {
+    color: #9580ff;
+}
+#pulseaudio.microphone {
+    color: #80ffea;
+}
+
+#network {
+    color: #80ffea;
+}
+
+#clock.time {
+    color: #ff80bf;
+}
+
+#network.disconnected {
+}
+
+#wireplumber {
+    color: #000000;
+}
+
+#wireplumber.muted {
+}
+
+#custom-media {
+    color: #2a5c45;
+    min-width: 100px;
+}
+
+#custom-media.custom-spotify {
+}
+
+#custom-media.custom-vlc {
+}
+
+#temperature {
+}
+
+#temperature.critical {
+}
+
+#tray {
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
+
+#idle_inhibitor {
+}
+
+#idle_inhibitor.activated {
+    color: #2d3436;
+}
+
+#mpd {
+    color: #2a5c45;
+}
+
+#mpd.disconnected {
+}
+
+#mpd.stopped {
+}
+
+#mpd.paused {
+}
+
+#language {
+    color: #740864;
+    padding: 0 5px;
+    margin: 0 5px;
+    min-width: 16px;
+}
+
+#keyboard-state {
+    color: #000000;
+    padding: 0 0px;
+    margin: 0 5px;
+    min-width: 16px;
+}
+
+#keyboard-state > label {
+    padding: 0 5px;
+}
+
+#keyboard-state > label.locked {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#scratchpad {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#scratchpad.empty {
+	background-color: transparent;
+}

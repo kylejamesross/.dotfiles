@@ -13,7 +13,6 @@ configs.setup({
 		"lua",
 		"bash",
 		"rust",
-		"help",
 		"javascript",
 		"typescript",
 		"tsx",

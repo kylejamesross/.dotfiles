@@ -39,9 +39,6 @@
         - ssh
     - name: Give ownership of .ssh to user
       shell: chown -R {{ lookup('env', 'USER') }}:wheel  /home/{{ lookup('env', 'USER') }}/.ssh
-    - name: Set timedatectl to ntp
-      become_user: root
-      shell: timedatectl ntp 1
     - name: Install yay
       become_user: "{{ lookup('env', 'USER') }}"
       become: false
@@ -62,20 +59,31 @@
     - name: Install mako
       pacman: name=mako
       tags: gui
+    - name: Install polkit
+      pacman: name=polkit
+      tags: gui
     - name: Install waybar-hyprland
       become_user: "{{ lookup('env', 'USER') }}"
       become: false
       shell: yay -S --noconfirm waybar-hyprland
       tags:
         - gui
+    - name: Install swww
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: yay -S --noconfirm swww
+      tags:
+        - gui
     - name: Install xdg-desktop-portal-hyprland-git
       become_user: "{{ lookup('env', 'USER') }}"
       become: false
       shell: yay -S --noconfirm xdg-desktop-portal-hyprland-git      
-      tags:
-        - gui
+      tags: gui
     - name: Install wofi
       pacman: name=wofi
+      tags: gui
+    - name: Install swappy
+      pacman: name=swappy
       tags: gui
     - name: Install grim
       pacman: name=grim
@@ -83,6 +91,20 @@
     - name: Install slurp
       pacman: name=slurp
       tags: gui
+    - name: Install pamixer
+      pacman: name=pamixer
+      tags: gui
+    - name: Install pacman-contrib
+      pacman: name=pacman-contrib
+    - name: Install interception-dual-function-keys
+      pacman: name=interception-dual-function-keys
+    - name: Set udevmon config
+      become_user: root
+      shell: mkdir -p /etc/interception/udevmon.d/ && cp -f /home/kyle/.dotfiles/external/my-udevmon.yaml /etc/interception/udevmon.d/my-udevmon.yaml  
+      tags: gui
+    - name: Enable udevmon
+      become_user: root
+      shell: systemctl enable udevmon
     - name: Install playerctl
       pacman: name=playerctl
       tags: gui
@@ -113,11 +135,15 @@
       tags: gui
     - name: Install lf
       pacman: name=lf
+    - name: Install xfce4-settings
+      pacman: name=xfce4-settings
+    - name: Install lxappearance
+      pacman: name=lxappearance
     - name: Install alsa-utils
       pacman: name=alsa-utils
       tags: gui
-    - name: Install xclip
-      pacman: name=xclip
+    - name: Install wl-clipboard
+      pacman: name=wl-clipboard
       tags: gui
     - name: Install curl
       pacman: name=curl
@@ -126,9 +152,6 @@
       tags: gui
     - name: Install wget
       pacman: name=wget
-    - name: Install dmenu
-      pacman: name=dmenu
-      tags: gui
     - name: Install gimp
       pacman: name=gimp
       tags: gui
@@ -285,6 +308,24 @@
       shell: yay -S --noconfirm dracula-icons-git
       tags:
         - theme
+    - name: Set theme
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: gsettings set org.gnome.desktop.interface gtk-theme "Dracula" && xfconf-query -c xsettings -p /Net/ThemeName -s "Dracula"
+      tags:
+        - theme
+    - name: Set icon theme
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: gsettings set org.gnome.desktop.interface icon-theme "Dracula" && xfconf-query -c xsettings -p /Net/IconThemeName -s "Dracula"
+      tags:
+        - theme
+    - name: Set cursor theme
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: gsettings set org.gnome.desktop.interface cursor-theme "material_light_cursors" && xfconf-query --channel xsettings --property /Gtk/CursorThemeName --set material_light_cursors
+      tags:
+        - theme
     - name: Install tmux
       pacman: name=tmux
       tags:
@@ -304,10 +345,6 @@
       tags:
         - theme
         - gui
-    - name: Install unzip
-      pacman: name=unzip
-      tags:
-        - neovim
     - name: Install node
       pacman: name=nodejs
       tags:
