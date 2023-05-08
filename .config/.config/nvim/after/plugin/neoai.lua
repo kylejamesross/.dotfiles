@@ -57,11 +57,30 @@ neoai.setup({
                     clear git commit message, with a short title summary
                     that is 75 characters or less:
                 ]] .. vim.fn.system("git diff --minimal --cached | head -n 230")
-
             end,
             modes = { "n" },
             strip_function = nil,
             desc = "Commit message"
+        },
+        {
+            key = "<leader>an",
+            use_context = false,
+            prompt = function()
+                return [[]] ..
+                    [[ Write me a commit message. From these code changes: ]] ..
+                    vim.fn.system("git diff --minimal --cached | head -n 230") ..
+                    [[ <END OF CODE CHANGES> ]] ..
+                    [[ In the short summary prefix it with AB#<number> based off the number in this branch name here: ]] ..
+                    vim.fn.system("git rev-parse --abbrev-ref HEAD") ..
+                    [[ Write a commit message in this format, do not show diffs of code:
+                        Short summary (50 chars or less) of code changes
+
+                        Detailed explanatation of the code changes (300 chars or less), wrap at 72 chars, Put in bullet point format
+                    ]]
+            end,
+            modes = { "n" },
+            strip_function = nil,
+            desc = "Commit message (NUDE)"
         },
     },
 })
