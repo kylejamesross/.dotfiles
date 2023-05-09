@@ -220,7 +220,7 @@ local mpris = awful.widget.watch(
 
     if mpris_now.state == "Playing" or mpris_now.state == "Paused" then
       widget:set_markup_silently(
-        span("  ", "#dddddd66") .. " " .. mpris_now.artist .. " - " .. mpris_now.title
+        span("  ", "#dddddd66") .. "󰎈 " .. mpris_now.artist .. " - " .. mpris_now.title
       )
     else
       widget:set_text("")
