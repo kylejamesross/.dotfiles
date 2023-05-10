@@ -17,7 +17,8 @@ button {
 }
 
 .modules-center, .modules-right {
-    background: rgba(34, 33, 44, 0.7);
+    /* background: rgba(34, 33, 44, 0.7); */
+    background: alpha(@theme_bg_color, 0.7);
     border-radius: 10px;
     margin: 10px 10px 0 10px;
 }
@@ -51,7 +52,7 @@ button {
 #custom-arch-logo {
     font-size: 1.5rem;
     color: #1793d0;
-    background: rgba(34, 33, 44, 0.7);
+    background: alpha(@theme_bg_color, 0.7);
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
 }
@@ -59,7 +60,7 @@ button {
 
 #workspaces button {
     color: #fff;
-    background: rgba(34, 33, 44, 0.7);
+    background: alpha(@theme_bg_color, 0.7);
 }
 #workspaces button:last-child {
     color: #fff;
@@ -68,10 +69,10 @@ button {
 }
 
 #workspaces button:hover {
-    background: rgba(34, 33, 44, 0.6);
+    background: alpha(@theme_base_color, 0.7);
 }
 #workspaces button.active {
-    background: rgba(34, 33, 44, 0.6);
+    background: alpha(@theme_base_color, 0.7);
     border-bottom: 2px solid rgba(255, 255, 255, 0.7);
 }
 
