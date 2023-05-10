@@ -169,6 +169,8 @@
       pacman: name=lazygit
     - name: Install tig
       pacman: name=tig
+    - name: Install network-manager-applet
+      pacman: name=network-manager-applet
     - name: Install reflector
       pacman: name=reflector
     - name: Install enable reflector

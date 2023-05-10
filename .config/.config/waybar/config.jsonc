@@ -12,6 +12,7 @@
         "custom/updates"
     ],
     "modules-right": [
+        "tray",
         "cpu",
         "disk",
         "memory",
@@ -91,6 +92,10 @@
         "ignore-list": [
             "wofi"
         ]
+    },
+    "tray": {
+        "icon-size": 21,
+        "spacing": 5
     },
     "cpu": {
         "interval": 10,
