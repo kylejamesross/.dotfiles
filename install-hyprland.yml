@@ -109,13 +109,20 @@
       pacman: name=playerctl
       tags: gui
     - name: Install sddm
-      pacman: name=sddm
-      tags: gui
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: yay -S --noconfirm sddm-git
+      tags:
+        - gui
     - name: Enable sddm service
       shell: systemctl enable sddm
       tags: gui
     - name: Install neofetch
       pacman: name=neofetch
+    - name: Install qt5-wayland
+      pacman: name=qt5-wayland
+    - name: Install qt6-wayland
+      pacman: name=qt6-wayland
     - name: Install kitty
       pacman: name=kitty
       tags: 
@@ -324,6 +331,12 @@
       become_user: "{{ lookup('env', 'USER') }}"
       become: false
       shell: gsettings set org.gnome.desktop.interface cursor-theme "material_light_cursors" && xfconf-query --channel xsettings --property /Gtk/CursorThemeName --set material_light_cursors
+      tags:
+        - theme
+    - name: Set font-name
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: false
+      shell: gsettings set org.gnome.desktop.interface font-name "JetBrainMono Nerd Font" 
       tags:
         - theme
     - name: Install tmux
