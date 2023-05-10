@@ -16,9 +16,12 @@ button {
     border-radius: 0;
 }
 
-.modules-left, .modules-center, .modules-right {
+.modules-center, .modules-right {
     background: rgba(34, 33, 44, 0.7);
     border-radius: 10px;
+    margin: 10px 10px 0 10px;
+}
+.modules-left {
     margin: 10px 10px 0 10px;
 }
 
@@ -47,15 +50,16 @@ button {
 
 #custom-arch-logo {
     font-size: 1.5rem;
-    margin-right: 5px;
     color: #1793d0;
+    background: rgba(34, 33, 44, 0.7);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
 
 #workspaces button {
     color: #fff;
-    border-top: 2px solid transparent;
-    border-bottom: 2px solid transparent;
+    background: rgba(34, 33, 44, 0.7);
 }
 #workspaces button:last-child {
     color: #fff;
@@ -64,16 +68,26 @@ button {
 }
 
 #workspaces button:hover {
+    background: rgba(34, 33, 44, 0.6);
 }
 #workspaces button.active {
-    border-bottom: 2px solid white
+    background: rgba(34, 33, 44, 0.6);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.7);
 }
 
 #workspaces button.focused {
 }
 
 #workspaces button.urgent {
-    background-color: #eb4d4b;
+    background: #ff5555;
+}
+
+#workspaces * {
+    color: #fff;
+}
+
+.workspace-1 {
+    color: yellow;
 }
 
 #clock.date {
@@ -96,7 +110,7 @@ button {
 }
 
 #pulseaudio {
-    color: #9580ff;
+    color: #bd93f9;
 }
 #pulseaudio.microphone {
     color: #80ffea;
