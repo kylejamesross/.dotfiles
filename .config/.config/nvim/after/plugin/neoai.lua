@@ -68,7 +68,7 @@ neoai.setup({
             prompt = function()
                 return [[]] ..
                     [[ Write me a commit message. From these code changes: ]] ..
-                    vim.fn.system("git diff --minimal --cached | head -n 230") ..
+                    vim.fn.system("git diff --minimal --cached | cut -c 4100") ..
                     [[ <END OF CODE CHANGES> ]] ..
                     [[ In the short summary prefix it with AB#<number> based off the number in this branch name here: ]] ..
                     vim.fn.system("git rev-parse --abbrev-ref HEAD") ..
