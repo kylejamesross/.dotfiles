@@ -5,17 +5,21 @@ if not status_ok then
 end
 
 function PopulateQuickfixWithTypescriptErrors()
-  local command_output = vim.fn.systemlist("tsc --noEmit 2>&1 | grep '(*,*):' | cut -d '(' -f 1 | uniq")
+  local command_output = vim.fn.systemlist("tsc --noEmit --pretty false 2>&1 | grep '([^,]*,[^)]*)'")
 
   vim.fn.setqflist({}, 'r')
 
-  for _, line in ipairs(command_output) do
-    local entry = {
-      filename = line,
-      lnum = 0,
-      col = 0,
-    }
-    vim.fn.setqflist({entry}, 'a')
+for _, line in ipairs(command_output) do
+    local filename, lnum, col, text = line:match('(%S+)%((%d+),(%d+)%): error%s(.+)')
+    if filename and lnum and col and text then
+      local entry = {
+        filename = filename,
+        lnum = tonumber(lnum),
+        col = tonumber(col),
+        text = text,
+      }
+      vim.fn.setqflist({entry}, 'a')
+    end
   end
 
   vim.cmd('copen')
@@ -34,7 +38,7 @@ typescript.setup({
     { buffer = bufnr, remap = false, silent = true, desc = "Typescript fix all" })
     vim.keymap.set("n", "<leader>l5", ":TypescriptOrganizeImports<CR>",
     { buffer = bufnr, remap = false, silent = true, desc = "Organize imports" })
-    vim.keymap.set("n", "<Leader>qt", ':lua PopulateQuickfix()<CR>', { noremap = true, silent = true, desc = "Populate quickfix list with typescript errors" })
+    vim.keymap.set("n", "<Leader>qt", ':lua PopulateQuickfixWithTypescriptErrors()<CR>', { noremap = true, silent = true, desc = "Populate quickfix list with typescript errors" })
     end
   }
 })
