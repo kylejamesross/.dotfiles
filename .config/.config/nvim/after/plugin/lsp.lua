@@ -73,6 +73,12 @@ lsp.configure("eslint", {
   end,
 })
 
+lsp.configure("omnisharp", {
+  on_attach = function(client)
+    client.server_capabilities.semanticTokensProvider = nil
+  end,
+})
+
 -- snippets
 require("luasnip/loaders/from_vscode").lazy_load()
 
