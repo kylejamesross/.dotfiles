@@ -21,6 +21,7 @@ alias fonts="fc-list"
 alias st="python3 ${HOME}/.dotfiles/bin/speedtest.py"
 alias update="yay -Syu"
 alias buildantibody="antibody bundle < /home/kyle/.zsh_plugins.txt > /home/kyle/.zsh_plugins.sh"
+alias gp="git push origin HEAD 2>&1 | grep -o 'http[s]\?://[^\"]\+' | xargs git web--browse"
 
 export DIR_NVIM_OPTIONS="${HOME}/.dotfiles/nvim/.config/nvim/lua/user"
 export DIR_DOTFILES="${HOME}/.dotfiles"
