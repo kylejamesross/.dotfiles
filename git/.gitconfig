@@ -21,3 +21,7 @@
 [pager]
     branch = false
     log =  false
+[web]
+    browser = brave
+[browser "brave"]
+    cmd = brave
