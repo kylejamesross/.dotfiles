@@ -130,3 +130,5 @@ vim.keymap.set("n", "<leader>ac", "<cmd>:NeoAIContext<CR>", { noremap = true, si
 vim.keymap.set("v", "<leader>ac", "<cmd>:'<,'>NeoAIContext<CR>", { noremap = true, silent = true, desc = "Open editor with context" })
 vim.keymap.set("n", "<leader>ai", ":NeoAIInjectContext ", { noremap = true, desc = "AI Command with context" })
 vim.keymap.set("v", "<leader>ai", ":'<,'>NeoAIInjectContext ", { noremap = true, desc = "AI Command with context" })
+vim.keymap.set("n", "<leader>ae", ":Chat", { noremap = true, desc = "AI Text Edit" })
+vim.keymap.set("v", "<leader>ae", ":'<,'>Chat ", { noremap = true, desc = "AI Text Edit" })

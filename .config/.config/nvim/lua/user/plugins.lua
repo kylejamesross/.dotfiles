@@ -85,6 +85,16 @@ local plugins = {
       { "<leader>ag", desc = "generate git message" },
     },
   },
+  {
+    "dpayne/CodeGPT.nvim",
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'MunifTanjim/nui.nvim',
+    },
+    config = function()
+      require("codegpt.config")
+    end
+  },
 
   -- Utilities
   "rstacruz/vim-xtract",
