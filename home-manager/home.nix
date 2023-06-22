@@ -90,6 +90,7 @@
     joplin
     firefox
     nodePackages.typescript
+    stow
     ];
 
   gtk = {                                     # Theming

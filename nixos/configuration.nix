@@ -139,7 +139,6 @@
         keyd
         zsh-powerlevel10k
         networkmanager
-        stow
     ];
   };
 
