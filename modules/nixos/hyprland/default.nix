@@ -52,12 +52,6 @@ in
     ];
   };
 
-  programs = {
-    hyprland = {
-      enable = true;
-    };
-  };
-
   xdg.portal = {                                  # Required for flatpak with window managers and for file browsing
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];

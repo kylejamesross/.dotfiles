@@ -121,12 +121,13 @@
 
   environment = {
     shells = with pkgs; [ zsh ];          # Default shell
-    variables = {
-      TERMINAL = "kitty";
-      EDITOR = "nvim";
-      VISUAL = "nvim";
-    };
+      variables = {
+        TERMINAL = "kitty";
+        EDITOR = "nvim";
+        VISUAL = "nvim";
+      };
     systemPackages = with pkgs; [
+        hyprland
         vim
         git
         waybar
@@ -138,6 +139,7 @@
         keyd
         zsh-powerlevel10k
         networkmanager
+        stow
     ];
   };
 
@@ -203,4 +205,4 @@
     };
     stateVersion = "23.05";
   };
-                                             }
+}
