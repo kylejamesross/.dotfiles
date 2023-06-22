@@ -99,7 +99,7 @@ local plugins = {
   -- Utilities
   "rstacruz/vim-xtract",
   "tpope/vim-surround",
-  { 'j-hui/fidget.nvim',       opts = {} },
+  { 'j-hui/fidget.nvim', tag = { "legacy" } },
   "NvChad/nvim-colorizer.lua",
   "folke/which-key.nvim",
 

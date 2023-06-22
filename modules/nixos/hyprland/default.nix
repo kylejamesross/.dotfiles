@@ -44,19 +44,12 @@ in
     };
     systemPackages = with pkgs; [
       grim
-      mpvpaper
       slurp
       swappy
-      swaylock
+      swww
       wl-clipboard
       wlr-randr
     ];
-  };
-
-  security.pam.services.swaylock = {
-    text = ''
-     auth include login
-    '';
   };
 
   programs = {
@@ -69,4 +62,9 @@ in
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
+  nixpkgs.overlays = [    # Waybar with experimental features
+    (final: prev: {
+     waybar = hyprland.packages.x86_64-linux.waybar-hyprland;
+     })
+  ];
 }
