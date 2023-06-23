@@ -24,7 +24,6 @@ in
   environment = {
     loginShellInit = ''
       if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
-        ${exec}
       fi
     '';                                   # Will automatically open Hyprland when logged into tty1
 
