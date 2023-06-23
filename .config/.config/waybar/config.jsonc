@@ -3,7 +3,7 @@
     "passthrough": false,
     "gtk-layer-shell": true,
     "modules-left": [
-        "custom/arch-logo",
+        "image#logo",
         "wlr/workspaces"
     ],
     "modules-center": [
@@ -20,10 +20,10 @@
         "pulseaudio#microphone",
         "clock#time"
     ],
-    "custom/arch-logo": {
-        "format": "",
-        "on-click": "pkill wofi || wofi -n -c ~/.dotfiles/.config/.config/waybar/top-bar-wofi-config",
-        "tooltip": false
+    "image#logo": {
+        "path": "~/.dotfiles/.config/.config/waybar/nix-snowflake.svg",
+        "size": 32,
+        "interval": 5,
     },
     "custom/updates": {
         "format": "{}",

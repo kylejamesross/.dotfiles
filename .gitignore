@@ -1,4 +1,5 @@
 plugin/packer_compiled.lua
+result/
 
 tmp/neovim/
 vim/.vim/pack/general/start/ctrlp
